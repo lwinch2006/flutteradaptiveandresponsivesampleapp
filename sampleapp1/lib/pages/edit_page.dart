@@ -4,23 +4,22 @@ import 'package:sampleapp1/components/app_navigation_bar.dart';
 import 'package:sampleapp1/models/app_navigation_widget_types.dart';
 import 'package:sampleapp1/routes.dart';
 
-class Page1 extends StatefulWidget {
-  const Page1({super.key, required this.title});
+class EditPage extends StatefulWidget {
+  const EditPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<Page1> createState() => _Page1State();
+  State<EditPage> createState() => _EditPageState();
 }
 
-class _Page1State extends State<Page1> {
+class _EditPageState extends State<EditPage> {
   @override
   Widget build(BuildContext context) {
     final currentWindowWidth = MediaQuery.sizeOf(context).width;
     final navigationWidgetType = AppNavigationWidgetTypes.fromWindowWidth(currentWindowWidth);
     return Scaffold(
         appBar: AppBar(
-          //automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
           title: Text(
             widget.title,
@@ -31,12 +30,12 @@ class _Page1State extends State<Page1> {
         ),
         body: BodyContainer(
           navigationWidgetType: navigationWidgetType,
-          pageIndex: page1Index,
+          pageIndex: editPageIndex,
           userContent: Center(child: Text(widget.title)),
         ),
         bottomNavigationBar: navigationWidgetType.isBar
             ? const AppNavigationBar(
-                currentIndex: page1Index,
+                currentIndex: editPageIndex,
               )
             : null);
   }

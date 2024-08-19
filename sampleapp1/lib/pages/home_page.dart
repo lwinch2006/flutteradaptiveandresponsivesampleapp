@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sampleapp1/components/body_container.dart';
-import 'package:sampleapp1/components/app_navigation_bar.dart';
-import 'package:sampleapp1/models/app_navigation_widget_types.dart';
-import 'package:sampleapp1/routes.dart';
-import 'package:sampleapp1/theme_data.dart' as theme_data;
+import 'package:go_router/go_router.dart';
+import 'package:sampleapp1/routes.dart' as routes;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -15,29 +12,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
   Widget build(BuildContext context) {
-    final currentWindowWidth = MediaQuery.sizeOf(context).width;
-    final navigationWidgetType = AppNavigationWidgetTypes.fromWindowWidth(currentWindowWidth);
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: theme_data.appBarBackgroundColor,
-          title: Text(
-            widget.title,
-            textAlign: TextAlign.left,
-            style: const TextStyle(fontSize: kDefaultFontSize),
-          ),
-          centerTitle: false,
+      appBar: AppBar(
+        backgroundColor: Theme
+            .of(context)
+            .colorScheme
+            .surfaceContainerLow,
+        title: Text(
+          widget.title,
+          textAlign: TextAlign.left,
+          style: const TextStyle(fontSize: kDefaultFontSize),
         ),
-        body: BodyContainer(
-          navigationWidgetType: navigationWidgetType,
-          pageIndex: homePageIndex,
-          userContent: Center(child: Text(widget.title)),
-        ),
-        bottomNavigationBar: navigationWidgetType.isBar
-            ? const AppNavigationBar(
-                currentIndex: homePageIndex,
-              )
-            : null);
+        centerTitle: false,
+      ),
+      body: Center(
+        child: FilledButton(
+            onPressed: () {
+              context.go(routes.detailsPagePath);
+            },
+            child: const Text('Start')),
+      ),
+    );
   }
+
 }

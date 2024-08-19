@@ -4,23 +4,22 @@ import 'package:sampleapp1/components/app_navigation_bar.dart';
 import 'package:sampleapp1/models/app_navigation_widget_types.dart';
 import 'package:sampleapp1/routes.dart';
 
-class Page3 extends StatefulWidget {
-  const Page3({super.key, required this.title});
+class AddPage extends StatefulWidget {
+  const AddPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<Page3> createState() => _Page3State();
+  State<AddPage> createState() => _AddPageState();
 }
 
-class _Page3State extends State<Page3> {
+class _AddPageState extends State<AddPage> {
   @override
   Widget build(BuildContext context) {
     final currentWindowWidth = MediaQuery.sizeOf(context).width;
     final navigationWidgetType = AppNavigationWidgetTypes.fromWindowWidth(currentWindowWidth);
     return Scaffold(
         appBar: AppBar(
-          //automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
           title: Text(
             widget.title,
@@ -31,12 +30,12 @@ class _Page3State extends State<Page3> {
         ),
         body: BodyContainer(
           navigationWidgetType: navigationWidgetType,
-          pageIndex: page3Index,
+          pageIndex: addPageIndex,
           userContent: Center(child: Text(widget.title)),
         ),
         bottomNavigationBar: navigationWidgetType.isBar
             ? const AppNavigationBar(
-                currentIndex: page3Index,
+                currentIndex: addPageIndex,
               )
             : null);
   }

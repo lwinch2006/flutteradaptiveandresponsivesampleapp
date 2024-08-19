@@ -1,5 +1,6 @@
 {
     "page": "page",
+    "navigationHomePageFirstCapital": "Home",
     "navigationDetailsPageFirstCapital": "Details",
     "navigationAddPageFirstCapital": "Add",
     "navigationEditPageFirstCapital": "Edit",

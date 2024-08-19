@@ -3,25 +3,25 @@ import 'package:sampleapp1/components/body_container.dart';
 import 'package:sampleapp1/components/app_navigation_bar.dart';
 import 'package:sampleapp1/models/app_navigation_widget_types.dart';
 import 'package:sampleapp1/routes.dart';
+import 'package:sampleapp1/theme_data.dart' as theme_data;
 
-class Page2 extends StatefulWidget {
-  const Page2({super.key, required this.title});
+class DetailsPage extends StatefulWidget {
+  const DetailsPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<Page2> createState() => _Page2State();
+  State<DetailsPage> createState() => _DetailsPageState();
 }
 
-class _Page2State extends State<Page2> {
+class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     final currentWindowWidth = MediaQuery.sizeOf(context).width;
     final navigationWidgetType = AppNavigationWidgetTypes.fromWindowWidth(currentWindowWidth);
     return Scaffold(
         appBar: AppBar(
-          //automaticallyImplyLeading: false,
-          backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
+          backgroundColor: theme_data.appBarBackgroundColor,
           title: Text(
             widget.title,
             textAlign: TextAlign.left,
@@ -31,12 +31,12 @@ class _Page2State extends State<Page2> {
         ),
         body: BodyContainer(
           navigationWidgetType: navigationWidgetType,
-          pageIndex: page2Index,
+          pageIndex: detailsPageIndex,
           userContent: Center(child: Text(widget.title)),
         ),
         bottomNavigationBar: navigationWidgetType.isBar
             ? const AppNavigationBar(
-                currentIndex: page2Index,
+                currentIndex: detailsPageIndex,
               )
             : null);
   }
