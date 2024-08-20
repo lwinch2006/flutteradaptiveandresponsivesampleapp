@@ -1,8 +1,8 @@
 {
     "page": "side",
-    "navigationHomePageFirstCapital": "Hjemme",
-    "navigationDetailsPageFirstCapital": "Detaljer",
-    "navigationAddPageFirstCapital": "Addere",
-    "navigationEditPageFirstCapital": "Redigere",
-    "navigationDeletePageFirstCapital": "Fjerne"
+    "navigationHomePage": "Hjemme side",
+    "navigationDetailsPage": "Detaljer side",
+    "navigationAddPage": "Addere side",
+    "navigationEditPage": "Redigere side",
+    "navigationDeletePage": "Fjerne side"
 }

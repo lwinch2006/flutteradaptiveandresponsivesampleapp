@@ -7,10 +7,6 @@ void main() {
   final router = generateRouter();
 
   runApp(MaterialApp.router(
-
-
-
-
     debugShowCheckedModeBanner: false,
     title: 'Flutter Demo',
     theme: ThemeData(

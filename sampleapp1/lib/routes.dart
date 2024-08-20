@@ -24,13 +24,13 @@ final navigatorKey = GlobalKey<NavigatorState>();
 final List<AppNavigationDestination> navigationDestinations =
     <AppNavigationDestination>[
   AppNavigationDestination(
-      route: detailsPagePath, icon: Icons.info_outline, label: navigatorKey.currentContext != null ? navigatorKey.currentContext!.l10n.navigationDetailsPageFirstCapital : 'Details'),
+      route: detailsPagePath, icon: Icons.info_outline, label: navigatorKey.currentContext != null ? navigatorKey.currentContext!.l10n.navigationDetailsPage : 'Details'),
   AppNavigationDestination(
-      route: addPagePath, icon: Icons.add, label: navigatorKey.currentContext != null ? navigatorKey.currentContext!.l10n.navigationAddPageFirstCapital : 'Add'),
+      route: addPagePath, icon: Icons.add, label: navigatorKey.currentContext != null ? navigatorKey.currentContext!.l10n.navigationAddPage : 'Add'),
   AppNavigationDestination(
-      route: editPagePath, icon: Icons.edit, label: navigatorKey.currentContext != null ? navigatorKey.currentContext!.l10n.navigationEditPageFirstCapital : 'Edit'),
+      route: editPagePath, icon: Icons.edit, label: navigatorKey.currentContext != null ? navigatorKey.currentContext!.l10n.navigationEditPage : 'Edit'),
   AppNavigationDestination(
-      route: deletePagePath, icon: Icons.delete_outline, label: navigatorKey.currentContext != null ? navigatorKey.currentContext!.l10n.navigationDeletePageFirstCapital : 'Delete'),
+      route: deletePagePath, icon: Icons.delete_outline, label: navigatorKey.currentContext != null ? navigatorKey.currentContext!.l10n.navigationDeletePage : 'Delete'),
 ];
 
 GoRouter generateRouter() {
@@ -42,7 +42,7 @@ GoRouter generateRouter() {
         path: homePagePath,
         pageBuilder: (context, state) {
           return CustomTransitionPage(
-            child: HomePage(title: '${context.l10n.navigationHomePageFirstCapital} ${context.l10n.page}'),
+            child: HomePage(title: context.l10n.navigationHomePage),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) => child,
           );
@@ -52,7 +52,7 @@ GoRouter generateRouter() {
         path: detailsPagePath,
         pageBuilder: (context, state) {
           return CustomTransitionPage(
-            child: DetailsPage(title: '${context.l10n.navigationDetailsPageFirstCapital} ${context.l10n.page}'),
+            child: DetailsPage(title: context.l10n.navigationDetailsPage),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) => child,
           );
@@ -62,7 +62,7 @@ GoRouter generateRouter() {
         path: addPagePath,
         pageBuilder: (context, state) {
           return CustomTransitionPage(
-            child: AddPage(title: '${context.l10n.navigationAddPageFirstCapital} ${context.l10n.page}'),
+            child: AddPage(title: context.l10n.navigationAddPage),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) => child,
           );
@@ -72,7 +72,7 @@ GoRouter generateRouter() {
         path: editPagePath,
         pageBuilder: (context, state) {
           return CustomTransitionPage(
-            child: EditPage(title: '${context.l10n.navigationEditPageFirstCapital} ${context.l10n.page}'),
+            child: EditPage(title: context.l10n.navigationEditPage),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) => child,
           );
@@ -82,7 +82,7 @@ GoRouter generateRouter() {
         path: deletePagePath,
         pageBuilder: (context, state) {
           return CustomTransitionPage(
-            child: DeletePage(title: '${context.l10n.navigationDeletePageFirstCapital} ${context.l10n.page}'),
+            child: DeletePage(title: context.l10n.navigationDeletePage),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) => child,
           );

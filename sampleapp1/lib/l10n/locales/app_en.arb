@@ -1,8 +1,8 @@
 {
     "page": "page",
-    "navigationHomePageFirstCapital": "Home",
-    "navigationDetailsPageFirstCapital": "Details",
-    "navigationAddPageFirstCapital": "Add",
-    "navigationEditPageFirstCapital": "Edit",
-    "navigationDeletePageFirstCapital": "Delete"
+    "navigationHomePage": "Home page",
+    "navigationDetailsPage": "Details page",
+    "navigationAddPage": "Add page",
+    "navigationEditPage": "Edit page",
+    "navigationDeletePage": "Delete page"
 }
