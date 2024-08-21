@@ -1,0 +1,8 @@
+{
+    "page": "page",
+    "navigationHomePage": "Home page",
+    "navigationDetailsPage": "Details page",
+    "navigationAddPage": "Add page",
+    "navigationEditPage": "Edit page",
+    "navigationDeletePage": "Delete page"
+}
