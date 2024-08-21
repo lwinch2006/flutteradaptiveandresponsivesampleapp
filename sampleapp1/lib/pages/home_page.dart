@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:sampleapp1/routes.dart' as routes;
+import 'package:sampleapp1/components/app_header.dart';
+import 'package:sampleapp1/extensions/build_context_extensions.dart';
+import 'package:sampleapp1/services/app_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -12,30 +13,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme
-            .of(context)
-            .colorScheme
-            .surfaceContainerLow,
-        title: Text(
-          widget.title,
-          textAlign: TextAlign.left,
-          style: const TextStyle(fontSize: kDefaultFontSize),
-        ),
-        centerTitle: false,
+      appBar: AppHeader(
+        appInitState: context.appInitState.value,
+        header: widget.title,
+        context: context,
       ),
       body: Center(
         child: FilledButton(
-            onPressed: () {
-              context.go(routes.detailsPagePath);
-            },
+            onPressed: () => AppService()..appInit(context),
             child: const Text('Start')),
       ),
     );
   }
-
 }
