@@ -10,6 +10,7 @@ class AppNavigationRail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('Calling build() of AppNavigationRail');
     return NavigationRail(
       backgroundColor: theme_data.navigationBackgroundColor,
       labelType: NavigationRailLabelType.all,

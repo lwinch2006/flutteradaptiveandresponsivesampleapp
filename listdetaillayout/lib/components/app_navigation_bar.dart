@@ -9,6 +9,7 @@ class AppNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('Calling build() of AppNavigationBar');
     return NavigationBar(
       backgroundColor: theme_data.navigationBackgroundColor,
       selectedIndex: currentIndex,
