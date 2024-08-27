@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:listdetaillayout/components/app_body_container.dart';
 import 'package:listdetaillayout/components/app_header.dart';
 import 'package:listdetaillayout/components/app_navigation_bar.dart';
-import 'package:listdetaillayout/components/body_container.dart';
-import 'package:listdetaillayout/extensions/build_context_extensions.dart';
 import 'package:listdetaillayout/models/app_navigation_widget_types.dart';
 import 'package:listdetaillayout/routes.dart';
 
@@ -25,11 +24,11 @@ class _EditPageState extends State<EditPage> {
         AppNavigationWidgetTypes.fromWindowWidth(currentWindowWidth);
     return Scaffold(
         appBar: AppHeader(
-          appInitState: context.appInitState.value,
+          showCloseButton: true,
           header: widget.title,
           context: context,
         ),
-        body: BodyContainer(
+        body: AppBodyContainer(
           navigationWidgetType: navigationWidgetType,
           pageIndex: editPageIndex,
           userContent: Center(child: Text(widget.title)),

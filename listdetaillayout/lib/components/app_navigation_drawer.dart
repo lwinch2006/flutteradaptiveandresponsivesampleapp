@@ -10,20 +10,26 @@ class AppNavigationDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NavigationDrawer(
-      selectedIndex: currentIndex,
-      backgroundColor: theme_data.navigationBackgroundColor,
-      tilePadding: const EdgeInsetsDirectional.symmetric(vertical: 0.0),
-      children: navigationDestinations.map((e) {
-        return NavigationDrawerDestination(
-            icon: Icon(e.icon), label: Text(e.label));
-      }).toList(),
-      onDestinationSelected: (selectedIndex) {
-        if (selectedIndex == currentIndex) {
-          return;
-        }
-        context.go(navigationDestinations[selectedIndex].route);
-      },
-    );
+    return ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: 200.0,
+        ),
+        child: NavigationDrawer(
+          selectedIndex: currentIndex,
+          backgroundColor: theme_data.navigationBackgroundColor,
+          tilePadding: const EdgeInsetsDirectional.symmetric(vertical: 0.0),
+          children: navigationDestinations.map((e) {
+            return NavigationDrawerDestination(
+              icon: Icon(e.icon),
+              label: Text(e.label),
+            );
+          }).toList(),
+          onDestinationSelected: (selectedIndex) {
+            if (selectedIndex == currentIndex) {
+              return;
+            }
+            context.go(navigationDestinations[selectedIndex].route);
+          },
+        ));
   }
 }

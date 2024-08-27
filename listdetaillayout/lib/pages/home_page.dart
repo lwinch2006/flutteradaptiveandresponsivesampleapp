@@ -1,31 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:listdetaillayout/components/app_center_text.dart';
 import 'package:listdetaillayout/components/app_header.dart';
-import 'package:listdetaillayout/extensions/build_context_extensions.dart';
-import 'package:listdetaillayout/services/app_service.dart';
+import 'package:listdetaillayout/components/app_progress_indicator.dart';
+import 'package:listdetaillayout/services.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
-
   final String title;
+  const HomePage({super.key, required this.title});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  Future<void>? appInitResult = null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppHeader(
-        appInitState: context.appInitState.value,
+        showCloseButton: false,
         header: widget.title,
+        centerHeader: true,
         context: context,
       ),
-      body: Center(
-        child: FilledButton(
-            onPressed: () => AppService()..appInit(context),
-            child: const Text('Start')),
-      ),
+      body: appInitResult == null
+          ? Center(
+              child: FilledButton(
+                  onPressed: () {
+                    setState(() {
+                      appInitResult = appService.initApp(context);
+                    });
+                  },
+                  child: const Text('Start')),
+            )
+          : FutureBuilder(
+              future: appInitResult,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done &&
+                    snapshot.hasError) {
+                  return const AppCenterText(data: 'Operation failed');
+                }
+
+                return const AppProgressIndicator();
+              },
+            ),
     );
   }
 }

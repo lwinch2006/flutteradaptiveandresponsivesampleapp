@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:listdetaillayout/components/app_body_container.dart';
 import 'package:listdetaillayout/components/app_header.dart';
+import 'package:listdetaillayout/components/app_list_detail_layout.dart';
 import 'package:listdetaillayout/components/app_navigation_bar.dart';
-import 'package:listdetaillayout/components/body_container.dart';
-import 'package:listdetaillayout/extensions/build_context_extensions.dart';
-import 'package:listdetaillayout/models/app_navigation_widget_types.dart';
 import 'package:listdetaillayout/routes.dart';
+import 'package:listdetaillayout/services.dart';
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({super.key, required this.title});
-
   final String title;
+  const DetailsPage({super.key, required this.title});
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
@@ -18,24 +17,23 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
-    final currentWindowWidth = MediaQuery.sizeOf(context).width;
-    final currentWindowHeight = MediaQuery.sizeOf(context).height;
-    debugPrint(
-        'Window size: ${currentWindowWidth.toInt()} x ${currentWindowHeight.toInt()} pixels');
-    final navigationWidgetType =
-        AppNavigationWidgetTypes.fromWindowWidth(currentWindowWidth);
+    final appAdaptiveDesignState =
+        appService.getAppAdaptiveDesignState(context);
+
     return Scaffold(
         appBar: AppHeader(
-          appInitState: context.appInitState.value,
+          showCloseButton: true,
           header: widget.title,
           context: context,
         ),
-        body: BodyContainer(
-          navigationWidgetType: navigationWidgetType,
+        body: AppBodyContainer(
+          navigationWidgetType: appAdaptiveDesignState.navigationWidgetType,
           pageIndex: detailsPageIndex,
-          userContent: Center(child: Text(widget.title)),
+          userContent: AppListDetailLayout(
+              appListDetailLayoutType:
+                  appAdaptiveDesignState.appListDetailLayoutType),
         ),
-        bottomNavigationBar: navigationWidgetType.isBar
+        bottomNavigationBar: appAdaptiveDesignState.navigationWidgetType.isBar
             ? const AppNavigationBar(
                 currentIndex: detailsPageIndex,
               )
