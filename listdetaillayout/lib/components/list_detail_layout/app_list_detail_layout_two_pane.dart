@@ -20,7 +20,7 @@ class AppListDetailLayoutTwoPane extends StatelessWidget {
         Expanded(
             flex: 4,
             child: ValueListenableBuilder(
-              valueListenable: context.appState.selectedListViewItemIndex,
+              valueListenable: context.selectItemState!.selectedItemIndex,
               builder: (context, selectedIndex, child) {
                 debugPrint(
                     'List view selected item index changed to $selectedIndex');

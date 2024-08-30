@@ -95,6 +95,19 @@ class ListViewService {
   }
 
   void closeItemDetails(BuildContext context) {
-    context.appState.selectedListViewItemIndex.value = -1;
+    resetListItemSelectState(context);
+  }
+
+  void resetListItemSelectState(BuildContext context) {
+    if (context.selectItemState == null) {
+      return;
+    }
+
+    context.selectItemState!.selectedItemIndex.value = -1;
+    context.selectItemState!.itemDetails.value = null;
+  }
+
+  void resetListItemStates(BuildContext context) {
+    resetListItemSelectState(context);
   }
 }

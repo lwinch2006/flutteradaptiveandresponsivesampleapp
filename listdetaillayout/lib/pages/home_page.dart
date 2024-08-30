@@ -39,7 +39,8 @@ class _HomePageState extends State<HomePage> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done &&
                     snapshot.hasError) {
-                  return const AppCenterText(data: 'Operation failed');
+                  return AppCenterText(
+                      data: 'Operation failed (${snapshot.error.toString()})');
                 }
 
                 return const AppProgressIndicator();

@@ -17,7 +17,7 @@ class AppListView extends StatelessWidget {
           titleAlignment: ListTileTitleAlignment.center,
           onTap: () {
             debugPrint('Selected list view item index: $index');
-            context.appState.selectedListViewItemIndex.value = index;
+            context.selectItemState!.selectedItemIndex.value = index;
           },
         );
       },

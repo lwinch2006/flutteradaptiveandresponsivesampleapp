@@ -14,15 +14,15 @@ class AppListDetailLayout extends StatelessWidget {
     return appListDetailLayoutType.isTwoPane
         ? const AppListDetailLayoutTwoPane()
         : ValueListenableBuilder(
-            valueListenable: context.appState.selectedListViewItemIndex,
-            builder: (context, value, child) {
-              if (context.appState.selectedListViewItemIndex.value < 0) {
+            valueListenable: context.selectItemState!.selectedItemIndex,
+            builder: (context, selectedIndex, child) {
+              if (selectedIndex < 0) {
                 return AppListView(items: context.appState.listViewItems.value);
               }
 
               return AppDetailView(
-                  selectedListViewViewModel: context.appState.listViewItems
-                      .value[context.appState.selectedListViewItemIndex.value]);
+                  selectedListViewViewModel:
+                      context.appState.listViewItems.value[selectedIndex]);
             },
           );
   }

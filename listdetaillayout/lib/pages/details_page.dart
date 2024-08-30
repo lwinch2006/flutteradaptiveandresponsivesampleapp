@@ -5,6 +5,8 @@ import 'package:listdetaillayout/components/list_detail_layout/app_list_detail_l
 import 'package:listdetaillayout/components/navigation/app_navigation_bar.dart';
 import 'package:listdetaillayout/routes.dart';
 import 'package:listdetaillayout/services.dart';
+import 'package:listdetaillayout/states/list_item_select_state_widget.dart';
+import 'package:listdetaillayout/view_models/detail_view_viewmodel.dart';
 
 class DetailsPage extends StatefulWidget {
   final String title;
@@ -15,6 +17,16 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+  final selectedItemIndexValueNotifier = ValueNotifier(-1);
+  final itemDetailsValueNotifier = ValueNotifier(null as DetailViewViewModel?);
+
+  @override
+  void dispose() {
+    selectedItemIndexValueNotifier.dispose();
+    itemDetailsValueNotifier.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final appAdaptiveDesignState =
@@ -29,9 +41,13 @@ class _DetailsPageState extends State<DetailsPage> {
         body: AppBodyContainer(
           navigationWidgetType: appAdaptiveDesignState.navigationWidgetType,
           pageIndex: detailsPageIndex,
-          userContent: AppListDetailLayout(
-              appListDetailLayoutType:
-                  appAdaptiveDesignState.appListDetailLayoutType),
+          userContent: ListItemSelectStateWidget(
+            child: AppListDetailLayout(
+                appListDetailLayoutType:
+                    appAdaptiveDesignState.appListDetailLayoutType),
+            selectedItemIndex: selectedItemIndexValueNotifier,
+            itemDetails: itemDetailsValueNotifier,
+          ),
         ),
         bottomNavigationBar: appAdaptiveDesignState.navigationWidgetType.isBar
             ? const AppNavigationBar(

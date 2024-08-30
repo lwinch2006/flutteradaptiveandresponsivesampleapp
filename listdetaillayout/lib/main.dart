@@ -10,7 +10,6 @@ void main() {
   runApp(AppStateWidget(
     initStatus: ValueNotifier(false),
     listViewItems: ValueNotifier([]),
-    selectedListViewItemIndex: ValueNotifier(-1),
     child: MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
