@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/dtos/list_view_item_dto.dart';
+import 'package:listdetaillayout/view_models/list_view_viewmodel.dart';
 
 class AppStateWidget extends InheritedWidget {
   final ValueNotifier<bool> initStatus;
-  final ValueNotifier<List<ListViewItemDTO>> listViewItems;
+  final ValueNotifier<List<ListViewViewModel>> listViewItems;
   final ValueNotifier<int> selectedListViewItemIndex;
 
   const AppStateWidget({

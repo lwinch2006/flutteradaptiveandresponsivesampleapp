@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:listdetaillayout/components/app_center_text.dart';
-import 'package:listdetaillayout/components/app_header.dart';
+import 'package:listdetaillayout/components/app_parts/app_header.dart';
 import 'package:listdetaillayout/components/app_progress_indicator.dart';
 import 'package:listdetaillayout/services.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/components/app_navigation_drawer.dart';
-import 'package:listdetaillayout/components/app_navigation_rail.dart';
-import 'package:listdetaillayout/components/app_user_content_container.dart';
+import 'package:listdetaillayout/components/app_parts/app_user_content_container.dart';
+import 'package:listdetaillayout/components/navigation/app_navigation_drawer.dart';
+import 'package:listdetaillayout/components/navigation/app_navigation_rail.dart';
 import 'package:listdetaillayout/models/app_navigation_widget_types.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
 

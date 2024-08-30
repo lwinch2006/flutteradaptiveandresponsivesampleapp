@@ -1,74 +1,100 @@
-import 'package:listdetaillayout/dtos/list_view_item_details_dto.dart';
-import 'package:listdetaillayout/dtos/list_view_item_dto.dart';
+import 'package:flutter/material.dart';
+import 'package:listdetaillayout/extensions/build_context_extensions.dart';
+import 'package:listdetaillayout/models/list_item.dart';
+import 'package:listdetaillayout/models/list_item_details.dart';
+import 'package:listdetaillayout/view_models/detail_view_viewmodel.dart';
+import 'package:listdetaillayout/view_models/list_view_viewmodel.dart';
 
 class ListViewService {
   const ListViewService();
 
-  Future<List<ListViewItemDTO>> getItems() {
+  Future<List<ListViewViewModel>> getItems() {
     return Future.delayed(
       const Duration(seconds: 5),
       () {
-        return const <ListViewItemDTO>[
-          ListViewItemDTO(id: 0, title: 'Gmail'),
-          ListViewItemDTO(id: 1, title: 'Outlook'),
-          ListViewItemDTO(id: 2, title: 'iCloud'),
-          ListViewItemDTO(id: 3, title: 'Macbook'),
-          ListViewItemDTO(id: 4, title: 'Twitter'),
-          ListViewItemDTO(id: 5, title: 'Facebook')
+        const listItems = <ListItem>[
+          ListItem(id: 0, title: 'Gmail'),
+          ListItem(id: 1, title: 'Outlook'),
+          ListItem(id: 2, title: 'iCloud'),
+          ListItem(id: 3, title: 'Macbook'),
+          ListItem(id: 4, title: 'Twitter'),
+          ListItem(id: 5, title: 'Facebook')
         ];
+
+        final response = listItems.map((listItem) {
+          return ListViewViewModel(id: listItem.id, title: listItem.title);
+        });
+
+        return response.toList();
       },
     );
   }
 
-  Future<ListViewItemDetailsDTO> getItemDetails(int itemId, String itemTitle) {
+  Future<DetailViewViewModel> getItemDetails(int itemId, String itemTitle) {
     return Future.delayed(
       const Duration(seconds: 5),
       () {
+        ListItemDetails listItem;
+
         switch (itemId) {
           case 0:
-            return ListViewItemDetailsDTO(
+            listItem = ListItemDetails(
                 itemId: itemId,
                 itemTitle: itemTitle,
                 username: 'Gmail user',
                 password: 'Gmail password');
+            break;
           case 1:
-            return ListViewItemDetailsDTO(
+            listItem = ListItemDetails(
                 itemId: itemId,
                 itemTitle: itemTitle,
                 username: 'Outlook user',
                 password: 'Outlook password');
+            break;
           case 2:
-            return ListViewItemDetailsDTO(
+            listItem = ListItemDetails(
                 itemId: itemId,
                 itemTitle: itemTitle,
                 username: 'iCloud user',
                 password: 'iCloud password');
+            break;
           case 3:
-            return ListViewItemDetailsDTO(
+            listItem = ListItemDetails(
                 itemId: itemId,
                 itemTitle: itemTitle,
                 username: 'Macbook user',
                 password: 'Macbook password');
+            break;
           case 4:
-            return ListViewItemDetailsDTO(
+            listItem = ListItemDetails(
                 itemId: itemId,
                 itemTitle: itemTitle,
                 username: 'Twitter user',
                 password: 'Twitter password');
+            break;
           case 5:
-            return ListViewItemDetailsDTO(
+            listItem = ListItemDetails(
                 itemId: itemId,
                 itemTitle: itemTitle,
                 username: 'Facebook user',
                 password: 'Facebook password');
+            break;
           default:
-            return ListViewItemDetailsDTO(
+            listItem = ListItemDetails(
                 itemId: itemId,
                 itemTitle: itemTitle,
                 username: 'Gmail user',
                 password: 'Gmail password');
+            break;
         }
+
+        final response = listItem.toDetailViewViewModel();
+        return response;
       },
     );
+  }
+
+  void closeItemDetails(BuildContext context) {
+    context.appState.selectedListViewItemIndex.value = -1;
   }
 }

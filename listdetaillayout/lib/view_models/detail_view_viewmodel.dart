@@ -1,10 +1,10 @@
-final class ListViewItemDetailsDTO {
+final class DetailViewViewModel {
   final int itemId;
   final String itemTitle;
   final String username;
   final String password;
 
-  const ListViewItemDetailsDTO(
+  const DetailViewViewModel(
       {required this.itemId,
       required this.itemTitle,
       required this.username,

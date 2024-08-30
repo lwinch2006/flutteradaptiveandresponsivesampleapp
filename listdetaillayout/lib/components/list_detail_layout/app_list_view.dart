@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/dtos/list_view_item_dto.dart';
 import 'package:listdetaillayout/extensions/build_context_extensions.dart';
+import 'package:listdetaillayout/view_models/list_view_viewmodel.dart';
 
 class AppListView extends StatelessWidget {
-  final List<ListViewItemDTO> items;
+  final List<ListViewViewModel> items;
   const AppListView({super.key, required this.items});
 
   @override

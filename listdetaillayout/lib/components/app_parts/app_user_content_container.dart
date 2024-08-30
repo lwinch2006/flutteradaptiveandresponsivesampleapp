@@ -13,7 +13,10 @@ class AppUserContentContainer extends StatelessWidget {
         decoration: BoxDecoration(
             color: theme_data.userContentBackgroundColor,
             borderRadius: const BorderRadius.all(Radius.circular(10.0))),
-        child: child,
+        child: Padding(
+          padding: const EdgeInsets.all(theme_data.commonPaddingValue),
+          child: child,
+        ),
       ),
     );
   }

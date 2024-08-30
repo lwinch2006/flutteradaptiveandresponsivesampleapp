@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/components/app_body_container.dart';
-import 'package:listdetaillayout/components/app_header.dart';
-import 'package:listdetaillayout/components/app_list_detail_layout.dart';
-import 'package:listdetaillayout/components/app_navigation_bar.dart';
+import 'package:listdetaillayout/components/app_parts/app_body_container.dart';
+import 'package:listdetaillayout/components/app_parts/app_header.dart';
+import 'package:listdetaillayout/components/list_detail_layout/app_list_detail_layout.dart';
+import 'package:listdetaillayout/components/navigation/app_navigation_bar.dart';
 import 'package:listdetaillayout/routes.dart';
 import 'package:listdetaillayout/services.dart';
 

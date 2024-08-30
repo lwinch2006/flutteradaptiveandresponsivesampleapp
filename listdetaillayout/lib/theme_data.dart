@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+const verticalSpacerSize = 30.0;
+const horizontalSpacerSize = 30.0;
+const formWidth = 400.0;
+const commonPaddingValue = 10.0;
+
 final colorScheme = ColorScheme.fromSeed(seedColor: Colors.indigo);
 
 final appBarBackgroundColor = colorScheme.surfaceContainerLow;
