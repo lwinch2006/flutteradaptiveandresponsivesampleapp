@@ -15,6 +15,11 @@ void main() {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: theme_data.colorScheme,
+        scaffoldBackgroundColor: theme_data.bodyBackGroundColor,
+        listTileTheme: ListTileThemeData(
+          selectedTileColor: theme_data.selectedTileColor,
+          shape: const StadiumBorder(),
+        ),
         useMaterial3: true,
       ),
       routerConfig: router,

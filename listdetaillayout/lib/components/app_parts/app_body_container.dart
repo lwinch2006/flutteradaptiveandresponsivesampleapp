@@ -3,7 +3,6 @@ import 'package:listdetaillayout/components/app_parts/app_user_content_container
 import 'package:listdetaillayout/components/navigation/app_navigation_drawer.dart';
 import 'package:listdetaillayout/components/navigation/app_navigation_rail.dart';
 import 'package:listdetaillayout/models/app_navigation_widget_types.dart';
-import 'package:listdetaillayout/theme_data.dart' as theme_data;
 
 class AppBodyContainer extends StatefulWidget {
   final int pageIndex;
@@ -49,7 +48,6 @@ class _AppBodyContainerState extends State<AppBodyContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: theme_data.bodyBackGroundColor,
       child: SafeArea(
         child: Row(
           children: [

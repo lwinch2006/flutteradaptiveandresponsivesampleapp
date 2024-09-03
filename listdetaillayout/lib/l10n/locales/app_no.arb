@@ -4,5 +4,6 @@
     "navigationDetailsPage": "Detaljer side",
     "navigationAddPage": "Addere side",
     "navigationEditPage": "Redigere side",
-    "navigationDeletePage": "Fjerne side"
+    "navigationDeletePage": "Fjerne side",
+    "navigationCloseAppPage": "Lukke"
 }

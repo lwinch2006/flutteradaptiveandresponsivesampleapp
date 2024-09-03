@@ -14,9 +14,7 @@ class AppDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (selectedListViewViewModel == null) {
-      return const Center(
-        child: Text('Select an item from the list'),
-      );
+      return const AppCenterText(data: 'Select an item from the list');
     }
 
     if (context.selectItemState?.itemDetails.value?.itemId ==

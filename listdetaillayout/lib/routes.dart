@@ -7,6 +7,7 @@ import 'package:listdetaillayout/pages/delete_page.dart';
 import 'package:listdetaillayout/pages/details_page.dart';
 import 'package:listdetaillayout/pages/edit_page.dart';
 import 'package:listdetaillayout/pages/home_page.dart';
+import 'package:listdetaillayout/services.dart';
 
 const detailsPageIndex = 0;
 const addPageIndex = 1;
@@ -24,29 +25,43 @@ final navigatorKey = GlobalKey<NavigatorState>();
 final List<AppNavigationDestination> navigationDestinations =
     <AppNavigationDestination>[
   AppNavigationDestination(
-      route: detailsPagePath,
-      icon: Icons.info_outline,
-      label: navigatorKey.currentContext != null
-          ? navigatorKey.currentContext!.l10n.navigationDetailsPage
-          : 'Details'),
+    route: detailsPagePath,
+    icon: Icons.info_outline,
+    label: navigatorKey.currentContext != null
+        ? navigatorKey.currentContext!.l10n.navigationDetailsPage
+        : 'Details',
+  ),
   AppNavigationDestination(
-      route: addPagePath,
-      icon: Icons.add,
-      label: navigatorKey.currentContext != null
-          ? navigatorKey.currentContext!.l10n.navigationAddPage
-          : 'Add'),
+    route: addPagePath,
+    icon: Icons.add,
+    label: navigatorKey.currentContext != null
+        ? navigatorKey.currentContext!.l10n.navigationAddPage
+        : 'Add',
+  ),
   AppNavigationDestination(
-      route: editPagePath,
-      icon: Icons.edit,
-      label: navigatorKey.currentContext != null
-          ? navigatorKey.currentContext!.l10n.navigationEditPage
-          : 'Edit'),
+    route: editPagePath,
+    icon: Icons.edit,
+    label: navigatorKey.currentContext != null
+        ? navigatorKey.currentContext!.l10n.navigationEditPage
+        : 'Edit',
+  ),
   AppNavigationDestination(
-      route: deletePagePath,
-      icon: Icons.delete_outline,
+    route: deletePagePath,
+    icon: Icons.delete_outline,
+    label: navigatorKey.currentContext != null
+        ? navigatorKey.currentContext!.l10n.navigationDeletePage
+        : 'Delete',
+  ),
+  AppNavigationDestination(
+      icon: Icons.exit_to_app_outlined,
       label: navigatorKey.currentContext != null
-          ? navigatorKey.currentContext!.l10n.navigationDeletePage
-          : 'Delete'),
+          ? navigatorKey.currentContext!.l10n.navigationCloseAppPage
+          : 'Close',
+      action: () {
+        if (navigatorKey.currentContext != null) {
+          appService.closeApp(navigatorKey.currentContext!);
+        }
+      }),
 ];
 
 GoRouter generateRouter() {

@@ -29,7 +29,12 @@ class _AppNavigationDrawerState extends State<AppNavigationDrawer> {
         if (selectedIndex == widget.currentIndex) {
           return;
         }
-        context.go(navigationDestinations[selectedIndex].route);
+
+        if (navigationDestinations[selectedIndex].action != null) {
+          navigationDestinations[selectedIndex].action!();
+        } else {
+          context.go(navigationDestinations[selectedIndex].route!);
+        }
       },
     );
   }

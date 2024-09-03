@@ -4,5 +4,6 @@
     "navigationDetailsPage": "Details page",
     "navigationAddPage": "Add page",
     "navigationEditPage": "Edit page",
-    "navigationDeletePage": "Delete page"
+    "navigationDeletePage": "Delete page",
+    "navigationCloseAppPage": "Close"
 }

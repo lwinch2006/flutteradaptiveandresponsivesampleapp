@@ -24,7 +24,7 @@ class _AddPageState extends State<AddPage> {
         AppNavigationWidgetTypes.fromWindowWidth(currentWindowWidth);
     return Scaffold(
         appBar: AppHeader(
-          showCloseButton: true,
+          showCloseButton: false,
           header: widget.title,
           context: context,
         ),

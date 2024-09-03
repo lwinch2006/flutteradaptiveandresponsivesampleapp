@@ -34,7 +34,7 @@ class _DetailsPageState extends State<DetailsPage> {
 
     return Scaffold(
         appBar: AppHeader(
-          showCloseButton: true,
+          showCloseButton: false,
           header: widget.title,
           context: context,
         ),

@@ -25,7 +25,12 @@ class AppNavigationRail extends StatelessWidget {
         if (selectedIndex == currentIndex) {
           return;
         }
-        context.go(navigationDestinations[selectedIndex].route);
+
+        if (navigationDestinations[selectedIndex].action != null) {
+          navigationDestinations[selectedIndex].action!();
+        } else {
+          context.go(navigationDestinations[selectedIndex].route!);
+        }
       },
     );
   }
