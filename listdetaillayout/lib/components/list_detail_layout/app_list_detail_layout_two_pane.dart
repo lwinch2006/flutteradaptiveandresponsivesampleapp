@@ -1,42 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:listdetaillayout/components/list_detail_layout/app_detail_view.dart';
 import 'package:listdetaillayout/components/list_detail_layout/app_list_view.dart';
-import 'package:listdetaillayout/extensions/build_context_extensions.dart';
+import 'package:listdetaillayout/theme_data.dart' as theme_data;
 
 class AppListDetailLayoutTwoPane extends StatelessWidget {
   const AppListDetailLayoutTwoPane({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    debugPrint('AppListDetailLayoutTwoPane: build()');
+    return const Row(
       children: [
         Expanded(
-            flex: 2,
-            child: AppListView(items: context.appState.listViewItems.value)),
-        const VerticalDivider(
+          flex: 2,
+          child: Padding(
+            padding: EdgeInsets.all(theme_data.commonPaddingValue),
+            child: AppListView(),
+          ),
+        ),
+        VerticalDivider(
           width: 1,
           color: Colors.grey,
         ),
         Expanded(
-            flex: 4,
-            child: ValueListenableBuilder(
-              valueListenable: context.selectItemState!.selectedItemIndex,
-              builder: (context, selectedIndex, child) {
-                debugPrint(
-                    'List view selected item index changed to $selectedIndex');
-
-                final selectedListViewItem = selectedIndex >= 0
-                    ? context.appState.listViewItems.value[selectedIndex]
-                    : null;
-
-                return AppDetailView(
-                  selectedListViewViewModel: selectedListViewItem,
-                );
-              },
-            )
-
-            //const AppDetailView(),
-            ),
+          flex: 4,
+          child: Padding(
+            padding: EdgeInsets.all(theme_data.commonPaddingValue),
+            child: AppDetailView(),
+          ),
+        ),
       ],
     );
   }

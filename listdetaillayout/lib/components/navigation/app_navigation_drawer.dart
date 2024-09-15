@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:listdetaillayout/dtos/common_state_dto.dart';
+import 'package:listdetaillayout/extensions/build_context_extensions.dart';
 import 'package:listdetaillayout/routes.dart';
+import 'package:listdetaillayout/services.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
 
 class AppNavigationDrawer extends StatefulWidget {
@@ -13,6 +15,19 @@ class AppNavigationDrawer extends StatefulWidget {
 
 class _AppNavigationDrawerState extends State<AppNavigationDrawer> {
   late Widget navigationDrawer = getNavigationDrawer();
+  late final CommonStateDto commonState;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    commonState = CommonStateDto(
+      appState: context.appState,
+      listViewItemsState: context.listViewItemsState,
+      listViewSelectedIndexState: context.listViewSelectedIndexState,
+      listViewSelectedItemState: context.listViewSelectedItemState,
+    );
+  }
 
   Widget getNavigationDrawer() {
     return NavigationDrawer(
@@ -26,15 +41,8 @@ class _AppNavigationDrawerState extends State<AppNavigationDrawer> {
         );
       }).toList(),
       onDestinationSelected: (selectedIndex) {
-        if (selectedIndex == widget.currentIndex) {
-          return;
-        }
-
-        if (navigationDestinations[selectedIndex].action != null) {
-          navigationDestinations[selectedIndex].action!();
-        } else {
-          context.go(navigationDestinations[selectedIndex].route!);
-        }
+        navigationService.onDestinationSelected(
+            context, commonState, widget.currentIndex, selectedIndex);
       },
     );
   }
@@ -50,7 +58,7 @@ class _AppNavigationDrawerState extends State<AppNavigationDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('Calling build() of AppNavigationDrawer');
+    debugPrint('AppNavigationDrawer: build()');
     return SizedBox(
       width: 200.0,
       child: navigationDrawer,

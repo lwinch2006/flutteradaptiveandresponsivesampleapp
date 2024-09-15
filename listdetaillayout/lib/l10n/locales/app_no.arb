@@ -1,9 +1,14 @@
 {
     "page": "side",
     "navigationHomePage": "SmartCardPass",
-    "navigationDetailsPage": "Detaljer side",
-    "navigationAddPage": "Addere side",
+    "navigationDetailsPage": "Kontoer",
+    "navigationAddPage": "Addere konto",
     "navigationEditPage": "Redigere side",
     "navigationDeletePage": "Fjerne side",
-    "navigationCloseAppPage": "Lukke"
+    "navigationCloseAppPage": "Lukke",
+    "progressIndicatorLoading": "Laster...",
+    "progressIndicatorLoadingData": "Laster data...",
+    "progressIndicatorAddingData": "Adderer data...",
+    "progressIndicatorUpdatingData": "Oppdaterer data...",
+    "progressIndicatorDeletingData": "Fjerner data..."
 }

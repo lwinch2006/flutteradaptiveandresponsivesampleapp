@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:listdetaillayout/components/app_snack_bar.dart';
+import 'package:listdetaillayout/theme_data.dart' as theme_data;
 
 class AppTextFormField extends StatefulWidget {
   final IconData icon;
@@ -43,11 +44,15 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('AppTextFormField: build()');
     return TextFormField(
       controller: textEditingController,
       readOnly: widget.isReadOnly,
-      obscureText: isHiddenText,
+      obscureText:
+          widget.isVisibilityButtonShown ? isHiddenText : widget.isHiddenText,
       decoration: InputDecoration(
+        fillColor: theme_data.textFieldEnabledColor,
+        filled: !widget.isReadOnly,
         border: const OutlineInputBorder(),
         icon: Icon(widget.icon),
         labelText: widget.label,

@@ -47,6 +47,7 @@ class _AppBodyContainerState extends State<AppBodyContainer> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('AppBodyContainer: build()');
     return Container(
       child: SafeArea(
         child: Row(

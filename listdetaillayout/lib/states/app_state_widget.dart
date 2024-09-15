@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/view_models/list_view_viewmodel.dart';
+import 'package:listdetaillayout/models/app_state_types.dart';
 
 class AppStateWidget extends InheritedWidget {
-  final ValueNotifier<bool> initStatus;
-  final ValueNotifier<List<ListViewViewModel>> listViewItems;
+  final ValueNotifier<AppStateTypes> state;
 
   const AppStateWidget({
     super.key,
     required super.child,
-    required this.initStatus,
-    required this.listViewItems,
+    required this.state,
   });
 
   @override
   bool updateShouldNotify(covariant AppStateWidget oldWidget) {
-    return initStatus != oldWidget.initStatus ||
-        listViewItems != oldWidget.listViewItems;
+    return state != oldWidget.state;
   }
 
   static AppStateWidget of(BuildContext context) {

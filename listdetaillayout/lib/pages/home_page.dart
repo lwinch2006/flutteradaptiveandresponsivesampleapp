@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:listdetaillayout/components/app_center_text.dart';
 import 'package:listdetaillayout/components/app_parts/app_header.dart';
-import 'package:listdetaillayout/components/app_progress_indicator.dart';
+import 'package:listdetaillayout/components/progress_indicators/app_progress_indicator.dart';
+import 'package:listdetaillayout/dtos/common_state_dto.dart';
+import 'package:listdetaillayout/extensions/build_context_extensions.dart';
 import 'package:listdetaillayout/services.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,39 +15,53 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<void>? appInitResult = null;
+  late final CommonStateDto commonState;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    commonState = CommonStateDto(
+      appState: context.appState,
+      listViewItemsState: context.listViewItemsState,
+      listViewSelectedIndexState: context.listViewSelectedIndexState,
+      listViewSelectedItemState: context.listViewSelectedItemState,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppHeader(
-        showCloseButton: false,
         header: widget.title,
         centerHeader: true,
         context: context,
       ),
-      body: appInitResult == null
-          ? Center(
+      body: ListenableBuilder(
+        listenable: context.appState.state,
+        builder: (context, child) {
+          if (context.appState.state.value.isNotInitialized) {
+            return Center(
               child: FilledButton(
-                  onPressed: () {
-                    setState(() {
-                      appInitResult = appService.initApp(context);
-                    });
-                  },
+                  onPressed: () async =>
+                      await appService.initApp(context, commonState),
                   child: const Text('Start')),
-            )
-          : FutureBuilder(
-              future: appInitResult,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done &&
-                    snapshot.hasError) {
-                  return AppCenterText(
-                      data: 'Operation failed (${snapshot.error.toString()})');
-                }
+            );
+          }
 
-                return const AppProgressIndicator();
-              },
-            ),
+          if (context.appState.state.value.isInitializing) {
+            return AppProgressIndicator(
+              label: context.l10n.progressIndicatorLoading,
+            );
+          }
+
+          if (context.appState.state.value.isInitializationError) {
+            return const AppCenterText(data: 'Operation failed');
+          }
+
+          return const AppCenterText(data: '');
+        },
+      ),
     );
   }
 }

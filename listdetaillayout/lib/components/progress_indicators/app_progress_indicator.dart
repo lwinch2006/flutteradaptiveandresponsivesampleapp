@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 
 class AppProgressIndicator extends StatelessWidget {
-  const AppProgressIndicator();
+  final String label;
+  const AppProgressIndicator({
+    required this.label,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CircularProgressIndicator(),
-          SizedBox(
+          const CircularProgressIndicator(),
+          const SizedBox(
             width: 10.0,
           ),
-          Text('Loading...'),
+          Text(label),
         ],
       ),
     );

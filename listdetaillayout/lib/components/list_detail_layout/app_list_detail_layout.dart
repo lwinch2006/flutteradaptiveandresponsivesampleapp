@@ -9,6 +9,7 @@ class AppListDetailLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('AppListDetailLayout: build()');
     return appListDetailLayoutType.isTwoPane
         ? const AppListDetailLayoutTwoPane()
         : const AppListDetailLayoutOnePane();

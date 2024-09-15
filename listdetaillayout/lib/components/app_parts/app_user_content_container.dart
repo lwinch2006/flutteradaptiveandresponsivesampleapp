@@ -7,16 +7,14 @@ class AppUserContentContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('AppUserContentContainer: build()');
     return Padding(
       padding: theme_data.commonPadding,
       child: Container(
         decoration: BoxDecoration(
             color: theme_data.userContentBackgroundColor,
             borderRadius: const BorderRadius.all(Radius.circular(10.0))),
-        child: Padding(
-          padding: const EdgeInsets.all(theme_data.commonPaddingValue),
-          child: child,
-        ),
+        child: child,
       ),
     );
   }

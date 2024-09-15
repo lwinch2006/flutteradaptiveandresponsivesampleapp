@@ -1,32 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listdetaillayout/extensions/build_context_extensions.dart';
-import 'package:listdetaillayout/models/app_adaptive_design_state.dart';
+import 'package:listdetaillayout/dtos/app_adaptive_design_state_dto.dart';
+import 'package:listdetaillayout/dtos/common_state_dto.dart';
 import 'package:listdetaillayout/models/app_list_detail_layout_types.dart';
 import 'package:listdetaillayout/models/app_navigation_widget_types.dart';
+import 'package:listdetaillayout/models/app_state_types.dart';
 import 'package:listdetaillayout/routes.dart' as routes;
-import 'package:listdetaillayout/services.dart';
-import 'package:listdetaillayout/services/list_view_service.dart';
+import 'package:listdetaillayout/services/list_detail_layout_service.dart';
+import 'package:listdetaillayout/services/state_service.dart';
 
 class AppService {
-  final ListViewService listItemService;
-  const AppService({required this.listItemService});
+  final ListDetailLayoutService listDetailLayoutService;
+  final StateService stateService;
 
-  Future<void> initApp(BuildContext context) async {
-    context.appState.listViewItems.value = await listViewService.getItems();
-    listItemService.resetListItemStates(context);
-    context.appState.initStatus.value = true;
-    context.go(routes.detailsPagePath);
+  const AppService({
+    required this.listDetailLayoutService,
+    required this.stateService,
+  });
+
+  Future<void> initApp(
+    BuildContext context,
+    CommonStateDto commonState,
+  ) async {
+    stateService.setAppState(commonState.appState, AppStateTypes.initializing);
+    stateService.setListViewSelectedIndexState(
+        commonState.listViewSelectedIndexState, -1);
+    stateService.setListViewSelectedItemState(
+        commonState.listViewSelectedItemState, null);
+
+    final listViewItems = await listDetailLayoutService.getItems();
+
+    stateService.setListViewItemsState(
+        commonState.listViewItemsState, listViewItems);
+    stateService.setAppState(commonState.appState, AppStateTypes.initialized);
+
+    context.go(routes.listDetailLayoutPagePath);
   }
 
-  void closeApp(BuildContext context) {
-    listItemService.resetListItemStates(context);
-    context.appState.listViewItems.value = [];
-    context.appState.initStatus.value = false;
+  void closeApp(
+    BuildContext context,
+    CommonStateDto commonState,
+  ) {
+    stateService.setListViewSelectedIndexState(
+        commonState.listViewSelectedIndexState, -1);
+    stateService.setListViewSelectedItemState(
+        commonState.listViewSelectedItemState, null);
+    stateService.setListViewItemsState(commonState.listViewItemsState, []);
+    stateService.setAppState(
+        commonState.appState, AppStateTypes.notInitialized);
+
     context.go(routes.homePagePath);
   }
 
-  AppAdaptiveDesignState getAppAdaptiveDesignState(BuildContext context) {
+  AppAdaptiveDesignStateDto getAppAdaptiveDesignState(BuildContext context) {
     final currentWindowWidth = MediaQuery.sizeOf(context).width;
     final currentWindowHeight = MediaQuery.sizeOf(context).height;
     final navigationWidgetType =
@@ -37,7 +63,7 @@ class AppService {
     debugPrint(
         'Window size: ${currentWindowWidth.toInt()} x ${currentWindowHeight.toInt()} pixels');
 
-    return AppAdaptiveDesignState(
+    return AppAdaptiveDesignStateDto(
       navigationWidgetType: navigationWidgetType,
       appListDetailLayoutType: appListDetailLayoutType,
     );
