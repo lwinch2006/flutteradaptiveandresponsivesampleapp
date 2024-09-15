@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:listdetaillayout/components/app_center_text.dart';
 import 'package:listdetaillayout/components/app_parts/app_header.dart';
-import 'package:listdetaillayout/components/progress_indicators/app_progress_indicator.dart';
+import 'package:listdetaillayout/components/app_progress_indicator.dart';
 import 'package:listdetaillayout/dtos/common_state_dto.dart';
 import 'package:listdetaillayout/extensions/build_context_extensions.dart';
 import 'package:listdetaillayout/services.dart';

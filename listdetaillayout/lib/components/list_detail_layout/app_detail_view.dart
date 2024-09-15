@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:listdetaillayout/components/app_center_text.dart';
-import 'package:listdetaillayout/components/app_form.dart';
-import 'package:listdetaillayout/components/progress_indicators/app_progress_indicator.dart';
+import 'package:listdetaillayout/components/app_form/app_form.dart';
+import 'package:listdetaillayout/components/app_progress_indicator.dart';
 import 'package:listdetaillayout/extensions/build_context_extensions.dart';
 
 class AppDetailView extends StatelessWidget {

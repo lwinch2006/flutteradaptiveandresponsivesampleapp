@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/components/app_form_close_button.dart';
-import 'package:listdetaillayout/components/app_form_save_button.dart';
+import 'package:listdetaillayout/components/app_form/app_form_close_button.dart';
+import 'package:listdetaillayout/components/app_form/app_form_save_button.dart';
+import 'package:listdetaillayout/components/app_form/app_text_form_field.dart';
 import 'package:listdetaillayout/components/app_horizontal_spacer.dart';
-import 'package:listdetaillayout/components/app_text_form_field.dart';
 import 'package:listdetaillayout/components/app_vertical_spacer.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
 import 'package:listdetaillayout/view_models/detail_view_viewmodel.dart';
