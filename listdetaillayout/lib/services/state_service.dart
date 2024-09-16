@@ -33,6 +33,32 @@ class StateService {
     listViewItemsState.listViewItems.value = items;
   }
 
+  void setListViewItemState(
+    ListViewItemsStateWidget? listViewItemsState,
+    int? index,
+    ListViewViewModel itemState,
+  ) {
+    if (listViewItemsState == null) {
+      return;
+    }
+
+    if (index == null) {
+      listViewItemsState.listViewItems.value =
+          List.from(listViewItemsState.listViewItems.value)..add(itemState);
+
+      return;
+    }
+
+    if (index < 0 ||
+        index > listViewItemsState.listViewItems.value.length - 1) {
+      return;
+    }
+
+    listViewItemsState.listViewItems.value[index] = itemState;
+    listViewItemsState.listViewItems.value =
+        List.from(listViewItemsState.listViewItems.value);
+  }
+
   void setListViewSelectedIndexState(
     ListViewSelectedIndexStateWidget? listViewSelectedIndexState,
     int selectedIndex,
@@ -75,12 +101,12 @@ class StateService {
       return;
     }
 
+    listViewSelectedIndexState.selectedIndex.value = -2;
     listViewSelectedItemState.selectedItem.value = const DetailViewViewModel(
+      itemId: null,
       itemTitle: 'New Account',
       username: '',
       password: '',
     );
-
-    listViewSelectedIndexState.selectedIndex.value = -2;
   }
 }

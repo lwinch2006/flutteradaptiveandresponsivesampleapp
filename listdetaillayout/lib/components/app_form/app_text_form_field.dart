@@ -4,12 +4,15 @@ import 'package:listdetaillayout/components/app_snack_bar.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
 
 class AppTextFormField extends StatefulWidget {
-  final IconData icon;
-  final String label;
+  final IconData? icon;
+  final String? label;
   final String text;
   final bool isReadOnly;
   final bool isVisibilityButtonShown;
+  final bool isCopyButtonShown;
   final bool isHiddenText;
+  final TextEditingController controller;
+  final String? Function(String?) validator;
 
   const AppTextFormField({
     super.key,
@@ -19,6 +22,9 @@ class AppTextFormField extends StatefulWidget {
     required this.isReadOnly,
     required this.isHiddenText,
     required this.isVisibilityButtonShown,
+    required this.isCopyButtonShown,
+    required this.controller,
+    required this.validator,
   });
 
   @override
@@ -27,26 +33,19 @@ class AppTextFormField extends StatefulWidget {
 
 class _AppTextFormFieldState extends State<AppTextFormField> {
   late bool isHiddenText;
-  late TextEditingController textEditingController;
 
   @override
   void initState() {
     super.initState();
     isHiddenText = widget.isHiddenText;
-    textEditingController = TextEditingController(text: widget.text);
-  }
-
-  @override
-  void dispose() {
-    textEditingController.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     debugPrint('AppTextFormField: build()');
     return TextFormField(
-      controller: textEditingController,
+      controller: widget.controller,
+      validator: widget.validator,
       readOnly: widget.isReadOnly,
       obscureText:
           widget.isVisibilityButtonShown ? isHiddenText : widget.isHiddenText,
@@ -56,7 +55,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         border: const OutlineInputBorder(),
         icon: Icon(widget.icon),
         labelText: widget.label,
-        suffixIcon: widget.isVisibilityButtonShown
+        suffixIcon: widget.isVisibilityButtonShown && widget.isCopyButtonShown
             ? Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -73,7 +72,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                   IconButton(
                     onPressed: () async {
                       await Clipboard.setData(
-                          ClipboardData(text: textEditingController.text));
+                          ClipboardData(text: widget.controller.text));
 
                       ScaffoldMessenger.of(context).showSnackBar(
                           AppSnackBar(content: '${widget.label} copied'));
@@ -82,16 +81,29 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                   ),
                 ],
               )
-            : IconButton(
-                onPressed: () async {
-                  await Clipboard.setData(
-                      ClipboardData(text: textEditingController.text));
+            : widget.isVisibilityButtonShown
+                ? IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isHiddenText = !isHiddenText;
+                      });
+                    },
+                    icon: isHiddenText
+                        ? const Icon(Icons.visibility_off_outlined)
+                        : const Icon(Icons.visibility_outlined),
+                  )
+                : widget.isCopyButtonShown
+                    ? IconButton(
+                        onPressed: () async {
+                          await Clipboard.setData(
+                              ClipboardData(text: widget.controller.text));
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      AppSnackBar(content: '${widget.label} copied'));
-                },
-                icon: const Icon(Icons.copy_outlined),
-              ),
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              AppSnackBar(content: '${widget.label} copied'));
+                        },
+                        icon: const Icon(Icons.copy_outlined),
+                      )
+                    : null,
       ),
     );
   }

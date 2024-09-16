@@ -52,10 +52,25 @@ class _AppListViewState extends State<AppListView> {
                     leading: const Icon(Icons.key_outlined),
                     title: Text(listViewItems[index].title),
                     titleAlignment: ListTileTitleAlignment.center,
-                    trailing: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.more_vert),
+                    trailing: PopupMenuButton<int>(
+                      itemBuilder: (context) {
+                        return <PopupMenuEntry<int>>[
+                          PopupMenuItem(
+                            value: listViewItems[index].id,
+                            child: const Text('Delete'),
+                          ),
+                        ];
+                      },
+                      onSelected: (itemId) async {
+                        await listDetailLayoutService.deleteItemDetails(
+                            itemId, commonState);
+                      },
                     ),
+
+                    // IconButton(
+                    //   onPressed: () {},
+                    //   icon: const Icon(Icons.more_vert),
+                    // ),
                     onTap: () async => await listDetailLayoutService
                         .onListTileTap(index, commonState),
                   );

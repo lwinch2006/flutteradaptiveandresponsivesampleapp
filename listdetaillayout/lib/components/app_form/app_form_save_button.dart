@@ -27,6 +27,7 @@ class _AppFormSaveButtonState extends State<AppFormSaveButton> {
     debugPrint('_AppFormSaveButtonState: didChangeDependencies()');
     commonState = CommonStateDto(
       detailsViewState: context.detailsViewState,
+      listViewSelectedIndexState: context.listViewSelectedIndexState,
       listViewSelectedItemState: context.listViewSelectedItemState,
     );
   }
