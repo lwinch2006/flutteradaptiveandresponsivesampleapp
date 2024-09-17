@@ -1,7 +1,7 @@
-final class ListViewViewModel implements Comparable<ListViewViewModel> {
+final class ListItemsViewModel implements Comparable<ListItemsViewModel> {
   final int id;
   final String title;
-  const ListViewViewModel({required this.id, required this.title});
+  const ListItemsViewModel({required this.id, required this.title});
 
   @override
   bool operator ==(Object other) {
@@ -9,7 +9,7 @@ final class ListViewViewModel implements Comparable<ListViewViewModel> {
       return true;
     }
 
-    if (other is ListViewViewModel) {
+    if (other is ListItemsViewModel) {
       return id == other.id &&
           title == other.title &&
           runtimeType == other.runtimeType;
@@ -22,7 +22,7 @@ final class ListViewViewModel implements Comparable<ListViewViewModel> {
   int get hashCode => id.hashCode ^ title.hashCode;
 
   @override
-  int compareTo(ListViewViewModel other) {
+  int compareTo(ListItemsViewModel other) {
     if (identical(this, other) || (id == other.id && title == other.title)) {
       return 0;
     }

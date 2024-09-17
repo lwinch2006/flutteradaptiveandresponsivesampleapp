@@ -4,8 +4,8 @@ import 'package:listdetaillayout/commands/update_list_item_command.dart';
 import 'package:listdetaillayout/models/list_item.dart';
 import 'package:listdetaillayout/models/list_item_details.dart';
 import 'package:listdetaillayout/view_models/create_new_list_item_viewmodel.dart';
-import 'package:listdetaillayout/view_models/detail_view_viewmodel.dart';
-import 'package:listdetaillayout/view_models/list_view_viewmodel.dart';
+import 'package:listdetaillayout/view_models/list_item_details_viewmodel.dart';
+import 'package:listdetaillayout/view_models/list_items_viewmodel.dart';
 import 'package:listdetaillayout/view_models/update_list_item_viewmodel.dart';
 
 final class ListDetailLayoutMapper {
@@ -108,13 +108,13 @@ final class ListDetailLayoutMapper {
     return destination;
   }
 
-  static ListViewViewModel? MapToListViewViewModelFromListItem(
+  static ListItemsViewModel? MapToListViewViewModelFromListItem(
       ListItem? source) {
     if (source == null) {
       return null;
     }
 
-    final destination = ListViewViewModel(
+    final destination = ListItemsViewModel(
       id: source.id,
       title: source.title,
     );
@@ -122,32 +122,32 @@ final class ListDetailLayoutMapper {
     return destination;
   }
 
-  static ListViewViewModel? MapToListViewViewModelFromDetailViewViewModel(
-      DetailViewViewModel? source) {
+  static ListItemsViewModel? MapToListViewViewModelFromDetailViewViewModel(
+      ListItemDetailsViewModel? source) {
     if (source == null) {
       return null;
     }
 
-    return ListViewViewModel(
+    return ListItemsViewModel(
       id: source.id!,
       title: source.title,
     );
   }
 
-  static List<ListViewViewModel> MapToListViewViewModels(
+  static List<ListItemsViewModel> MapToListViewViewModels(
       List<ListItem> source) {
     return source
         .map((item) => MapToListViewViewModelFromListItem(item)!)
         .toList();
   }
 
-  static DetailViewViewModel? MapToDetailViewViewModelFromListItemDetails(
+  static ListItemDetailsViewModel? MapToDetailViewViewModelFromListItemDetails(
       ListItemDetails? source) {
     if (source == null) {
       return null;
     }
 
-    var destination = DetailViewViewModel(
+    var destination = ListItemDetailsViewModel(
       id: source.itemId,
       title: source.itemTitle,
       username: source.username,
@@ -157,14 +157,14 @@ final class ListDetailLayoutMapper {
     return destination;
   }
 
-  static DetailViewViewModel?
+  static ListItemDetailsViewModel?
       MapToDetailViewViewModelFromCreateNewListItemViewModel(
           int id, CreateNewListItemViewModel? source) {
     if (source == null) {
       return null;
     }
 
-    final destination = DetailViewViewModel(
+    final destination = ListItemDetailsViewModel(
       id: id,
       title: source.title,
       username: source.username,
@@ -174,14 +174,14 @@ final class ListDetailLayoutMapper {
     return destination;
   }
 
-  static DetailViewViewModel?
+  static ListItemDetailsViewModel?
       MapToDetailViewViewModelFromUpdateListItemViewModel(
           UpdateListItemViewModel? source) {
     if (source == null) {
       return null;
     }
 
-    final destination = DetailViewViewModel(
+    final destination = ListItemDetailsViewModel(
       id: source.id,
       title: source.title,
       username: source.username,
@@ -192,7 +192,7 @@ final class ListDetailLayoutMapper {
   }
 
   static CreateNewListItemViewModel? MapToCreateNewListItemViewModel(
-      DetailViewViewModel? source) {
+      ListItemDetailsViewModel? source) {
     if (source == null) {
       return null;
     }
@@ -205,7 +205,7 @@ final class ListDetailLayoutMapper {
   }
 
   static UpdateListItemViewModel? MapToUpdateListItemViewModel(
-      DetailViewViewModel? source) {
+      ListItemDetailsViewModel? source) {
     if (source == null) {
       return null;
     }

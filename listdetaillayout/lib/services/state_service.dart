@@ -5,8 +5,8 @@ import 'package:listdetaillayout/states/details_view_state_widget.dart';
 import 'package:listdetaillayout/states/list_view_items_state_widget.dart';
 import 'package:listdetaillayout/states/list_view_selected_index_state_widget.dart';
 import 'package:listdetaillayout/states/list_view_selected_item_state_widget.dart';
-import 'package:listdetaillayout/view_models/detail_view_viewmodel.dart';
-import 'package:listdetaillayout/view_models/list_view_viewmodel.dart';
+import 'package:listdetaillayout/view_models/list_item_details_viewmodel.dart';
+import 'package:listdetaillayout/view_models/list_items_viewmodel.dart';
 
 class StateService {
   const StateService();
@@ -24,7 +24,7 @@ class StateService {
 
   void setListViewItemsState(
     ListViewItemsStateWidget? listViewItemsState,
-    List<ListViewViewModel> items,
+    List<ListItemsViewModel> items,
   ) {
     if (listViewItemsState == null) {
       return;
@@ -36,7 +36,7 @@ class StateService {
   void setListViewItemState(
     ListViewItemsStateWidget? listViewItemsState,
     int? index,
-    ListViewViewModel itemState,
+    ListItemsViewModel itemState,
   ) {
     if (listViewItemsState == null) {
       return;
@@ -72,7 +72,7 @@ class StateService {
 
   void setListViewSelectedItemState(
     ListViewSelectedItemStateWidget? listViewSelectedItemState,
-    DetailViewViewModel? itemDetails,
+    ListItemDetailsViewModel? itemDetails,
   ) {
     if (listViewSelectedItemState == null) {
       return;
@@ -102,7 +102,8 @@ class StateService {
     }
 
     listViewSelectedIndexState.selectedIndex.value = -2;
-    listViewSelectedItemState.selectedItem.value = const DetailViewViewModel(
+    listViewSelectedItemState.selectedItem.value =
+        const ListItemDetailsViewModel(
       id: null,
       title: 'New Account',
       username: '',

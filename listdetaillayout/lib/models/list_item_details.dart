@@ -1,4 +1,4 @@
-import 'package:listdetaillayout/view_models/detail_view_viewmodel.dart';
+import 'package:listdetaillayout/view_models/list_item_details_viewmodel.dart';
 
 class ListItemDetails {
   final int itemId;
@@ -15,8 +15,8 @@ class ListItemDetails {
 }
 
 extension ListItemDetailsMapping on ListItemDetails {
-  DetailViewViewModel toDetailViewViewModel() {
-    return DetailViewViewModel(
+  ListItemDetailsViewModel toDetailViewViewModel() {
+    return ListItemDetailsViewModel(
       id: itemId,
       title: itemTitle,
       username: username,

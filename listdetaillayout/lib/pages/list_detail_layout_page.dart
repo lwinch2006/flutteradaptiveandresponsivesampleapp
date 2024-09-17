@@ -9,7 +9,7 @@ import 'package:listdetaillayout/services.dart';
 import 'package:listdetaillayout/states/details_view_state_widget.dart';
 import 'package:listdetaillayout/states/list_view_selected_index_state_widget.dart';
 import 'package:listdetaillayout/states/list_view_selected_item_state_widget.dart';
-import 'package:listdetaillayout/view_models/detail_view_viewmodel.dart';
+import 'package:listdetaillayout/view_models/list_item_details_viewmodel.dart';
 
 class ListDetailLayoutPage extends StatefulWidget {
   final String title;
@@ -21,7 +21,8 @@ class ListDetailLayoutPage extends StatefulWidget {
 
 class _ListDetailLayoutPageState extends State<ListDetailLayoutPage> {
   final selectedItemIndexValueNotifier = ValueNotifier(-1);
-  final itemDetailsValueNotifier = ValueNotifier(null as DetailViewViewModel?);
+  final itemDetailsValueNotifier =
+      ValueNotifier(null as ListItemDetailsViewModel?);
   final detailsViewState = ValueNotifier(DetailsViewStateTypes.loadedData);
   final detailsViewError = ValueNotifier(null);
 

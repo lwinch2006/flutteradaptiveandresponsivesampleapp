@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/view_models/detail_view_viewmodel.dart';
+import 'package:listdetaillayout/view_models/list_item_details_viewmodel.dart';
 
 class ListViewSelectedItemStateWidget extends InheritedWidget {
-  final ValueNotifier<DetailViewViewModel?> selectedItem;
+  final ValueNotifier<ListItemDetailsViewModel?> selectedItem;
   const ListViewSelectedItemStateWidget({
     super.key,
     required super.child,

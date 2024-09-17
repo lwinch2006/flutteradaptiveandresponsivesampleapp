@@ -9,10 +9,10 @@ import 'package:listdetaillayout/extensions/build_context_extensions.dart';
 import 'package:listdetaillayout/mappers/list_detail_layout_mapper.dart';
 import 'package:listdetaillayout/services.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
-import 'package:listdetaillayout/view_models/detail_view_viewmodel.dart';
+import 'package:listdetaillayout/view_models/list_item_details_viewmodel.dart';
 
 class AppForm extends StatefulWidget {
-  final DetailViewViewModel detailViewViewModel;
+  final ListItemDetailsViewModel detailViewViewModel;
 
   const AppForm({super.key, required this.detailViewViewModel});
 
@@ -158,7 +158,7 @@ class _AppFormState extends State<AppForm> {
                   if (!isReadOnly)
                     FilledButton(
                       onPressed: () async {
-                        final detailViewViewModel = DetailViewViewModel(
+                        final detailViewViewModel = ListItemDetailsViewModel(
                           id: widget.detailViewViewModel.id,
                           title: labelController.text,
                           username: usernameController.text,

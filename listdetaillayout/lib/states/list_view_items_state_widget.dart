@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/view_models/list_view_viewmodel.dart';
+import 'package:listdetaillayout/view_models/list_items_viewmodel.dart';
 
 class ListViewItemsStateWidget extends InheritedWidget {
-  final ValueNotifier<List<ListViewViewModel>> listViewItems;
+  final ValueNotifier<List<ListItemsViewModel>> listViewItems;
 
   const ListViewItemsStateWidget({
     super.key,

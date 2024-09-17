@@ -5,7 +5,7 @@ import 'package:listdetaillayout/models/details_view_state_types.dart';
 import 'package:listdetaillayout/repositories/list_detail_layout_repository.dart';
 import 'package:listdetaillayout/services/state_service.dart';
 import 'package:listdetaillayout/view_models/create_new_list_item_viewmodel.dart';
-import 'package:listdetaillayout/view_models/list_view_viewmodel.dart';
+import 'package:listdetaillayout/view_models/list_items_viewmodel.dart';
 import 'package:listdetaillayout/view_models/update_list_item_viewmodel.dart';
 
 class ListDetailLayoutService {
@@ -17,7 +17,7 @@ class ListDetailLayoutService {
     required this.stateService,
   });
 
-  Future<List<ListViewViewModel>> getItems() {
+  Future<List<ListItemsViewModel>> getItems() {
     return Future.delayed(
       const Duration(seconds: 5),
       () async {
@@ -179,10 +179,10 @@ class ListDetailLayoutService {
             ListDetailLayoutMapper.MapToDeleteListItemCommand(itemId);
         await listDetailLayoutRepository.deleteItem(command);
 
-        final listViewItemsExceptDeleted =
-            List<ListViewViewModel>.from(listViewItemsState.listViewItems.value)
-                .where((item) => item.id != command.id)
-                .toList();
+        final listViewItemsExceptDeleted = List<ListItemsViewModel>.from(
+                listViewItemsState.listViewItems.value)
+            .where((item) => item.id != command.id)
+            .toList();
 
         stateService.setListViewItemsState(
           listViewItemsState,
