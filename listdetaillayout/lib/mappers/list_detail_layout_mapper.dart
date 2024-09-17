@@ -33,7 +33,7 @@ final class ListDetailLayoutMapper {
     }
 
     final destination = UpdateListItemCommand(
-      id: source.id!,
+      id: source.id,
       title: source.title,
       username: source.username,
       password: source.password,
