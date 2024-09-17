@@ -62,7 +62,7 @@ class _AppListViewState extends State<AppListView> {
                         ];
                       },
                       onSelected: (itemId) async {
-                        await listDetailLayoutService.deleteItemDetails(
+                        await listDetailLayoutService.deleteItem(
                             itemId, commonState);
                       },
                     ),

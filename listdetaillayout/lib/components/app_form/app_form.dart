@@ -6,6 +6,7 @@ import 'package:listdetaillayout/components/app_horizontal_spacer.dart';
 import 'package:listdetaillayout/components/app_vertical_spacer.dart';
 import 'package:listdetaillayout/dtos/common_state_dto.dart';
 import 'package:listdetaillayout/extensions/build_context_extensions.dart';
+import 'package:listdetaillayout/mappers/list_detail_layout_mapper.dart';
 import 'package:listdetaillayout/services.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
 import 'package:listdetaillayout/view_models/detail_view_viewmodel.dart';
@@ -33,11 +34,11 @@ class _AppFormState extends State<AppForm> {
   void initState() {
     super.initState();
 
-    isAddMode = widget.detailViewViewModel.itemId == null;
+    isAddMode = widget.detailViewViewModel.id == null;
     isReadOnly = !isAddMode;
 
     labelController =
-        TextEditingController(text: widget.detailViewViewModel.itemTitle);
+        TextEditingController(text: widget.detailViewViewModel.title);
     usernameController =
         TextEditingController(text: widget.detailViewViewModel.username);
     passwordController =
@@ -80,11 +81,11 @@ class _AppFormState extends State<AppForm> {
   Widget build(BuildContext context) {
     debugPrint('AppForm: build()');
 
-    isAddMode = widget.detailViewViewModel.itemId == null;
+    isAddMode = widget.detailViewViewModel.id == null;
     if (isAddMode) {
       isReadOnly = !isAddMode;
       labelController =
-          TextEditingController(text: widget.detailViewViewModel.itemTitle);
+          TextEditingController(text: widget.detailViewViewModel.title);
       usernameController =
           TextEditingController(text: widget.detailViewViewModel.username);
       passwordController =
@@ -100,13 +101,13 @@ class _AppFormState extends State<AppForm> {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (isReadOnly)
-                Text(widget.detailViewViewModel.itemTitle,
+                Text(widget.detailViewViewModel.title,
                     style: Theme.of(context).textTheme.titleLarge),
               if (!isReadOnly)
                 AppTextFormField(
                   icon: null,
                   label: null,
-                  text: widget.detailViewViewModel.itemTitle,
+                  text: widget.detailViewViewModel.title,
                   isReadOnly: isReadOnly,
                   isHiddenText: false,
                   isVisibilityButtonShown: false,
@@ -158,20 +159,29 @@ class _AppFormState extends State<AppForm> {
                     FilledButton(
                       onPressed: () async {
                         final detailViewViewModel = DetailViewViewModel(
-                          itemId: widget.detailViewViewModel.itemId,
-                          itemTitle: labelController.text,
+                          id: widget.detailViewViewModel.id,
+                          title: labelController.text,
                           username: usernameController.text,
                           password: passwordController.text,
                         );
 
                         if (isAddMode) {
-                          await listDetailLayoutService.addItemDetails(
-                            detailViewViewModel,
+                          final createNewListItemViewModel =
+                              ListDetailLayoutMapper
+                                  .MapToCreateNewListItemViewModel(
+                                      detailViewViewModel)!;
+
+                          await listDetailLayoutService.createNewItem(
+                            createNewListItemViewModel,
                             commonState,
                           );
                         } else {
-                          await listDetailLayoutService.updateItemDetails(
-                            detailViewViewModel,
+                          final updateListItemViewModel = ListDetailLayoutMapper
+                              .MapToUpdateListItemViewModel(
+                                  detailViewViewModel)!;
+
+                          await listDetailLayoutService.updateItem(
+                            updateListItemViewModel,
                             commonState,
                           );
                         }

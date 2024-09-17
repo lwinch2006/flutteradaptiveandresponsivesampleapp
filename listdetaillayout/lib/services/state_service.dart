@@ -103,8 +103,8 @@ class StateService {
 
     listViewSelectedIndexState.selectedIndex.value = -2;
     listViewSelectedItemState.selectedItem.value = const DetailViewViewModel(
-      itemId: null,
-      itemTitle: 'New Account',
+      id: null,
+      title: 'New Account',
       username: '',
       password: '',
     );

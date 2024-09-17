@@ -1,14 +1,15 @@
 final class DetailViewViewModel {
-  final int? itemId;
-  final String itemTitle;
+  final int? id;
+  final String title;
   final String username;
   final String password;
 
-  const DetailViewViewModel(
-      {this.itemId,
-      required this.itemTitle,
-      required this.username,
-      required this.password});
+  const DetailViewViewModel({
+    this.id,
+    required this.title,
+    required this.username,
+    required this.password,
+  });
 
   DetailViewViewModel copyWith({
     int? itemId,
@@ -17,8 +18,8 @@ final class DetailViewViewModel {
     String? password,
   }) {
     return DetailViewViewModel(
-      itemId: itemId ?? this.itemId,
-      itemTitle: itemTitle ?? this.itemTitle,
+      id: itemId ?? this.id,
+      title: itemTitle ?? this.title,
       username: username ?? this.username,
       password: password ?? this.password,
     );

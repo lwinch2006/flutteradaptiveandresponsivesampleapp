@@ -17,8 +17,8 @@ class ListItemDetails {
 extension ListItemDetailsMapping on ListItemDetails {
   DetailViewViewModel toDetailViewViewModel() {
     return DetailViewViewModel(
-      itemId: itemId,
-      itemTitle: itemTitle,
+      id: itemId,
+      title: itemTitle,
       username: username,
       password: password,
     );

@@ -27,11 +27,11 @@ class ListDetailLayoutRepository {
   Future<int> createItem(CreateNewListItemCommand command) {
     return Future.delayed(const Duration(seconds: 1), () {
       final newId = Random().nextInt(100);
-      final newListItem =
-          ListDetailLayoutMapper.MapToListItemFromCreateCommand(newId, command);
+      final newListItem = ListDetailLayoutMapper.MapToListItemFromCreateCommand(
+          newId, command)!;
       final newListItemDetails =
           ListDetailLayoutMapper.MapToListItemDetailsFromCreateCommand(
-              newId, command);
+              newId, command)!;
 
       dummyListItems.add(newListItem);
       dummyListItemsDetails[newId] = newListItemDetails;
@@ -43,9 +43,10 @@ class ListDetailLayoutRepository {
   Future<void> updateItem(UpdateListItemCommand command) {
     return Future.delayed(const Duration(seconds: 1), () {
       final updatedListItem =
-          ListDetailLayoutMapper.MapToListItemFromUpdateCommand(command);
+          ListDetailLayoutMapper.MapToListItemFromUpdateCommand(command)!;
       final updatedListItemDetails =
-          ListDetailLayoutMapper.MapToListItemDetailsFromUpdateCommand(command);
+          ListDetailLayoutMapper.MapToListItemDetailsFromUpdateCommand(
+              command)!;
 
       for (var i = 0; i < dummyListItems.length; i++) {
         if (dummyListItems[i].id == updatedListItem.id) {
