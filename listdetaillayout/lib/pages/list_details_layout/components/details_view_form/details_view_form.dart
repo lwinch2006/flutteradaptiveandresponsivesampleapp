@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/components/app_horizontal_spacer.dart';
-import 'package:listdetaillayout/components/app_vertical_spacer.dart';
+import 'package:listdetaillayout/components/app_horizontal_spacer_30.dart';
+import 'package:listdetaillayout/components/app_vertical_spacer_30.dart';
 import 'package:listdetaillayout/dtos/common_state_dto.dart';
 import 'package:listdetaillayout/extensions/build_context_extensions.dart';
 import 'package:listdetaillayout/mappers/list_detail_layout_mapper.dart';
@@ -115,7 +115,7 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
                   controller: labelController,
                   validator: DetailsViewFormValidator.validateLabel,
                 ),
-              const AppVerticalSpacer(),
+              const AppVerticalSpacer30(),
               DetailsViewFormTextField(
                 icon: Icons.person,
                 label: 'Username',
@@ -127,7 +127,7 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
                 controller: usernameController,
                 validator: DetailsViewFormValidator.validateUsername,
               ),
-              const AppVerticalSpacer(),
+              const AppVerticalSpacer30(),
               DetailsViewFormTextField(
                 icon: Icons.key_outlined,
                 label: 'Password',
@@ -139,7 +139,7 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
                 controller: passwordController,
                 validator: DetailsViewFormValidator.validatePassword,
               ),
-              const AppVerticalSpacer(),
+              const AppVerticalSpacer30(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -150,7 +150,7 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
                       onPressed: setReadMode,
                       child: const Text('Cancel'),
                     ),
-                  const AppHorizontalSpacer(),
+                  const AppHorizontalSpacer30(),
                   if (isReadOnly && !isAddMode)
                     FilledButton(
                       onPressed: setEditMode,

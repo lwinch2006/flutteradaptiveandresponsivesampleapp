@@ -43,7 +43,6 @@ class _ListDetailLayoutPageState extends State<ListDetailLayoutPage> {
     return ListViewSelectedIndexStateWidget(
       selectedIndex: selectedItemIndexValueNotifier,
       child: ListViewSelectedItemStateWidget(
-        //selectedItemIndex: selectedItemIndexValueNotifier,
         selectedItem: itemDetailsValueNotifier,
         child: DetailsViewStateWidget(
           state: detailsViewState,

@@ -53,6 +53,7 @@ class _ListViewPaneState extends State<ListViewPane> {
                     title: Text(listViewItems[index].title),
                     titleAlignment: ListTileTitleAlignment.center,
                     trailing: PopupMenuButton<int>(
+                      icon: const Icon(Icons.more_vert),
                       itemBuilder: (context) {
                         return <PopupMenuEntry<int>>[
                           PopupMenuItem(
@@ -66,11 +67,6 @@ class _ListViewPaneState extends State<ListViewPane> {
                             itemId, commonState);
                       },
                     ),
-
-                    // IconButton(
-                    //   onPressed: () {},
-                    //   icon: const Icon(Icons.more_vert),
-                    // ),
                     onTap: () async => await listDetailLayoutService
                         .onListTileTap(index, commonState),
                   );

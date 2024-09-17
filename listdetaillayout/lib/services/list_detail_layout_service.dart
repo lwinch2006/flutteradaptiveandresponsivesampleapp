@@ -239,4 +239,16 @@ class ListDetailLayoutService {
       }
     }
   }
+
+  Future<void> searchItems(String queryString, CommonStateDto commonState) {
+    return Future.delayed(const Duration(seconds: 5), () {
+      return;
+    });
+  }
+
+  Future<void> clearSearch() {
+    return Future.delayed(const Duration(seconds: 5), () {
+      return;
+    });
+  }
 }

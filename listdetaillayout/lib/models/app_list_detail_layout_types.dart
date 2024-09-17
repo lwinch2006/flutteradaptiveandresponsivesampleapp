@@ -14,7 +14,7 @@ enum AppListDetailLayoutTypes {
     if (width <= compactWindowWidthMax) {
       return AppListDetailLayoutTypes.onePane;
     } else if (width <= mediumWindowWidthMax) {
-      return AppListDetailLayoutTypes.twoPane;
+      return AppListDetailLayoutTypes.onePane;
     } else {
       return AppListDetailLayoutTypes.twoPane;
     }

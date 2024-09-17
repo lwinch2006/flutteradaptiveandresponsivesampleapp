@@ -9,11 +9,13 @@ class AppUserContentContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     debugPrint('AppUserContentContainer: build()');
     return Padding(
-      padding: theme_data.commonPadding,
+      padding: const EdgeInsets.only(
+        left: theme_data.commonPaddingValue,
+        top: 0.0,
+        right: theme_data.commonPaddingValue,
+        bottom: theme_data.commonPaddingValue,
+      ),
       child: Container(
-        decoration: BoxDecoration(
-            color: theme_data.userContentBackgroundColor,
-            borderRadius: const BorderRadius.all(Radius.circular(10.0))),
         child: child,
       ),
     );

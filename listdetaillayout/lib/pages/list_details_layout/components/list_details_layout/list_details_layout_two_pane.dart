@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:listdetaillayout/components/app_horizontal_spacer_20.dart';
+import 'package:listdetaillayout/components/app_vertical_spacer_20.dart';
 import 'package:listdetaillayout/pages/list_details_layout/components/list_details_layout/details_view_pane.dart';
+import 'package:listdetaillayout/pages/list_details_layout/components/list_details_layout/list_details_layout_pane_container.dart';
 import 'package:listdetaillayout/pages/list_details_layout/components/list_details_layout/list_view_pane.dart';
-import 'package:listdetaillayout/theme_data.dart' as theme_data;
+import 'package:listdetaillayout/pages/list_details_layout/components/list_details_layout/list_view_search_bar.dart';
 
 class ListDetailsLayoutTwoPane extends StatelessWidget {
   const ListDetailsLayoutTwoPane({super.key});
@@ -13,19 +16,22 @@ class ListDetailsLayoutTwoPane extends StatelessWidget {
       children: [
         Expanded(
           flex: 2,
-          child: Padding(
-            padding: EdgeInsets.all(theme_data.commonPaddingValue),
-            child: ListViewPane(),
+          child: Column(
+            children: [
+              ListViewSearchBar(),
+              AppVerticalSpacer20(),
+              Expanded(
+                child: ListDetailsLayoutPaneContainer(
+                  child: ListViewPane(),
+                ),
+              ),
+            ],
           ),
         ),
-        VerticalDivider(
-          width: 1,
-          color: Colors.grey,
-        ),
+        AppHorizontalSpacer20(),
         Expanded(
           flex: 4,
-          child: Padding(
-            padding: EdgeInsets.all(theme_data.commonPaddingValue),
+          child: ListDetailsLayoutPaneContainer(
             child: DetailsViewPane(),
           ),
         ),
