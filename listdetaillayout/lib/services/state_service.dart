@@ -30,6 +30,8 @@ class StateService {
       return;
     }
 
+    items.sort((item1, item2) =>
+        item1.title.toUpperCase().compareTo(item2.title.toUpperCase()));
     listViewItemsState.listViewItems.value = items;
   }
 
@@ -43,9 +45,10 @@ class StateService {
     }
 
     if (index == null) {
-      listViewItemsState.listViewItems.value =
-          List.from(listViewItemsState.listViewItems.value)..add(itemState);
-
+      final items = listViewItemsState.listViewItems.value..add(itemState);
+      items.sort((item1, item2) =>
+          item1.title.toUpperCase().compareTo(item2.title.toUpperCase()));
+      listViewItemsState.listViewItems.value = items;
       return;
     }
 
@@ -54,9 +57,12 @@ class StateService {
       return;
     }
 
-    listViewItemsState.listViewItems.value[index] = itemState;
-    listViewItemsState.listViewItems.value =
-        List.from(listViewItemsState.listViewItems.value);
+    final items = listViewItemsState.listViewItems.value;
+    items[index] = itemState;
+    items.sort((item1, item2) =>
+        item1.title.toUpperCase().compareTo(item2.title.toUpperCase()));
+    listViewItemsState.listViewItems.value = items;
+    return;
   }
 
   void setListViewSelectedIndexState(
