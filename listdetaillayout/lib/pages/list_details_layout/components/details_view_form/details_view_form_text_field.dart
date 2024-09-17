@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:listdetaillayout/components/app_snack_bar.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
 
-class AppTextFormField extends StatefulWidget {
+class DetailsViewFormTextField extends StatefulWidget {
   final IconData? icon;
   final String? label;
   final String text;
@@ -14,7 +14,7 @@ class AppTextFormField extends StatefulWidget {
   final TextEditingController controller;
   final String? Function(String?) validator;
 
-  const AppTextFormField({
+  const DetailsViewFormTextField({
     super.key,
     required this.icon,
     required this.label,
@@ -28,10 +28,11 @@ class AppTextFormField extends StatefulWidget {
   });
 
   @override
-  State<AppTextFormField> createState() => _AppTextFormFieldState();
+  State<DetailsViewFormTextField> createState() =>
+      _DetailsViewFormTextFieldState();
 }
 
-class _AppTextFormFieldState extends State<AppTextFormField> {
+class _DetailsViewFormTextFieldState extends State<DetailsViewFormTextField> {
   late bool isHiddenText;
 
   @override

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:listdetaillayout/components/app_parts/app_body_container.dart';
 import 'package:listdetaillayout/components/app_parts/app_header.dart';
-import 'package:listdetaillayout/components/list_detail_layout/app_list_detail_layout.dart';
 import 'package:listdetaillayout/components/navigation/app_navigation_bar.dart';
 import 'package:listdetaillayout/models/details_view_state_types.dart';
+import 'package:listdetaillayout/pages/list_details_layout/components/list_details_layout/list_details_layout.dart';
 import 'package:listdetaillayout/routes.dart';
 import 'package:listdetaillayout/services.dart';
 import 'package:listdetaillayout/states/details_view_state_widget.dart';
@@ -56,7 +56,7 @@ class _ListDetailLayoutPageState extends State<ListDetailLayoutPage> {
             body: AppBodyContainer(
               navigationWidgetType: appAdaptiveDesignState.navigationWidgetType,
               pageIndex: listDetailLayoutPageIndex,
-              userContent: AppListDetailLayout(
+              userContent: ListDetailsLayout(
                 appListDetailLayoutType:
                     appAdaptiveDesignState.appListDetailLayoutType,
               ),

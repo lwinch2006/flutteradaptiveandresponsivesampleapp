@@ -3,14 +3,15 @@ import 'package:listdetaillayout/dtos/common_state_dto.dart';
 import 'package:listdetaillayout/extensions/build_context_extensions.dart';
 import 'package:listdetaillayout/services.dart';
 
-class AppFormCloseButton extends StatefulWidget {
-  const AppFormCloseButton({super.key});
+class DetailsViewFormCloseButton extends StatefulWidget {
+  const DetailsViewFormCloseButton({super.key});
 
   @override
-  State<StatefulWidget> createState() => _AppFormCloseButtonState();
+  State<StatefulWidget> createState() => _DetailsViewFormCloseButtonState();
 }
 
-class _AppFormCloseButtonState extends State<AppFormCloseButton> {
+class _DetailsViewFormCloseButtonState
+    extends State<DetailsViewFormCloseButton> {
   late final CommonStateDto commonState;
 
   @override

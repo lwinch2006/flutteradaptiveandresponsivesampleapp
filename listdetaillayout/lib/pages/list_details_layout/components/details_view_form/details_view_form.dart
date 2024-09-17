@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/components/app_form/app_form_close_button.dart';
-import 'package:listdetaillayout/components/app_form/app_form_validator.dart';
-import 'package:listdetaillayout/components/app_form/app_text_form_field.dart';
 import 'package:listdetaillayout/components/app_horizontal_spacer.dart';
 import 'package:listdetaillayout/components/app_vertical_spacer.dart';
 import 'package:listdetaillayout/dtos/common_state_dto.dart';
 import 'package:listdetaillayout/extensions/build_context_extensions.dart';
 import 'package:listdetaillayout/mappers/list_detail_layout_mapper.dart';
+import 'package:listdetaillayout/pages/list_details_layout/components/details_view_form/details_view_form_close_button.dart';
+import 'package:listdetaillayout/pages/list_details_layout/components/details_view_form/details_view_form_text_field.dart';
+import 'package:listdetaillayout/pages/list_details_layout/components/details_view_form/details_view_form_validator.dart';
 import 'package:listdetaillayout/services.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
 import 'package:listdetaillayout/view_models/list_item_details_viewmodel.dart';
 
-class AppForm extends StatefulWidget {
+class DetailsViewForm extends StatefulWidget {
   final ListItemDetailsViewModel detailViewViewModel;
 
-  const AppForm({super.key, required this.detailViewViewModel});
+  const DetailsViewForm({super.key, required this.detailViewViewModel});
 
   @override
-  State<AppForm> createState() => _AppFormState();
+  State<DetailsViewForm> createState() => _DetailsViewFormState();
 }
 
-class _AppFormState extends State<AppForm> {
+class _DetailsViewFormState extends State<DetailsViewForm> {
   final formKey = GlobalKey<FormState>();
   late TextEditingController labelController;
   late TextEditingController usernameController;
@@ -104,7 +104,7 @@ class _AppFormState extends State<AppForm> {
                 Text(widget.detailViewViewModel.title,
                     style: Theme.of(context).textTheme.titleLarge),
               if (!isReadOnly)
-                AppTextFormField(
+                DetailsViewFormTextField(
                   icon: null,
                   label: null,
                   text: widget.detailViewViewModel.title,
@@ -113,10 +113,10 @@ class _AppFormState extends State<AppForm> {
                   isVisibilityButtonShown: false,
                   isCopyButtonShown: false,
                   controller: labelController,
-                  validator: AppFormValidator.validateLabel,
+                  validator: DetailsViewFormValidator.validateLabel,
                 ),
               const AppVerticalSpacer(),
-              AppTextFormField(
+              DetailsViewFormTextField(
                 icon: Icons.person,
                 label: 'Username',
                 text: widget.detailViewViewModel.username,
@@ -125,10 +125,10 @@ class _AppFormState extends State<AppForm> {
                 isVisibilityButtonShown: false,
                 isCopyButtonShown: isReadOnly,
                 controller: usernameController,
-                validator: AppFormValidator.validateUsername,
+                validator: DetailsViewFormValidator.validateUsername,
               ),
               const AppVerticalSpacer(),
-              AppTextFormField(
+              DetailsViewFormTextField(
                 icon: Icons.key_outlined,
                 label: 'Password',
                 text: widget.detailViewViewModel.password,
@@ -137,13 +137,14 @@ class _AppFormState extends State<AppForm> {
                 isVisibilityButtonShown: isReadOnly,
                 isCopyButtonShown: isReadOnly,
                 controller: passwordController,
-                validator: AppFormValidator.validatePassword,
+                validator: DetailsViewFormValidator.validatePassword,
               ),
               const AppVerticalSpacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (isReadOnly || isAddMode) const AppFormCloseButton(),
+                  if (isReadOnly || isAddMode)
+                    const DetailsViewFormCloseButton(),
                   if (!isReadOnly && !isAddMode)
                     ElevatedButton(
                       onPressed: setReadMode,

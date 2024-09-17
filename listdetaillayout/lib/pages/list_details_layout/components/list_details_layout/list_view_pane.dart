@@ -4,16 +4,16 @@ import 'package:listdetaillayout/extensions/build_context_extensions.dart';
 import 'package:listdetaillayout/services.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
 
-class AppListView extends StatefulWidget {
-  const AppListView({
+class ListViewPane extends StatefulWidget {
+  const ListViewPane({
     super.key,
   });
 
   @override
-  State<StatefulWidget> createState() => _AppListViewState();
+  State<StatefulWidget> createState() => _ListViewPaneState();
 }
 
-class _AppListViewState extends State<AppListView> {
+class _ListViewPaneState extends State<ListViewPane> {
   late final CommonStateDto commonState;
 
   @override

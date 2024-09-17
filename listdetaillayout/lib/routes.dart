@@ -4,7 +4,7 @@ import 'package:listdetaillayout/dtos/common_state_dto.dart';
 import 'package:listdetaillayout/extensions/build_context_extensions.dart';
 import 'package:listdetaillayout/models/app_navigation_destination.dart';
 import 'package:listdetaillayout/pages/home_page.dart';
-import 'package:listdetaillayout/pages/list_detail_layout_page.dart';
+import 'package:listdetaillayout/pages/list_details_layout/list_detail_layout_page.dart';
 import 'package:listdetaillayout/services.dart';
 
 const listDetailLayoutPageIndex = 0;

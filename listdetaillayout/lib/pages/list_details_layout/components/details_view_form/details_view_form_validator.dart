@@ -1,4 +1,4 @@
-class AppFormValidator {
+class DetailsViewFormValidator {
   static const int _maxLabelLength = 25;
   static const int _maxUsernameLength = 50;
   static const int _maxPasswordLength = 50;
