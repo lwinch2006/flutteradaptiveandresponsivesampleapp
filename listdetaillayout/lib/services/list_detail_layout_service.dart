@@ -134,7 +134,6 @@ class ListDetailLayoutService {
     debugPrint('list item details getting updated');
     final detailsViewState = commonState.detailsViewState;
     final listViewItemsState = commonState.listViewItemsState;
-    final listViewSelectedIndexState = commonState.listViewSelectedIndexState!;
     final listViewSelectedItemState = commonState.listViewSelectedItemState!;
 
     stateService.setDetailsViewState(
