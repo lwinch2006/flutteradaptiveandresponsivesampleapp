@@ -45,6 +45,7 @@ class _ListViewPaneState extends State<ListViewPane> {
             return Material(
               color: theme_data.userContentBackgroundColor,
               child: ListView.builder(
+                //shrinkWrap: true,
                 itemCount: listViewItems.length,
                 itemBuilder: (context, index) {
                   return ListTile(

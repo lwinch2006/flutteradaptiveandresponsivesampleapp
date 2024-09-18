@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-const formWidth = 400.0;
+const maxFormWidth = 400.0;
+double formWidth = maxFormWidth;
+
 const commonPaddingValue = 10.0;
 
 final colorScheme = ColorScheme.fromSeed(seedColor: Colors.indigo);

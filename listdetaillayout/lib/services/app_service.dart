@@ -55,6 +55,7 @@ class AppService {
   AppAdaptiveDesignStateDto getAppAdaptiveDesignState(BuildContext context) {
     final currentWindowWidth = MediaQuery.sizeOf(context).width;
     final currentWindowHeight = MediaQuery.sizeOf(context).height;
+    final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
     final navigationWidgetType =
         AppNavigationWidgetTypes.fromWindowWidth(currentWindowWidth);
     final appListDetailLayoutType =
@@ -62,6 +63,9 @@ class AppService {
 
     debugPrint(
         'Window size: ${currentWindowWidth.toInt()} x ${currentWindowHeight.toInt()} pixels');
+    debugPrint('Pixel ratio: $devicePixelRatio');
+
+    // formWidth = min(currentWindowWidth * 0.8, maxFormWidth);
 
     return AppAdaptiveDesignStateDto(
       navigationWidgetType: navigationWidgetType,

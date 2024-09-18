@@ -51,6 +51,7 @@ class _DetailsViewFormTextFieldState extends State<DetailsViewFormTextField> {
       obscureText:
           widget.isVisibilityButtonShown ? isHiddenText : widget.isHiddenText,
       decoration: InputDecoration(
+        isDense: true,
         fillColor: theme_data.textFieldEnabledColor,
         filled: !widget.isReadOnly,
         border: const OutlineInputBorder(),
