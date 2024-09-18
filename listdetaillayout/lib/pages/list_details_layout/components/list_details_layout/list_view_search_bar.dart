@@ -23,8 +23,6 @@ class _ListViewSearchBarState extends State<ListViewSearchBar> {
     commonState = CommonStateDto(
       detailsViewState: context.detailsViewState,
       listViewItemsState: context.listViewItemsState,
-      listViewSelectedIndexState: context.listViewSelectedIndexState,
-      listViewSelectedItemState: context.listViewSelectedItemState,
     );
   }
 
@@ -42,8 +40,15 @@ class _ListViewSearchBarState extends State<ListViewSearchBar> {
       hintText: 'Search...',
       elevation: const WidgetStatePropertyAll(0),
       onTap: () {},
-      onChanged: (queryString) async {
-        await listDetailLayoutService.searchItems(queryString, commonState);
+      onChanged: (queryString) {
+        debugPrint(
+            'Query string "$queryString" and is empty ${queryString.isEmpty}');
+
+        if (queryString.isNotEmpty) {
+          listDetailLayoutService.searchItems(queryString, commonState);
+        } else {
+          listDetailLayoutService.clearSearch(commonState);
+        }
       },
       onSubmitted: null,
       trailing: <Widget>[
@@ -52,9 +57,9 @@ class _ListViewSearchBarState extends State<ListViewSearchBar> {
           builder: (context, textEditingValue, child) {
             if (textEditingValue.text.isNotEmpty) {
               return IconButton(
-                onPressed: () async {
+                onPressed: () {
                   searchController.clear();
-                  await listDetailLayoutService.clearSearch();
+                  listDetailLayoutService.clearSearch(commonState);
                 },
                 icon: const Icon(Icons.close_outlined),
               );

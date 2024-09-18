@@ -33,7 +33,7 @@ class _ListViewPaneState extends State<ListViewPane> {
     debugPrint('AppListView: Widget.build()');
 
     return ValueListenableBuilder(
-      valueListenable: context.listViewItemsState.listViewItems,
+      valueListenable: context.listViewItemsState.filteredListViewItems,
       builder: (context, listViewItems, child) {
         debugPrint('AppListView: ValueListenableBuilder1.build()');
 

@@ -17,13 +17,26 @@ class ListDetailLayoutService {
     required this.stateService,
   });
 
-  Future<List<ListItemsViewModel>> getItems() {
+  Future<List<ListItemsViewModel>> getItems(CommonStateDto commonState) {
+    final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
+
+    final listViewSelectedItemState = commonState.listViewSelectedItemState;
+
+    final listViewItemsState = commonState.listViewItemsState;
+
+    stateService.setListViewSelectedIndexState(listViewSelectedIndexState, -1);
+    stateService.setListViewSelectedItemState(listViewSelectedItemState, null);
+
     return Future.delayed(
       const Duration(seconds: 5),
       () async {
         final listItems = await listDetailLayoutRepository.getItems();
         final listItemsAsViewModel =
             ListDetailLayoutMapper.MapToListViewViewModels(listItems);
+
+        stateService.setListViewItemsState(
+            listViewItemsState, listItemsAsViewModel);
+
         return listItemsAsViewModel;
       },
     );
@@ -34,8 +47,8 @@ class ListDetailLayoutService {
     String itemTitle,
     CommonStateDto commonState,
   ) {
-    final detailsViewState = commonState.detailsViewState!;
-    final listViewSelectedItemState = commonState.listViewSelectedItemState!;
+    final detailsViewState = commonState.detailsViewState;
+    final listViewSelectedItemState = commonState.listViewSelectedItemState;
 
     stateService.setDetailsViewState(
       detailsViewState,
@@ -63,71 +76,25 @@ class ListDetailLayoutService {
     );
   }
 
-  Future<void> updateItem(
-    UpdateListItemViewModel updateListItemViewModel,
-    CommonStateDto commonState,
-  ) {
-    debugPrint('list item details getting updated');
-    final detailsViewState = commonState.detailsViewState!;
-    final listViewItemsState = commonState.listViewItemsState!;
-    final listViewSelectedIndexState = commonState.listViewSelectedIndexState!;
-    final listViewSelectedItemState = commonState.listViewSelectedItemState!;
-
-    stateService.setDetailsViewState(
-      detailsViewState,
-      DetailsViewStateTypes.updatingData,
-    );
-
-    return Future.delayed(
-      const Duration(seconds: 5),
-      () async {
-        final command = ListDetailLayoutMapper.MapToUpdateListItemCommand(
-            updateListItemViewModel)!;
-        await listDetailLayoutRepository.updateItem(command);
-
-        final detailsViewViewModel = ListDetailLayoutMapper
-            .MapToDetailViewViewModelFromUpdateListItemViewModel(
-                updateListItemViewModel);
-
-        final listViewViewModel = ListDetailLayoutMapper
-            .MapToListViewViewModelFromDetailViewViewModel(
-                detailsViewViewModel)!;
-
-        stateService.setListViewItemState(
-          listViewItemsState,
-          listViewSelectedIndexState.selectedIndex.value,
-          listViewViewModel,
-        );
-        stateService.setListViewSelectedItemState(
-          listViewSelectedItemState,
-          detailsViewViewModel,
-        );
-        stateService.setDetailsViewState(
-          detailsViewState,
-          DetailsViewStateTypes.loadedData,
-        );
-      },
-    );
-  }
-
   Future<void> createNewItem(
     CreateNewListItemViewModel createNewListItemViewModel,
     CommonStateDto commonState,
   ) {
     debugPrint('list item details getting added');
-    final detailsViewState = commonState.detailsViewState!;
+    final detailsViewState = commonState.detailsViewState;
     final listViewItemsState = commonState.listViewItemsState!;
-    final listViewSelectedIndexState = commonState.listViewSelectedIndexState!;
-    final listViewSelectedItemState = commonState.listViewSelectedItemState!;
+    final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
+    final listViewSelectedItemState = commonState.listViewSelectedItemState;
 
     stateService.setDetailsViewState(
         detailsViewState, DetailsViewStateTypes.addingData);
 
+    final command = ListDetailLayoutMapper.MapToCreateNewListItemCommand(
+        createNewListItemViewModel)!;
+
     return Future.delayed(
       const Duration(seconds: 5),
       () async {
-        final command = ListDetailLayoutMapper.MapToCreateNewListItemCommand(
-            createNewListItemViewModel)!;
         var newId = await listDetailLayoutRepository.createItem(command);
 
         final detailsViewViewModel = ListDetailLayoutMapper
@@ -145,7 +112,56 @@ class ListDetailLayoutService {
         );
         stateService.setListViewSelectedIndexState(
           listViewSelectedIndexState,
-          listViewItemsState.listViewItems.value.indexOf(listViewViewModel),
+          listViewItemsState.filteredListViewItems.value
+              .indexOf(listViewViewModel),
+        );
+        stateService.setListViewSelectedItemState(
+          listViewSelectedItemState,
+          detailsViewViewModel,
+        );
+        stateService.setDetailsViewState(
+          detailsViewState,
+          DetailsViewStateTypes.loadedData,
+        );
+      },
+    );
+  }
+
+  Future<void> updateItem(
+    UpdateListItemViewModel updateListItemViewModel,
+    CommonStateDto commonState,
+  ) {
+    debugPrint('list item details getting updated');
+    final detailsViewState = commonState.detailsViewState;
+    final listViewItemsState = commonState.listViewItemsState;
+    final listViewSelectedIndexState = commonState.listViewSelectedIndexState!;
+    final listViewSelectedItemState = commonState.listViewSelectedItemState!;
+
+    stateService.setDetailsViewState(
+      detailsViewState,
+      DetailsViewStateTypes.updatingData,
+    );
+
+    final command = ListDetailLayoutMapper.MapToUpdateListItemCommand(
+        updateListItemViewModel)!;
+
+    return Future.delayed(
+      const Duration(seconds: 5),
+      () async {
+        await listDetailLayoutRepository.updateItem(command);
+
+        final detailsViewViewModel = ListDetailLayoutMapper
+            .MapToDetailViewViewModelFromUpdateListItemViewModel(
+                updateListItemViewModel);
+
+        final listViewViewModel = ListDetailLayoutMapper
+            .MapToListViewViewModelFromDetailViewViewModel(
+                detailsViewViewModel)!;
+
+        stateService.setListViewItemState(
+          listViewItemsState,
+          listViewViewModel.id,
+          listViewViewModel,
         );
         stateService.setListViewSelectedItemState(
           listViewSelectedItemState,
@@ -164,23 +180,23 @@ class ListDetailLayoutService {
     CommonStateDto commonState,
   ) {
     debugPrint('list item details getting deleted');
-    final detailsViewState = commonState.detailsViewState!;
+    final detailsViewState = commonState.detailsViewState;
     final listViewItemsState = commonState.listViewItemsState!;
-    final listViewSelectedIndexState = commonState.listViewSelectedIndexState!;
-    final listViewSelectedItemState = commonState.listViewSelectedItemState!;
+    final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
+    final listViewSelectedItemState = commonState.listViewSelectedItemState;
 
     stateService.setDetailsViewState(
         detailsViewState, DetailsViewStateTypes.deletingData);
 
+    final command = ListDetailLayoutMapper.MapToDeleteListItemCommand(itemId);
+
     return Future.delayed(
       const Duration(seconds: 5),
       () async {
-        final command =
-            ListDetailLayoutMapper.MapToDeleteListItemCommand(itemId);
         await listDetailLayoutRepository.deleteItem(command);
 
         final listViewItemsExceptDeleted = List<ListItemsViewModel>.from(
-                listViewItemsState.listViewItems.value)
+                listViewItemsState.filteredListViewItems.value)
             .where((item) => item.id != command.id)
             .toList();
 
@@ -205,8 +221,8 @@ class ListDetailLayoutService {
   }
 
   void closeItemDetails(CommonStateDto commonState) {
-    final listViewSelectedIndexState = commonState.listViewSelectedIndexState!;
-    final listViewSelectedItemState = commonState.listViewSelectedItemState!;
+    final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
+    final listViewSelectedItemState = commonState.listViewSelectedItemState;
 
     stateService.setListViewSelectedIndexState(listViewSelectedIndexState, -1);
     stateService.setListViewSelectedItemState(listViewSelectedItemState, null);
@@ -227,7 +243,7 @@ class ListDetailLayoutService {
     final selectedItemFromState = listViewSelectedItemState.selectedItem.value;
 
     final selectedItem = selectedIndex >= 0
-        ? listViewItemsState.listViewItems.value[selectedIndex]
+        ? listViewItemsState.filteredListViewItems.value[selectedIndex]
         : null;
 
     if (!(selectedItemFromState?.id == selectedItem?.id)) {
@@ -240,15 +256,23 @@ class ListDetailLayoutService {
     }
   }
 
-  Future<void> searchItems(String queryString, CommonStateDto commonState) {
-    return Future.delayed(const Duration(seconds: 5), () {
-      return;
-    });
+  void searchItems(String queryString, CommonStateDto commonState) {
+    final listViewItemsState = commonState.listViewItemsState!;
+    final filteredItems = listViewItemsState.listViewItems.value
+        .where((item) => item.title.toLowerCase().contains(queryString))
+        .toList();
+
+    stateService.setFilteredListViewItemsState(
+        listViewItemsState, filteredItems);
+    return;
   }
 
-  Future<void> clearSearch() {
-    return Future.delayed(const Duration(seconds: 5), () {
-      return;
-    });
+  void clearSearch(CommonStateDto commonState) {
+    final listViewItemsState = commonState.listViewItemsState!;
+
+    stateService.setFilteredListViewItemsState(
+        listViewItemsState, listViewItemsState.listViewItems.value);
+
+    return;
   }
 }

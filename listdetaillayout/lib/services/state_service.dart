@@ -32,36 +32,75 @@ class StateService {
 
     items.sort((item1, item2) =>
         item1.title.toUpperCase().compareTo(item2.title.toUpperCase()));
+
     listViewItemsState.listViewItems.value = items;
+    listViewItemsState.filteredListViewItems.value = items;
+  }
+
+  void setFilteredListViewItemsState(
+    ListViewItemsStateWidget? listViewItemsState,
+    List<ListItemsViewModel> items,
+  ) {
+    if (listViewItemsState == null) {
+      return;
+    }
+
+    items.sort((item1, item2) =>
+        item1.title.toUpperCase().compareTo(item2.title.toUpperCase()));
+
+    listViewItemsState.filteredListViewItems.value = items;
   }
 
   void setListViewItemState(
     ListViewItemsStateWidget? listViewItemsState,
-    int? index,
+    int? id,
     ListItemsViewModel itemState,
   ) {
     if (listViewItemsState == null) {
       return;
     }
 
-    if (index == null) {
+    if (id == null) {
       final items = listViewItemsState.listViewItems.value..add(itemState);
       items.sort((item1, item2) =>
-          item1.title.toUpperCase().compareTo(item2.title.toUpperCase()));
+          item1.title.toLowerCase().compareTo(item2.title.toLowerCase()));
       listViewItemsState.listViewItems.value = items;
+
+      final filteredItems = listViewItemsState.filteredListViewItems.value
+        ..add(itemState);
+      filteredItems.sort((item1, item2) =>
+          item1.title.toLowerCase().compareTo(item2.title.toLowerCase()));
+      listViewItemsState.filteredListViewItems.value = filteredItems;
+
       return;
     }
 
-    if (index < 0 ||
-        index > listViewItemsState.listViewItems.value.length - 1) {
+    if (id < 0) {
       return;
     }
 
-    final items = listViewItemsState.listViewItems.value;
-    items[index] = itemState;
-    items.sort((item1, item2) =>
-        item1.title.toUpperCase().compareTo(item2.title.toUpperCase()));
-    listViewItemsState.listViewItems.value = items;
+    final filteredItems = List<ListItemsViewModel>.from(
+        listViewItemsState.filteredListViewItems.value);
+    final filteredItemIndex = filteredItems.indexWhere((item) => item.id == id);
+
+    if (filteredItemIndex >= 0) {
+      filteredItems[filteredItemIndex] = itemState;
+      filteredItems.sort((item1, item2) =>
+          item1.title.toLowerCase().compareTo(item2.title.toLowerCase()));
+      listViewItemsState.filteredListViewItems.value = filteredItems;
+    }
+
+    final items =
+        List<ListItemsViewModel>.from(listViewItemsState.listViewItems.value);
+    final itemIndex = items.indexWhere((item) => item.id == id);
+
+    if (itemIndex >= 0) {
+      items[itemIndex] = itemState;
+      items.sort((item1, item2) =>
+          item1.title.toLowerCase().compareTo(item2.title.toLowerCase()));
+      listViewItemsState.listViewItems.value = items;
+    }
+
     return;
   }
 

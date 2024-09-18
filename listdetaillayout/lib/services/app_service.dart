@@ -23,17 +23,8 @@ class AppService {
     CommonStateDto commonState,
   ) async {
     stateService.setAppState(commonState.appState, AppStateTypes.initializing);
-    stateService.setListViewSelectedIndexState(
-        commonState.listViewSelectedIndexState, -1);
-    stateService.setListViewSelectedItemState(
-        commonState.listViewSelectedItemState, null);
-
-    final listViewItems = await listDetailLayoutService.getItems();
-
-    stateService.setListViewItemsState(
-        commonState.listViewItemsState, listViewItems);
+    await listDetailLayoutService.getItems(commonState);
     stateService.setAppState(commonState.appState, AppStateTypes.initialized);
-
     context.go(routes.listDetailLayoutPagePath);
   }
 
