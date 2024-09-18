@@ -61,25 +61,29 @@ class _DetailsViewFormTextFieldState extends State<DetailsViewFormTextField> {
             ? Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isHiddenText = !isHiddenText;
-                      });
-                    },
-                    icon: isHiddenText
-                        ? const Icon(Icons.visibility_off_outlined)
-                        : const Icon(Icons.visibility_outlined),
+                  Flexible(
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isHiddenText = !isHiddenText;
+                        });
+                      },
+                      icon: isHiddenText
+                          ? const Icon(Icons.visibility_off_outlined)
+                          : const Icon(Icons.visibility_outlined),
+                    ),
                   ),
-                  IconButton(
-                    onPressed: () async {
-                      await Clipboard.setData(
-                          ClipboardData(text: widget.controller.text));
+                  Flexible(
+                    child: IconButton(
+                      onPressed: () async {
+                        await Clipboard.setData(
+                            ClipboardData(text: widget.controller.text));
 
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          AppSnackBar(content: '${widget.label} copied'));
-                    },
-                    icon: const Icon(Icons.copy_outlined),
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            AppSnackBar(content: '${widget.label} copied'));
+                      },
+                      icon: const Icon(Icons.copy_outlined),
+                    ),
                   ),
                 ],
               )

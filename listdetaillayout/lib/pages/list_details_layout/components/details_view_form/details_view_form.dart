@@ -4,13 +4,14 @@ import 'package:listdetaillayout/components/app_vertical_spacer_20.dart';
 import 'package:listdetaillayout/components/app_vertical_spacer_30.dart';
 import 'package:listdetaillayout/dtos/common_state_dto.dart';
 import 'package:listdetaillayout/extensions/build_context_extensions.dart';
-import 'package:listdetaillayout/mappers/list_detail_layout_mapper.dart';
 import 'package:listdetaillayout/pages/list_details_layout/components/details_view_form/details_view_form_close_button.dart';
 import 'package:listdetaillayout/pages/list_details_layout/components/details_view_form/details_view_form_text_field.dart';
 import 'package:listdetaillayout/pages/list_details_layout/components/details_view_form/details_view_form_validator.dart';
 import 'package:listdetaillayout/services.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
+import 'package:listdetaillayout/view_models/create_new_list_item_viewmodel.dart';
 import 'package:listdetaillayout/view_models/list_item_details_viewmodel.dart';
+import 'package:listdetaillayout/view_models/update_list_item_viewmodel.dart';
 
 class DetailsViewForm extends StatefulWidget {
   final ListItemDetailsViewModel detailViewViewModel;
@@ -94,89 +95,90 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
     }
 
     return Center(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: SizedBox(
-            width: theme_data.maxFormWidth,
-            child: Form(
-              key: formKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (isReadOnly)
-                    Text(widget.detailViewViewModel.title,
-                        style: Theme.of(context).textTheme.titleLarge),
-                  if (!isReadOnly)
-                    DetailsViewFormTextField(
-                      icon: null,
-                      label: null,
-                      text: widget.detailViewViewModel.title,
-                      isReadOnly: isReadOnly,
-                      isHiddenText: false,
-                      isVisibilityButtonShown: false,
-                      isCopyButtonShown: false,
-                      controller: labelController,
-                      validator: DetailsViewFormValidator.validateLabel,
-                    ),
-                  const AppVerticalSpacer30(),
+      child: SizedBox(
+        width: theme_data.maxFormWidth,
+        child: Form(
+          key: formKey,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (isReadOnly)
+                  Text(widget.detailViewViewModel.title,
+                      style: Theme.of(context).textTheme.titleLarge),
+                if (!isReadOnly)
                   DetailsViewFormTextField(
-                    icon: Icons.person,
-                    label: 'Username',
-                    text: widget.detailViewViewModel.username,
+                    icon: null,
+                    label: null,
+                    text: widget.detailViewViewModel.title,
                     isReadOnly: isReadOnly,
                     isHiddenText: false,
                     isVisibilityButtonShown: false,
-                    isCopyButtonShown: isReadOnly,
-                    controller: usernameController,
-                    validator: DetailsViewFormValidator.validateUsername,
+                    isCopyButtonShown: false,
+                    controller: labelController,
+                    validator: DetailsViewFormValidator.validateLabel,
                   ),
-                  const AppVerticalSpacer30(),
-                  DetailsViewFormTextField(
-                    icon: Icons.key_outlined,
-                    label: 'Password',
-                    text: widget.detailViewViewModel.password,
-                    isReadOnly: isReadOnly,
-                    isHiddenText: isReadOnly,
-                    isVisibilityButtonShown: isReadOnly,
-                    isCopyButtonShown: isReadOnly,
-                    controller: passwordController,
-                    validator: DetailsViewFormValidator.validatePassword,
-                  ),
-                  const AppVerticalSpacer30(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (isReadOnly || isAddMode)
-                        const DetailsViewFormCloseButton(),
-                      if (!isReadOnly && !isAddMode)
-                        ElevatedButton(
+                const AppVerticalSpacer30(),
+                DetailsViewFormTextField(
+                  icon: Icons.person,
+                  label: 'Username',
+                  text: widget.detailViewViewModel.username,
+                  isReadOnly: isReadOnly,
+                  isHiddenText: false,
+                  isVisibilityButtonShown: false,
+                  isCopyButtonShown: isReadOnly,
+                  controller: usernameController,
+                  validator: DetailsViewFormValidator.validateUsername,
+                ),
+                const AppVerticalSpacer30(),
+                DetailsViewFormTextField(
+                  icon: Icons.key_outlined,
+                  label: 'Password',
+                  text: widget.detailViewViewModel.password,
+                  isReadOnly: isReadOnly,
+                  isHiddenText: isReadOnly,
+                  isVisibilityButtonShown: isReadOnly,
+                  isCopyButtonShown: isReadOnly,
+                  controller: passwordController,
+                  validator: DetailsViewFormValidator.validatePassword,
+                ),
+                const AppVerticalSpacer30(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (isReadOnly || isAddMode)
+                      const Flexible(
+                        child: const DetailsViewFormCloseButton(),
+                      ),
+                    if (!isReadOnly && !isAddMode)
+                      Flexible(
+                        child: ElevatedButton(
                           onPressed: setReadMode,
                           child: const Text('Cancel'),
                         ),
-                      const AppHorizontalSpacer30(),
-                      if (isReadOnly && !isAddMode)
-                        FilledButton(
+                      ),
+                    const Flexible(
+                      child: const AppHorizontalSpacer30(),
+                    ),
+                    if (isReadOnly && !isAddMode)
+                      Flexible(
+                        child: FilledButton(
                           onPressed: setEditMode,
                           child: const Text('Update'),
                         ),
-                      if (!isReadOnly)
-                        FilledButton(
+                      ),
+                    if (!isReadOnly)
+                      Flexible(
+                        child: FilledButton(
                           onPressed: () async {
-                            final detailViewViewModel =
-                                ListItemDetailsViewModel(
-                              id: widget.detailViewViewModel.id,
-                              title: labelController.text,
-                              username: usernameController.text,
-                              password: passwordController.text,
-                            );
-
                             if (isAddMode) {
                               final createNewListItemViewModel =
-                                  ListDetailLayoutMapper
-                                      .MapToCreateNewListItemViewModel(
-                                          detailViewViewModel)!;
+                                  CreateNewListItemViewModel(
+                                title: labelController.text,
+                                username: usernameController.text,
+                                password: passwordController.text,
+                              );
 
                               await listDetailLayoutService.createNewItem(
                                 createNewListItemViewModel,
@@ -184,9 +186,12 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
                               );
                             } else {
                               final updateListItemViewModel =
-                                  ListDetailLayoutMapper
-                                      .MapToUpdateListItemViewModel(
-                                          detailViewViewModel)!;
+                                  UpdateListItemViewModel(
+                                id: widget.detailViewViewModel.id!,
+                                title: labelController.text,
+                                username: usernameController.text,
+                                password: passwordController.text,
+                              );
 
                               await listDetailLayoutService.updateItem(
                                 updateListItemViewModel,
@@ -195,12 +200,12 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
                             }
                           },
                           child: const Text('Save'),
-                        )
-                    ],
-                  ),
-                  const AppVerticalSpacer20()
-                ],
-              ),
+                        ),
+                      ),
+                  ],
+                ),
+                const AppVerticalSpacer20()
+              ],
             ),
           ),
         ),

@@ -65,7 +65,9 @@ class _ListDetailLayoutPageState extends State<ListDetailLayoutPage> {
                     ? const AppNavigationBar(
                         currentIndex: listDetailLayoutPageIndex,
                       )
-                    : null,
+                    : const SizedBox(
+                        height: 20.0,
+                      ),
           ),
         ),
       ),

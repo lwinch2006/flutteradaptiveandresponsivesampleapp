@@ -13,6 +13,7 @@ class AppHeader extends AppBar {
     this.centerHeader = false,
     this.actions,
   }) : super(
+          scrolledUnderElevation: 0.0,
           backgroundColor: theme_data.appBarBackgroundColor,
           title: Text(
             header,
