@@ -190,15 +190,28 @@ class ListDetailLayoutService {
       () async {
         await listDetailLayoutRepository.deleteItem(command);
 
-        final listViewItemsExceptDeleted = List<ListItemsViewModel>.from(
-                listViewItemsState.filteredListViewItems.value)
-            .where((item) => item.id != command.id)
-            .toList();
+        final unfilteredListViewItemsExceptDeleted =
+            List<ListItemsViewModel>.from(
+                    listViewItemsState.listViewItems.value)
+                .where((item) => item.id != command.id)
+                .toList();
 
-        stateService.setListViewItemsState(
+        final filteredListViewItemsExceptDeleted =
+            List<ListItemsViewModel>.from(
+                    listViewItemsState.filteredListViewItems.value)
+                .where((item) => item.id != command.id)
+                .toList();
+
+        stateService.setUnfilteredListViewItemsState(
           listViewItemsState,
-          listViewItemsExceptDeleted,
+          unfilteredListViewItemsExceptDeleted,
         );
+
+        stateService.setFilteredListViewItemsState(
+          listViewItemsState,
+          filteredListViewItemsExceptDeleted,
+        );
+
         stateService.setListViewSelectedIndexState(
           listViewSelectedIndexState,
           -1,
@@ -261,8 +274,10 @@ class ListDetailLayoutService {
   void clearSearch(CommonStateDto commonState) {
     final listViewItemsState = commonState.listViewItemsState!;
 
-    stateService.setFilteredListViewItemsState(
-        listViewItemsState, listViewItemsState.listViewItems.value);
+    final items =
+        List<ListItemsViewModel>.from(listViewItemsState.listViewItems.value);
+
+    stateService.setFilteredListViewItemsState(listViewItemsState, items);
 
     return;
   }

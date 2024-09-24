@@ -117,7 +117,7 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
                     isVisibilityButtonShown: false,
                     isCopyButtonShown: false,
                     controller: labelController,
-                    validator: DetailsViewFormValidator.validateLabel,
+                    validator: DetailsViewFormValidator.validateTitle,
                   ),
                 const AppVerticalSpacer30(),
                 DetailsViewFormTextField(
@@ -173,30 +173,34 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
                         child: FilledButton(
                           onPressed: () async {
                             if (isAddMode) {
-                              final createNewListItemViewModel =
-                                  CreateNewListItemViewModel(
-                                title: labelController.text,
-                                username: usernameController.text,
-                                password: passwordController.text,
-                              );
+                              if (formKey.currentState!.validate()) {
+                                final createNewListItemViewModel =
+                                    CreateNewListItemViewModel(
+                                  title: labelController.text,
+                                  username: usernameController.text,
+                                  password: passwordController.text,
+                                );
 
-                              await listDetailLayoutService.createNewItem(
-                                createNewListItemViewModel,
-                                commonState,
-                              );
+                                await listDetailLayoutService.createNewItem(
+                                  createNewListItemViewModel,
+                                  commonState,
+                                );
+                              }
                             } else {
-                              final updateListItemViewModel =
-                                  UpdateListItemViewModel(
-                                id: widget.detailViewViewModel.id!,
-                                title: labelController.text,
-                                username: usernameController.text,
-                                password: passwordController.text,
-                              );
+                              if (formKey.currentState!.validate()) {
+                                final updateListItemViewModel =
+                                    UpdateListItemViewModel(
+                                  id: widget.detailViewViewModel.id!,
+                                  title: labelController.text,
+                                  username: usernameController.text,
+                                  password: passwordController.text,
+                                );
 
-                              await listDetailLayoutService.updateItem(
-                                updateListItemViewModel,
-                                commonState,
-                              );
+                                await listDetailLayoutService.updateItem(
+                                  updateListItemViewModel,
+                                  commonState,
+                                );
+                              }
                             }
                           },
                           child: const Text('Save'),

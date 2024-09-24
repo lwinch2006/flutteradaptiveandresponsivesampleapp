@@ -3,13 +3,13 @@ class DetailsViewFormValidator {
   static const int _maxUsernameLength = 50;
   static const int _maxPasswordLength = 50;
 
-  static String? validateLabel(String? value) {
+  static String? validateTitle(String? value) {
     if (value == null || value.isEmpty == true) {
-      return 'Label cannot be empty';
+      return 'Title cannot be empty';
     }
 
     if (value.length > _maxLabelLength) {
-      return 'Label cannot exceed $_maxLabelLength characters';
+      return 'Title cannot exceed $_maxLabelLength characters';
     }
 
     return null;

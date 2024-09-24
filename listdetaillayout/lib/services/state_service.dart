@@ -33,8 +33,24 @@ class StateService {
     items.sort((item1, item2) =>
         item1.title.toUpperCase().compareTo(item2.title.toUpperCase()));
 
+    listViewItemsState.listViewItems.value =
+        List<ListItemsViewModel>.from(items);
+    listViewItemsState.filteredListViewItems.value =
+        List<ListItemsViewModel>.from(items);
+  }
+
+  void setUnfilteredListViewItemsState(
+    ListViewItemsStateWidget? listViewItemsState,
+    List<ListItemsViewModel> items,
+  ) {
+    if (listViewItemsState == null) {
+      return;
+    }
+
+    items.sort((item1, item2) =>
+        item1.title.toUpperCase().compareTo(item2.title.toUpperCase()));
+
     listViewItemsState.listViewItems.value = items;
-    listViewItemsState.filteredListViewItems.value = items;
   }
 
   void setFilteredListViewItemsState(
@@ -61,12 +77,15 @@ class StateService {
     }
 
     if (id == null) {
-      final items = listViewItemsState.listViewItems.value..add(itemState);
+      final items =
+          List<ListItemsViewModel>.from(listViewItemsState.listViewItems.value)
+            ..add(itemState);
       items.sort((item1, item2) =>
           item1.title.toLowerCase().compareTo(item2.title.toLowerCase()));
       listViewItemsState.listViewItems.value = items;
 
-      final filteredItems = listViewItemsState.filteredListViewItems.value
+      final filteredItems = List<ListItemsViewModel>.from(
+          listViewItemsState.filteredListViewItems.value)
         ..add(itemState);
       filteredItems.sort((item1, item2) =>
           item1.title.toLowerCase().compareTo(item2.title.toLowerCase()));
