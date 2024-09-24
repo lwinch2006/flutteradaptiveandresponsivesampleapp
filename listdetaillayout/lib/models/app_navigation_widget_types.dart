@@ -13,7 +13,7 @@ enum AppNavigationWidgetTypes {
   bool get isDrawer => index == 2;
 
   static AppNavigationWidgetTypes fromWindowWidth(double width) {
-    if (width <= mediumWindowWidthMax) {
+    if (width <= compactWindowWidthMax) {
       return AppNavigationWidgetTypes.bar;
     } else if (width <= expandedWindowWidthMax) {
       return AppNavigationWidgetTypes.rail;

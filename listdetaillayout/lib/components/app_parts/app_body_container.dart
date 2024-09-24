@@ -49,15 +49,13 @@ class _AppBodyContainerState extends State<AppBodyContainer> {
   Widget build(BuildContext context) {
     debugPrint('AppBodyContainer: build()');
     return Container(
-      child: SafeArea(
-        child: Row(
-          children: [
-            if (appNavigationWidget != null) appNavigationWidget!,
-            Expanded(
-              child: AppUserContentContainer(child: widget.userContent),
-            ),
-          ],
-        ),
+      child: Row(
+        children: [
+          if (appNavigationWidget != null) appNavigationWidget!,
+          Expanded(
+            child: AppUserContentContainer(child: widget.userContent),
+          ),
+        ],
       ),
     );
   }

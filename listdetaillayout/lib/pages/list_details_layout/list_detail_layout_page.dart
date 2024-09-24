@@ -37,8 +37,8 @@ class _ListDetailLayoutPageState extends State<ListDetailLayoutPage> {
 
   @override
   Widget build(BuildContext context) {
-    final appAdaptiveDesignState =
-        appService.getAppAdaptiveDesignState(context);
+    debugPrint('ListDetailLayoutPage: build()');
+    var appAdaptiveDesignState = appService.getAppAdaptiveDesignState(context);
 
     return ListViewSelectedIndexStateWidget(
       selectedIndex: selectedItemIndexValueNotifier,
@@ -52,12 +52,23 @@ class _ListDetailLayoutPageState extends State<ListDetailLayoutPage> {
               header: widget.title,
               context: context,
             ),
-            body: AppBodyContainer(
-              navigationWidgetType: appAdaptiveDesignState.navigationWidgetType,
-              pageIndex: listDetailLayoutPageIndex,
-              userContent: ListDetailsLayout(
-                appListDetailLayoutType:
-                    appAdaptiveDesignState.appListDetailLayoutType,
+            body: SafeArea(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  debugPrint('ListDetailLayoutPage: LayoutBuilder: build()');
+                  appAdaptiveDesignState = appService
+                      .getAppAdaptiveDesignStateFromBoxConstraints(constraints);
+
+                  return AppBodyContainer(
+                    navigationWidgetType:
+                        appAdaptiveDesignState.navigationWidgetType,
+                    pageIndex: listDetailLayoutPageIndex,
+                    userContent: ListDetailsLayout(
+                      appListDetailLayoutType:
+                          appAdaptiveDesignState.appListDetailLayoutType,
+                    ),
+                  );
+                },
               ),
             ),
             bottomNavigationBar:

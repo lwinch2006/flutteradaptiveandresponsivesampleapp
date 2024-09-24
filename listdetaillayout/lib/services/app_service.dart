@@ -44,19 +44,32 @@ class AppService {
   }
 
   AppAdaptiveDesignStateDto getAppAdaptiveDesignState(BuildContext context) {
-    final currentWindowWidth = MediaQuery.sizeOf(context).width;
-    final currentWindowHeight = MediaQuery.sizeOf(context).height;
+    final currentWindowSize = MediaQuery.sizeOf(context);
     final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
     final navigationWidgetType =
-        AppNavigationWidgetTypes.fromWindowWidth(currentWindowWidth);
+        AppNavigationWidgetTypes.fromWindowWidth(currentWindowSize.width);
     final appListDetailLayoutType =
-        AppListDetailLayoutTypes.fromWindowWidth(currentWindowWidth);
+        AppListDetailLayoutTypes.fromWindowWidth(currentWindowSize.width);
 
     debugPrint(
-        'Window size: ${currentWindowWidth.toInt()} x ${currentWindowHeight.toInt()} pixels');
+        'Window size (MediaQuery): ${currentWindowSize.width.toInt()} x ${currentWindowSize.height.toInt()} pixels');
     debugPrint('Pixel ratio: $devicePixelRatio');
 
-    // formWidth = min(currentWindowWidth * 0.8, maxFormWidth);
+    return AppAdaptiveDesignStateDto(
+      navigationWidgetType: navigationWidgetType,
+      appListDetailLayoutType: appListDetailLayoutType,
+    );
+  }
+
+  AppAdaptiveDesignStateDto getAppAdaptiveDesignStateFromBoxConstraints(
+      BoxConstraints constraints) {
+    final navigationWidgetType =
+        AppNavigationWidgetTypes.fromWindowWidth(constraints.maxWidth);
+    final appListDetailLayoutType =
+        AppListDetailLayoutTypes.fromWindowWidth(constraints.maxWidth);
+
+    debugPrint(
+        'Window size (BoxConstrains): ${constraints.maxWidth.toInt()} x ${constraints.maxHeight.toInt()} pixels');
 
     return AppAdaptiveDesignStateDto(
       navigationWidgetType: navigationWidgetType,
