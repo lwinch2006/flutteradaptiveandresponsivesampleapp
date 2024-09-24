@@ -179,7 +179,6 @@ class ListDetailLayoutService {
     CommonStateDto commonState,
   ) {
     debugPrint('list item details getting deleted');
-    final detailsViewState = commonState.detailsViewState;
     final listViewItemsState = commonState.listViewItemsState!;
     final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
     final listViewSelectedItemState = commonState.listViewSelectedItemState;
