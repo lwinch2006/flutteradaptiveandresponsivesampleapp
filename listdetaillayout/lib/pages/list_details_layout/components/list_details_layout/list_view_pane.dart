@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listdetaillayout/components/app_progress_indicator.dart';
 import 'package:listdetaillayout/dtos/common_state_dto.dart';
 import 'package:listdetaillayout/extensions/build_context_extensions.dart';
 import 'package:listdetaillayout/services.dart';
@@ -25,6 +26,21 @@ class _ListViewPaneState extends State<ListViewPane> {
       listViewSelectedIndexState: context.listViewSelectedIndexState,
       listViewSelectedItemState: context.listViewSelectedItemState,
       detailsViewState: context.detailsViewState,
+    );
+  }
+
+  void showLoadingDialog() async {
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const Dialog(
+          backgroundColor: Colors.transparent,
+          child: Center(
+            child: const AppProgressIndicator(label: 'Deleting data...'),
+          ),
+        );
+      },
     );
   }
 
@@ -64,8 +80,12 @@ class _ListViewPaneState extends State<ListViewPane> {
                         ];
                       },
                       onSelected: (itemId) async {
+                        showLoadingDialog();
+
                         await listDetailLayoutService.deleteItem(
                             itemId, commonState);
+
+                        Navigator.of(context).pop();
                       },
                     ),
                     onTap: () async => await listDetailLayoutService

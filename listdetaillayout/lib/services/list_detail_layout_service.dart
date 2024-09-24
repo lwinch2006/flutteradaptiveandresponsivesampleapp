@@ -184,9 +184,6 @@ class ListDetailLayoutService {
     final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
     final listViewSelectedItemState = commonState.listViewSelectedItemState;
 
-    stateService.setDetailsViewState(
-        detailsViewState, DetailsViewStateTypes.deletingData);
-
     final command = ListDetailLayoutMapper.MapToDeleteListItemCommand(itemId);
 
     return Future.delayed(
@@ -210,10 +207,6 @@ class ListDetailLayoutService {
         stateService.setListViewSelectedItemState(
           listViewSelectedItemState,
           null,
-        );
-        stateService.setDetailsViewState(
-          detailsViewState,
-          DetailsViewStateTypes.loadedData,
         );
       },
     );

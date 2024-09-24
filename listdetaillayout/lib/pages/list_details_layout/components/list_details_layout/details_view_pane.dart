@@ -25,15 +25,11 @@ class DetailsViewPane extends StatelessWidget {
         if (state.isUpdatingData) {
           return const AppProgressIndicator(label: 'Updating data...');
         }
-        if (state.isDeletingData) {
-          return const AppProgressIndicator(label: 'Deleting data...');
-        }
         if (state.isLoadingData) {
           return const AppProgressIndicator(label: 'Loading data...');
         }
         if (state.isAddingDataError ||
             state.isUpdatingDataError ||
-            state.isDeletingDataError ||
             state.isLoadingDataError) {
           return AppCenterText(data: detailsViewState.error.value!);
         }

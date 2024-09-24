@@ -5,9 +5,7 @@ enum DetailsViewStateTypes {
   addingData('addingData'),
   addingDataError('addingDataError'),
   updatingData('updatingData'),
-  updatingDataError('updatingDataError'),
-  deletingData('deletingData'),
-  deletingDataError('deletingDataError');
+  updatingDataError('updatingDataError');
 
   final String name;
   const DetailsViewStateTypes(this.name);
@@ -19,6 +17,4 @@ enum DetailsViewStateTypes {
   bool get isAddingDataError => index == 4;
   bool get isUpdatingData => index == 5;
   bool get isUpdatingDataError => index == 6;
-  bool get isDeletingData => index == 7;
-  bool get isDeletingDataError => index == 8;
 }
