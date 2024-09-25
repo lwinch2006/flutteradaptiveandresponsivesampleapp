@@ -25,6 +25,11 @@ class AppService {
     stateService.setAppState(commonState.appState, AppStateTypes.initializing);
     await listDetailLayoutService.getItems(commonState);
     stateService.setAppState(commonState.appState, AppStateTypes.initialized);
+
+    stateService.setNavigationCurrentIndexState(
+        commonState.navigationCurrentIndexState,
+        routes.listDetailLayoutPageIndex);
+
     context.go(routes.listDetailLayoutPagePath);
   }
 
@@ -39,6 +44,9 @@ class AppService {
     stateService.setListViewItemsState(commonState.listViewItemsState, []);
     stateService.setAppState(
         commonState.appState, AppStateTypes.notInitialized);
+
+    stateService.setNavigationCurrentIndexState(
+        commonState.navigationCurrentIndexState, routes.homePageIndex);
 
     context.go(routes.homePagePath);
   }

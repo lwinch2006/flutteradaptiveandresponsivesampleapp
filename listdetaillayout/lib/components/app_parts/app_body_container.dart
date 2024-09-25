@@ -25,10 +25,10 @@ class _AppBodyContainerState extends State<AppBodyContainer> {
   Widget? getNavigationWidget() {
     switch (widget.navigationWidgetType) {
       case AppNavigationWidgetTypes.rail:
-        return AppNavigationRail(currentIndex: widget.pageIndex);
+        return const AppNavigationRail();
 
       case AppNavigationWidgetTypes.drawer:
-        return AppNavigationDrawer(currentIndex: widget.pageIndex);
+        return const AppNavigationDrawer();
 
       default:
         return null;

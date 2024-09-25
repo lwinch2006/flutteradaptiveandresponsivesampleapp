@@ -73,12 +73,8 @@ class _ListDetailLayoutPageState extends State<ListDetailLayoutPage> {
             ),
             bottomNavigationBar:
                 appAdaptiveDesignState.navigationWidgetType.isBar
-                    ? const AppNavigationBar(
-                        currentIndex: listDetailLayoutPageIndex,
-                      )
-                    : const SizedBox(
-                        height: 20.0,
-                      ),
+                    ? const AppNavigationBar()
+                    : const SizedBox(height: 20.0),
           ),
         ),
       ),

@@ -6,8 +6,7 @@ import 'package:listdetaillayout/services.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
 
 class AppNavigationRail extends StatefulWidget {
-  final int currentIndex;
-  const AppNavigationRail({super.key, required this.currentIndex});
+  const AppNavigationRail({super.key});
 
   @override
   State<StatefulWidget> createState() => _AppNavigationRailState();
@@ -25,25 +24,32 @@ class _AppNavigationRailState extends State<AppNavigationRail> {
       listViewItemsState: context.listViewItemsState,
       listViewSelectedIndexState: context.listViewSelectedIndexState,
       listViewSelectedItemState: context.listViewSelectedItemState,
+      navigationCurrentIndexState: context.navigationCurrentIndexState,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     debugPrint('AppNavigationRail: build()');
-    return NavigationRail(
-      backgroundColor: theme_data.navigationBackgroundColor,
-      labelType: NavigationRailLabelType.all,
-      destinations: navigationDestinations.map((e) {
-        return NavigationRailDestination(
-          icon: Icon(e.icon),
-          label: Text(e.label),
+    return ValueListenableBuilder(
+      valueListenable: context.navigationCurrentIndexState.currentIndex,
+      builder: (context, selectedIndex, child) {
+        debugPrint('AppNavigationRail: ValueListenableBuilder: build()');
+        return NavigationRail(
+          backgroundColor: theme_data.navigationBackgroundColor,
+          labelType: NavigationRailLabelType.all,
+          destinations: navigationDestinations.map((e) {
+            return NavigationRailDestination(
+              icon: Icon(e.icon),
+              label: Text(e.label),
+            );
+          }).toList(),
+          selectedIndex: selectedIndex,
+          onDestinationSelected: (selectedIndex) {
+            navigationService.onDestinationSelected(
+                context, commonState, selectedIndex);
+          },
         );
-      }).toList(),
-      selectedIndex: widget.currentIndex,
-      onDestinationSelected: (selectedIndex) {
-        navigationService.onDestinationSelected(
-            context, commonState, widget.currentIndex, selectedIndex);
       },
     );
   }

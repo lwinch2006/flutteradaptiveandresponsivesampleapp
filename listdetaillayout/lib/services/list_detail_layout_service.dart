@@ -3,6 +3,7 @@ import 'package:listdetaillayout/dtos/common_state_dto.dart';
 import 'package:listdetaillayout/mappers/list_detail_layout_mapper.dart';
 import 'package:listdetaillayout/models/details_view_state_types.dart';
 import 'package:listdetaillayout/repositories/list_detail_layout_repository.dart';
+import 'package:listdetaillayout/routes.dart' as routes;
 import 'package:listdetaillayout/services/state_service.dart';
 import 'package:listdetaillayout/view_models/create_new_list_item_viewmodel.dart';
 import 'package:listdetaillayout/view_models/list_items_viewmodel.dart';
@@ -85,6 +86,7 @@ class ListDetailLayoutService {
     final listViewItemsState = commonState.listViewItemsState!;
     final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
     final listViewSelectedItemState = commonState.listViewSelectedItemState;
+    final navigationCurrentIndexState = commonState.navigationCurrentIndexState;
 
     stateService.setDetailsViewState(
         detailsViewState, DetailsViewStateTypes.addingData);
@@ -118,6 +120,10 @@ class ListDetailLayoutService {
         stateService.setListViewSelectedItemState(
           listViewSelectedItemState,
           detailsViewViewModel,
+        );
+        stateService.setNavigationCurrentIndexState(
+          navigationCurrentIndexState,
+          routes.listDetailLayoutPageIndex,
         );
         stateService.setDetailsViewState(
           detailsViewState,

@@ -17,11 +17,27 @@ class NavigationService {
     required this.stateService,
   });
 
-  void onDestinationSelected(BuildContext context, CommonStateDto commonState,
-      int currentIndex, int selectedIndex) {
-    if (selectedIndex == currentIndex) {
+  void onDestinationSelected(
+    BuildContext context,
+    CommonStateDto commonState,
+    int selectedIndex,
+  ) {
+    final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
+
+    final navigationCurrentIndexState =
+        commonState.navigationCurrentIndexState!;
+
+    final listViewSelectedItemState = commonState.listViewSelectedItemState;
+
+    if (navigationCurrentIndexState.currentIndex.value == selectedIndex) {
       return;
     }
+
+    stateService.setNavigationCurrentIndexState(
+        navigationCurrentIndexState, selectedIndex);
+
+    stateService.setListViewSelectedIndexState(listViewSelectedIndexState, -1);
+    stateService.setListViewSelectedItemState(listViewSelectedItemState, null);
 
     if (navigationDestinations[selectedIndex].action != null) {
       navigationDestinations[selectedIndex].action!(context, commonState);

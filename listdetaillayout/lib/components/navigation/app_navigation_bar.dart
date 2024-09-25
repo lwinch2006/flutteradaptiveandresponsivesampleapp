@@ -6,9 +6,7 @@ import 'package:listdetaillayout/services.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
 
 class AppNavigationBar extends StatefulWidget {
-  final int currentIndex;
-
-  const AppNavigationBar({super.key, required this.currentIndex});
+  const AppNavigationBar({super.key});
 
   @override
   State<StatefulWidget> createState() => _AppNavigationBarState();
@@ -26,21 +24,28 @@ class _AppNavigationBarState extends State<AppNavigationBar> {
       listViewItemsState: context.listViewItemsState,
       listViewSelectedIndexState: context.listViewSelectedIndexState,
       listViewSelectedItemState: context.listViewSelectedItemState,
+      navigationCurrentIndexState: context.navigationCurrentIndexState,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     debugPrint('AppNavigationBar: build()');
-    return NavigationBar(
-      backgroundColor: theme_data.navigationBackgroundColor,
-      selectedIndex: widget.currentIndex,
-      destinations: navigationDestinations.map((e) {
-        return NavigationDestination(icon: Icon(e.icon), label: e.label);
-      }).toList(),
-      onDestinationSelected: (selectedIndex) {
-        navigationService.onDestinationSelected(
-            context, commonState, widget.currentIndex, selectedIndex);
+    return ValueListenableBuilder(
+      valueListenable: context.navigationCurrentIndexState.currentIndex,
+      builder: (context, selectedIndex, child) {
+        debugPrint('AppNavigationBar: ValueListenableBuilder: build()');
+        return NavigationBar(
+          backgroundColor: theme_data.navigationBackgroundColor,
+          selectedIndex: selectedIndex,
+          destinations: navigationDestinations.map((e) {
+            return NavigationDestination(icon: Icon(e.icon), label: e.label);
+          }).toList(),
+          onDestinationSelected: (selectedIndex) {
+            navigationService.onDestinationSelected(
+                context, commonState, selectedIndex);
+          },
+        );
       },
     );
   }

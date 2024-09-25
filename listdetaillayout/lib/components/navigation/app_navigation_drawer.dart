@@ -6,15 +6,13 @@ import 'package:listdetaillayout/services.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
 
 class AppNavigationDrawer extends StatefulWidget {
-  final int currentIndex;
-  const AppNavigationDrawer({super.key, required this.currentIndex});
+  const AppNavigationDrawer({super.key});
 
   @override
   State<AppNavigationDrawer> createState() => _AppNavigationDrawerState();
 }
 
 class _AppNavigationDrawerState extends State<AppNavigationDrawer> {
-  late Widget navigationDrawer = getNavigationDrawer();
   late final CommonStateDto commonState;
 
   @override
@@ -26,34 +24,8 @@ class _AppNavigationDrawerState extends State<AppNavigationDrawer> {
       listViewItemsState: context.listViewItemsState,
       listViewSelectedIndexState: context.listViewSelectedIndexState,
       listViewSelectedItemState: context.listViewSelectedItemState,
+      navigationCurrentIndexState: context.navigationCurrentIndexState,
     );
-  }
-
-  Widget getNavigationDrawer() {
-    return NavigationDrawer(
-      selectedIndex: widget.currentIndex,
-      backgroundColor: theme_data.navigationBackgroundColor,
-      tilePadding: const EdgeInsetsDirectional.symmetric(vertical: 0.0),
-      children: navigationDestinations.map((e) {
-        return NavigationDrawerDestination(
-          icon: Icon(e.icon),
-          label: Text(e.label),
-        );
-      }).toList(),
-      onDestinationSelected: (selectedIndex) {
-        navigationService.onDestinationSelected(
-            context, commonState, widget.currentIndex, selectedIndex);
-      },
-    );
-  }
-
-  @override
-  void didUpdateWidget(covariant AppNavigationDrawer oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.currentIndex == oldWidget.currentIndex) {
-      return;
-    }
-    navigationDrawer = getNavigationDrawer();
   }
 
   @override
@@ -61,7 +33,27 @@ class _AppNavigationDrawerState extends State<AppNavigationDrawer> {
     debugPrint('AppNavigationDrawer: build()');
     return SizedBox(
       width: 200.0,
-      child: navigationDrawer,
+      child: ValueListenableBuilder(
+        valueListenable: context.navigationCurrentIndexState.currentIndex,
+        builder: (context, selectedIndex, child) {
+          debugPrint('AppNavigationDrawer: ValueListenableBuilder: build()');
+          return NavigationDrawer(
+            selectedIndex: selectedIndex,
+            backgroundColor: theme_data.navigationBackgroundColor,
+            tilePadding: const EdgeInsetsDirectional.symmetric(vertical: 0.0),
+            children: navigationDestinations.map((e) {
+              return NavigationDrawerDestination(
+                icon: Icon(e.icon),
+                label: Text(e.label),
+              );
+            }).toList(),
+            onDestinationSelected: (selectedIndex) {
+              navigationService.onDestinationSelected(
+                  context, commonState, selectedIndex);
+            },
+          );
+        },
+      ),
     );
   }
 }

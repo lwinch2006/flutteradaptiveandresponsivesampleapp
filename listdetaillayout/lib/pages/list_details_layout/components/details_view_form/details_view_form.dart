@@ -56,6 +56,7 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
       listViewItemsState: context.listViewItemsState,
       listViewSelectedIndexState: context.listViewSelectedIndexState,
       listViewSelectedItemState: context.listViewSelectedItemState,
+      navigationCurrentIndexState: context.navigationCurrentIndexState,
     );
   }
 

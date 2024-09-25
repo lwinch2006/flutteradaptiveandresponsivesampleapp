@@ -7,6 +7,7 @@ import 'package:listdetaillayout/pages/home_page.dart';
 import 'package:listdetaillayout/pages/list_details_layout/list_detail_layout_page.dart';
 import 'package:listdetaillayout/services.dart';
 
+const homePageIndex = -1;
 const listDetailLayoutPageIndex = 0;
 
 const homePagePath = '/';
