@@ -12,6 +12,8 @@ class DetailsViewFormTextField extends StatefulWidget {
   final bool isCopyButtonShown;
   final bool isHiddenText;
   final TextEditingController controller;
+  final FocusNode? focusNode;
+  final FocusNode? nextFocusNode;
   final String? Function(String?) validator;
 
   const DetailsViewFormTextField({
@@ -25,6 +27,8 @@ class DetailsViewFormTextField extends StatefulWidget {
     required this.isCopyButtonShown,
     required this.controller,
     required this.validator,
+    this.focusNode = null,
+    this.nextFocusNode = null,
   });
 
   @override
@@ -46,7 +50,14 @@ class _DetailsViewFormTextFieldState extends State<DetailsViewFormTextField> {
     debugPrint('AppTextFormField: build()');
     return TextFormField(
       controller: widget.controller,
+      focusNode: widget.focusNode,
       validator: widget.validator,
+      onFieldSubmitted: (value) {
+        if (widget.focusNode != null && widget.nextFocusNode != null) {
+          widget.focusNode!.unfocus();
+          FocusScope.of(context).requestFocus(widget.nextFocusNode);
+        }
+      },
       readOnly: widget.isReadOnly,
       obscureText:
           widget.isVisibilityButtonShown ? isHiddenText : widget.isHiddenText,

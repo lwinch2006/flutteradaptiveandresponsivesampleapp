@@ -7,7 +7,7 @@ import 'package:listdetaillayout/states/list_view_selected_index_state_widget.da
 import 'package:listdetaillayout/states/list_view_selected_item_state_widget.dart';
 import 'package:listdetaillayout/states/navigation_current_index_state_widget.dart';
 import 'package:listdetaillayout/view_models/list_item_details_viewmodel.dart';
-import 'package:listdetaillayout/view_models/list_items_viewmodel.dart';
+import 'package:listdetaillayout/view_models/list_item_viewmodel.dart';
 
 class StateService {
   const StateService();
@@ -25,7 +25,7 @@ class StateService {
 
   void setListViewItemsState(
     ListViewItemsStateWidget? listViewItemsState,
-    List<ListItemsViewModel> items,
+    List<ListItemViewModel> items,
   ) {
     if (listViewItemsState == null) {
       return;
@@ -35,14 +35,14 @@ class StateService {
         item1.title.toUpperCase().compareTo(item2.title.toUpperCase()));
 
     listViewItemsState.listViewItems.value =
-        List<ListItemsViewModel>.from(items);
+        List<ListItemViewModel>.from(items);
     listViewItemsState.filteredListViewItems.value =
-        List<ListItemsViewModel>.from(items);
+        List<ListItemViewModel>.from(items);
   }
 
   void setUnfilteredListViewItemsState(
     ListViewItemsStateWidget? listViewItemsState,
-    List<ListItemsViewModel> items,
+    List<ListItemViewModel> items,
   ) {
     if (listViewItemsState == null) {
       return;
@@ -56,7 +56,7 @@ class StateService {
 
   void setFilteredListViewItemsState(
     ListViewItemsStateWidget? listViewItemsState,
-    List<ListItemsViewModel> items,
+    List<ListItemViewModel> items,
   ) {
     if (listViewItemsState == null) {
       return;
@@ -68,30 +68,30 @@ class StateService {
     listViewItemsState.filteredListViewItems.value = items;
   }
 
-  void setListViewItemState(
+  void setFilterQueryStringState(
+    ListViewItemsStateWidget? listViewItemsState,
+    String queryString,
+  ) {
+    if (listViewItemsState == null) {
+      return;
+    }
+
+    listViewItemsState.filterQueryString.value = queryString;
+  }
+
+  void setListViewItemsStateOnListItemUpsert(
     ListViewItemsStateWidget? listViewItemsState,
     int? id,
-    ListItemsViewModel itemState,
+    ListItemViewModel itemState,
+    String filterQueryString,
   ) {
     if (listViewItemsState == null) {
       return;
     }
 
     if (id == null) {
-      final items =
-          List<ListItemsViewModel>.from(listViewItemsState.listViewItems.value)
-            ..add(itemState);
-      items.sort((item1, item2) =>
-          item1.title.toLowerCase().compareTo(item2.title.toLowerCase()));
-      listViewItemsState.listViewItems.value = items;
-
-      final filteredItems = List<ListItemsViewModel>.from(
-          listViewItemsState.filteredListViewItems.value)
-        ..add(itemState);
-      filteredItems.sort((item1, item2) =>
-          item1.title.toLowerCase().compareTo(item2.title.toLowerCase()));
-      listViewItemsState.filteredListViewItems.value = filteredItems;
-
+      _addNewItemToListViewItemsState(
+          listViewItemsState, itemState, filterQueryString);
       return;
     }
 
@@ -99,19 +99,60 @@ class StateService {
       return;
     }
 
-    final filteredItems = List<ListItemsViewModel>.from(
+    _updateItemInListViewItemsState(
+        listViewItemsState, id, itemState, filterQueryString);
+
+    return;
+  }
+
+  void _addNewItemToListViewItemsState(
+    ListViewItemsStateWidget listViewItemsState,
+    ListItemViewModel itemState,
+    String filterQueryString,
+  ) {
+    final items =
+        List<ListItemViewModel>.from(listViewItemsState.listViewItems.value)
+          ..add(itemState);
+    items.sort((item1, item2) =>
+        item1.title.toLowerCase().compareTo(item2.title.toLowerCase()));
+    listViewItemsState.listViewItems.value = items;
+
+    var filteredItems = List<ListItemViewModel>.from(
+        listViewItemsState.filteredListViewItems.value)
+      ..add(itemState);
+
+    filteredItems = filteredItems
+        .where((item) => item.title.toLowerCase().contains(filterQueryString))
+        .toList();
+
+    filteredItems.sort((item1, item2) =>
+        item1.title.toLowerCase().compareTo(item2.title.toLowerCase()));
+
+    listViewItemsState.filteredListViewItems.value = filteredItems;
+  }
+
+  void _updateItemInListViewItemsState(
+    ListViewItemsStateWidget listViewItemsState,
+    int id,
+    ListItemViewModel itemState,
+    String filterQueryString,
+  ) {
+    var filteredItems = List<ListItemViewModel>.from(
         listViewItemsState.filteredListViewItems.value);
     final filteredItemIndex = filteredItems.indexWhere((item) => item.id == id);
 
     if (filteredItemIndex >= 0) {
       filteredItems[filteredItemIndex] = itemState;
+      filteredItems = filteredItems
+          .where((item) => item.title.toLowerCase().contains(filterQueryString))
+          .toList();
       filteredItems.sort((item1, item2) =>
           item1.title.toLowerCase().compareTo(item2.title.toLowerCase()));
       listViewItemsState.filteredListViewItems.value = filteredItems;
     }
 
     final items =
-        List<ListItemsViewModel>.from(listViewItemsState.listViewItems.value);
+        List<ListItemViewModel>.from(listViewItemsState.listViewItems.value);
     final itemIndex = items.indexWhere((item) => item.id == id);
 
     if (itemIndex >= 0) {
@@ -120,8 +161,6 @@ class StateService {
           item1.title.toLowerCase().compareTo(item2.title.toLowerCase()));
       listViewItemsState.listViewItems.value = items;
     }
-
-    return;
   }
 
   void setListViewSelectedIndexState(
@@ -170,7 +209,7 @@ class StateService {
     listViewSelectedItemState.selectedItem.value =
         const ListItemDetailsViewModel(
       id: null,
-      title: 'New Account',
+      title: '',
       username: '',
       password: '',
     );

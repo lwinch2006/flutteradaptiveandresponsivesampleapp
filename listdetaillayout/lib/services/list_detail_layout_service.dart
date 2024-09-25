@@ -6,7 +6,7 @@ import 'package:listdetaillayout/repositories/list_detail_layout_repository.dart
 import 'package:listdetaillayout/routes.dart' as routes;
 import 'package:listdetaillayout/services/state_service.dart';
 import 'package:listdetaillayout/view_models/create_new_list_item_viewmodel.dart';
-import 'package:listdetaillayout/view_models/list_items_viewmodel.dart';
+import 'package:listdetaillayout/view_models/list_item_viewmodel.dart';
 import 'package:listdetaillayout/view_models/update_list_item_viewmodel.dart';
 
 class ListDetailLayoutService {
@@ -18,7 +18,7 @@ class ListDetailLayoutService {
     required this.stateService,
   });
 
-  Future<List<ListItemsViewModel>> getItems(CommonStateDto commonState) {
+  Future<List<ListItemViewModel>> getItems(CommonStateDto commonState) {
     final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
 
     final listViewSelectedItemState = commonState.listViewSelectedItemState;
@@ -103,28 +103,34 @@ class ListDetailLayoutService {
             .MapToDetailViewViewModelFromCreateNewListItemViewModel(
                 newId, createNewListItemViewModel);
 
-        final listViewViewModel = ListDetailLayoutMapper
+        final listItemViewModel = ListDetailLayoutMapper
             .MapToListViewViewModelFromDetailViewViewModel(
                 detailsViewViewModel)!;
 
-        stateService.setListViewItemState(
+        stateService.setListViewItemsStateOnListItemUpsert(
           listViewItemsState,
           null,
-          listViewViewModel,
+          listItemViewModel,
+          listViewItemsState.filterQueryString.value,
         );
+
+        final indexOfNewListViewItem = listViewItemsState
+            .filteredListViewItems.value
+            .indexOf(listItemViewModel);
+
         stateService.setListViewSelectedIndexState(
-          listViewSelectedIndexState,
-          listViewItemsState.filteredListViewItems.value
-              .indexOf(listViewViewModel),
-        );
+            listViewSelectedIndexState, indexOfNewListViewItem);
+
         stateService.setListViewSelectedItemState(
           listViewSelectedItemState,
-          detailsViewViewModel,
+          indexOfNewListViewItem >= 0 ? detailsViewViewModel : null,
         );
+
         stateService.setNavigationCurrentIndexState(
           navigationCurrentIndexState,
           routes.listDetailLayoutPageIndex,
         );
+
         stateService.setDetailsViewState(
           detailsViewState,
           DetailsViewStateTypes.loadedData,
@@ -139,7 +145,8 @@ class ListDetailLayoutService {
   ) {
     debugPrint('list item details getting updated');
     final detailsViewState = commonState.detailsViewState;
-    final listViewItemsState = commonState.listViewItemsState;
+    final listViewItemsState = commonState.listViewItemsState!;
+    final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
     final listViewSelectedItemState = commonState.listViewSelectedItemState!;
 
     stateService.setDetailsViewState(
@@ -155,23 +162,33 @@ class ListDetailLayoutService {
       () async {
         await listDetailLayoutRepository.updateItem(command);
 
-        final detailsViewViewModel = ListDetailLayoutMapper
+        final listItemDetailsViewModel = ListDetailLayoutMapper
             .MapToDetailViewViewModelFromUpdateListItemViewModel(
                 updateListItemViewModel);
 
-        final listViewViewModel = ListDetailLayoutMapper
+        final listItemViewModel = ListDetailLayoutMapper
             .MapToListViewViewModelFromDetailViewViewModel(
-                detailsViewViewModel)!;
+                listItemDetailsViewModel)!;
 
-        stateService.setListViewItemState(
+        stateService.setListViewItemsStateOnListItemUpsert(
           listViewItemsState,
-          listViewViewModel.id,
-          listViewViewModel,
+          listItemViewModel.id,
+          listItemViewModel,
+          listViewItemsState.filterQueryString.value,
         );
+
+        final indexOfNewListViewItem = listViewItemsState
+            .filteredListViewItems.value
+            .indexOf(listItemViewModel);
+
+        stateService.setListViewSelectedIndexState(
+            listViewSelectedIndexState, indexOfNewListViewItem);
+
         stateService.setListViewSelectedItemState(
           listViewSelectedItemState,
-          detailsViewViewModel,
+          indexOfNewListViewItem >= 0 ? listItemDetailsViewModel : null,
         );
+
         stateService.setDetailsViewState(
           detailsViewState,
           DetailsViewStateTypes.loadedData,
@@ -197,16 +214,14 @@ class ListDetailLayoutService {
         await listDetailLayoutRepository.deleteItem(command);
 
         final unfilteredListViewItemsExceptDeleted =
-            List<ListItemsViewModel>.from(
-                    listViewItemsState.listViewItems.value)
+            List<ListItemViewModel>.from(listViewItemsState.listViewItems.value)
                 .where((item) => item.id != command.id)
                 .toList();
 
-        final filteredListViewItemsExceptDeleted =
-            List<ListItemsViewModel>.from(
-                    listViewItemsState.filteredListViewItems.value)
-                .where((item) => item.id != command.id)
-                .toList();
+        final filteredListViewItemsExceptDeleted = List<ListItemViewModel>.from(
+                listViewItemsState.filteredListViewItems.value)
+            .where((item) => item.id != command.id)
+            .toList();
 
         stateService.setUnfilteredListViewItemsState(
           listViewItemsState,
@@ -272,6 +287,8 @@ class ListDetailLayoutService {
         .where((item) => item.title.toLowerCase().contains(queryString))
         .toList();
 
+    stateService.setFilterQueryStringState(listViewItemsState, queryString);
+
     stateService.setFilteredListViewItemsState(
         listViewItemsState, filteredItems);
     return;
@@ -281,7 +298,9 @@ class ListDetailLayoutService {
     final listViewItemsState = commonState.listViewItemsState!;
 
     final items =
-        List<ListItemsViewModel>.from(listViewItemsState.listViewItems.value);
+        List<ListItemViewModel>.from(listViewItemsState.listViewItems.value);
+
+    stateService.setFilterQueryStringState(listViewItemsState, "");
 
     stateService.setFilteredListViewItemsState(listViewItemsState, items);
 

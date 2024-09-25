@@ -18,6 +18,7 @@ void main() {
         child: ListViewItemsStateWidget(
           listViewItems: ValueNotifier([]),
           filteredListViewItems: ValueNotifier([]),
+          filterQueryString: ValueNotifier(""),
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/view_models/list_items_viewmodel.dart';
+import 'package:listdetaillayout/view_models/list_item_viewmodel.dart';
 
 class ListViewItemsStateWidget extends InheritedWidget {
-  final ValueNotifier<List<ListItemsViewModel>> listViewItems;
-  final ValueNotifier<List<ListItemsViewModel>> filteredListViewItems;
+  final ValueNotifier<List<ListItemViewModel>> listViewItems;
+  final ValueNotifier<List<ListItemViewModel>> filteredListViewItems;
+  final ValueNotifier<String> filterQueryString;
 
   const ListViewItemsStateWidget({
     super.key,
     required super.child,
     required this.listViewItems,
     required this.filteredListViewItems,
+    required this.filterQueryString,
   });
 
   @override
