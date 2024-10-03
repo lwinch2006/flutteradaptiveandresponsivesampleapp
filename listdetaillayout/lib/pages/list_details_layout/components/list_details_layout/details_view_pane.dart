@@ -36,7 +36,7 @@ class DetailsViewPane extends StatelessWidget {
 
         if (state.isLoadedData) {
           return ValueListenableBuilder(
-            valueListenable: context.listViewSelectedItemState!.selectedItem,
+            valueListenable: context.detailsViewSelectedItemState!.selectedItem,
             builder: (context, selectedItem, child) {
               debugPrint('AppDetailView: ValueListenableBuilder2.build()');
 

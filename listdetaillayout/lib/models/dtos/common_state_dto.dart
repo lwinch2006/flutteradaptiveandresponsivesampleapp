@@ -1,8 +1,8 @@
 import 'package:listdetaillayout/models/states/app_state_widget.dart';
+import 'package:listdetaillayout/models/states/details_view_selected_item_state_widget.dart';
 import 'package:listdetaillayout/models/states/details_view_state_widget.dart';
 import 'package:listdetaillayout/models/states/list_view_items_state_widget.dart';
 import 'package:listdetaillayout/models/states/list_view_selected_index_state_widget.dart';
-import 'package:listdetaillayout/models/states/list_view_selected_item_state_widget.dart';
 import 'package:listdetaillayout/models/states/navigation_current_index_state_widget.dart';
 
 class CommonStateDto {
@@ -10,7 +10,7 @@ class CommonStateDto {
   final DetailsViewStateWidget? detailsViewState;
   final ListViewItemsStateWidget? listViewItemsState;
   final ListViewSelectedIndexStateWidget? listViewSelectedIndexState;
-  final ListViewSelectedItemStateWidget? listViewSelectedItemState;
+  final DetailsViewSelectedItemStateWidget? detailsViewSelectedItemState;
   final NavigationCurrentIndexStateWidget? navigationCurrentIndexState;
 
   const CommonStateDto({
@@ -18,7 +18,7 @@ class CommonStateDto {
     this.detailsViewState = null,
     this.listViewItemsState = null,
     this.listViewSelectedIndexState = null,
-    this.listViewSelectedItemState = null,
+    this.detailsViewSelectedItemState = null,
     this.navigationCurrentIndexState = null,
   });
 }

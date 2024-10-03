@@ -21,12 +21,14 @@ class ListDetailLayoutService {
   Future<List<ListItemViewModel>> getItems(CommonStateDto commonState) {
     final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
 
-    final listViewSelectedItemState = commonState.listViewSelectedItemState;
+    final detailsViewSelectedItemState =
+        commonState.detailsViewSelectedItemState;
 
     final listViewItemsState = commonState.listViewItemsState;
 
     stateService.setListViewSelectedIndexState(listViewSelectedIndexState, -1);
-    stateService.setListViewSelectedItemState(listViewSelectedItemState, null);
+    stateService.setDetailsViewSelectedItemState(
+        detailsViewSelectedItemState, null);
 
     return Future.delayed(
       const Duration(seconds: 5),
@@ -49,7 +51,8 @@ class ListDetailLayoutService {
     CommonStateDto commonState,
   ) {
     final detailsViewState = commonState.detailsViewState;
-    final listViewSelectedItemState = commonState.listViewSelectedItemState;
+    final detailsViewSelectedItemState =
+        commonState.detailsViewSelectedItemState;
 
     stateService.setDetailsViewState(
       detailsViewState,
@@ -65,8 +68,8 @@ class ListDetailLayoutService {
             ListDetailLayoutMapper.MapToDetailViewViewModelFromListItemDetails(
                 listItemDetails);
 
-        stateService.setListViewSelectedItemState(
-          listViewSelectedItemState,
+        stateService.setDetailsViewSelectedItemState(
+          detailsViewSelectedItemState,
           listItemAsViewModel,
         );
         stateService.setDetailsViewState(
@@ -85,7 +88,8 @@ class ListDetailLayoutService {
     final detailsViewState = commonState.detailsViewState;
     final listViewItemsState = commonState.listViewItemsState!;
     final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
-    final listViewSelectedItemState = commonState.listViewSelectedItemState;
+    final detailsViewSelectedItemState =
+        commonState.detailsViewSelectedItemState;
     final navigationCurrentIndexState = commonState.navigationCurrentIndexState;
 
     stateService.setDetailsViewState(
@@ -121,8 +125,8 @@ class ListDetailLayoutService {
         stateService.setListViewSelectedIndexState(
             listViewSelectedIndexState, indexOfNewListViewItem);
 
-        stateService.setListViewSelectedItemState(
-          listViewSelectedItemState,
+        stateService.setDetailsViewSelectedItemState(
+          detailsViewSelectedItemState,
           indexOfNewListViewItem >= 0 ? detailsViewViewModel : null,
         );
 
@@ -147,7 +151,8 @@ class ListDetailLayoutService {
     final detailsViewState = commonState.detailsViewState;
     final listViewItemsState = commonState.listViewItemsState!;
     final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
-    final listViewSelectedItemState = commonState.listViewSelectedItemState!;
+    final detailsViewSelectedItemState =
+        commonState.detailsViewSelectedItemState!;
 
     stateService.setDetailsViewState(
       detailsViewState,
@@ -184,8 +189,8 @@ class ListDetailLayoutService {
         stateService.setListViewSelectedIndexState(
             listViewSelectedIndexState, indexOfNewListViewItem);
 
-        stateService.setListViewSelectedItemState(
-          listViewSelectedItemState,
+        stateService.setDetailsViewSelectedItemState(
+          detailsViewSelectedItemState,
           indexOfNewListViewItem >= 0 ? listItemDetailsViewModel : null,
         );
 
@@ -204,7 +209,8 @@ class ListDetailLayoutService {
     debugPrint('list item details getting deleted');
     final listViewItemsState = commonState.listViewItemsState!;
     final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
-    final listViewSelectedItemState = commonState.listViewSelectedItemState;
+    final detailsViewSelectedItemState =
+        commonState.detailsViewSelectedItemState;
 
     final command = ListDetailLayoutMapper.MapToDeleteListItemCommand(itemId);
 
@@ -237,8 +243,8 @@ class ListDetailLayoutService {
           listViewSelectedIndexState,
           -1,
         );
-        stateService.setListViewSelectedItemState(
-          listViewSelectedItemState,
+        stateService.setDetailsViewSelectedItemState(
+          detailsViewSelectedItemState,
           null,
         );
       },
@@ -247,10 +253,12 @@ class ListDetailLayoutService {
 
   void closeItemDetails(CommonStateDto commonState) {
     final listViewSelectedIndexState = commonState.listViewSelectedIndexState;
-    final listViewSelectedItemState = commonState.listViewSelectedItemState;
+    final detailsViewSelectedItemState =
+        commonState.detailsViewSelectedItemState;
 
     stateService.setListViewSelectedIndexState(listViewSelectedIndexState, -1);
-    stateService.setListViewSelectedItemState(listViewSelectedItemState, null);
+    stateService.setDetailsViewSelectedItemState(
+        detailsViewSelectedItemState, null);
   }
 
   Future<void> onListTileTap(
@@ -261,19 +269,21 @@ class ListDetailLayoutService {
 
     final listViewItemsState = commonState.listViewItemsState!;
     final listViewSelectedIndexState = commonState.listViewSelectedIndexState!;
-    final listViewSelectedItemState = commonState.listViewSelectedItemState!;
+    final detailsViewSelectedItemState =
+        commonState.detailsViewSelectedItemState!;
 
     listViewSelectedIndexState.selectedIndex.value = selectedIndex;
 
-    final selectedItemFromState = listViewSelectedItemState.selectedItem.value;
+    final selectedItemFromState =
+        detailsViewSelectedItemState.selectedItem.value;
 
     final selectedItem = selectedIndex >= 0
         ? listViewItemsState.filteredListViewItems.value[selectedIndex]
         : null;
 
     if (!(selectedItemFromState?.id == selectedItem?.id)) {
-      stateService.setListViewSelectedItemState(
-          listViewSelectedItemState, null);
+      stateService.setDetailsViewSelectedItemState(
+          detailsViewSelectedItemState, null);
 
       if (selectedItem != null) {
         await getItemDetails(selectedItem.id, selectedItem.title, commonState);

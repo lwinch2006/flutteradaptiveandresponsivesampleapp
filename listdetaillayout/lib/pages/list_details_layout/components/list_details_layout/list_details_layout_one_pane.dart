@@ -21,7 +21,7 @@ class ListDetailsLayoutOnePane extends StatelessWidget {
           );
         }
 
-        if (context.listViewSelectedItemState!.selectedItem.value != null) {
+        if (context.detailsViewSelectedItemState!.selectedItem.value != null) {
           return const ListDetailsLayoutPaneContainer(
             child: DetailsViewPane(),
           );

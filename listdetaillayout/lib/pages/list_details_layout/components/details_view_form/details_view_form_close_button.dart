@@ -21,7 +21,7 @@ class _DetailsViewFormCloseButtonState
     commonState = CommonStateDto(
       detailsViewState: context.detailsViewState,
       listViewSelectedIndexState: context.listViewSelectedIndexState,
-      listViewSelectedItemState: context.listViewSelectedItemState,
+      detailsViewSelectedItemState: context.detailsViewSelectedItemState,
     );
   }
 

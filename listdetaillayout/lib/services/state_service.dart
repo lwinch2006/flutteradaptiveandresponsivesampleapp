@@ -1,10 +1,10 @@
 import 'package:listdetaillayout/models/enums/app_state_types.dart';
 import 'package:listdetaillayout/models/enums/details_view_state_types.dart';
 import 'package:listdetaillayout/models/states/app_state_widget.dart';
+import 'package:listdetaillayout/models/states/details_view_selected_item_state_widget.dart';
 import 'package:listdetaillayout/models/states/details_view_state_widget.dart';
 import 'package:listdetaillayout/models/states/list_view_items_state_widget.dart';
 import 'package:listdetaillayout/models/states/list_view_selected_index_state_widget.dart';
-import 'package:listdetaillayout/models/states/list_view_selected_item_state_widget.dart';
 import 'package:listdetaillayout/models/states/navigation_current_index_state_widget.dart';
 import 'package:listdetaillayout/view_models/list_item_details_viewmodel.dart';
 import 'package:listdetaillayout/view_models/list_item_viewmodel.dart';
@@ -174,15 +174,15 @@ class StateService {
     listViewSelectedIndexState.selectedIndex.value = selectedIndex;
   }
 
-  void setListViewSelectedItemState(
-    ListViewSelectedItemStateWidget? listViewSelectedItemState,
+  void setDetailsViewSelectedItemState(
+    DetailsViewSelectedItemStateWidget? detailsViewSelectedItemState,
     ListItemDetailsViewModel? itemDetails,
   ) {
-    if (listViewSelectedItemState == null) {
+    if (detailsViewSelectedItemState == null) {
       return;
     }
 
-    listViewSelectedItemState.selectedItem.value = itemDetails;
+    detailsViewSelectedItemState.selectedItem.value = itemDetails;
   }
 
   void setDetailsViewState(
@@ -198,15 +198,15 @@ class StateService {
 
   void setAddNewItemState(
     ListViewSelectedIndexStateWidget? listViewSelectedIndexState,
-    ListViewSelectedItemStateWidget? listViewSelectedItemState,
+    DetailsViewSelectedItemStateWidget? detailsViewSelectedItemState,
   ) {
     if (listViewSelectedIndexState == null ||
-        listViewSelectedItemState == null) {
+        detailsViewSelectedItemState == null) {
       return;
     }
 
     listViewSelectedIndexState.selectedIndex.value = -2;
-    listViewSelectedItemState.selectedItem.value =
+    detailsViewSelectedItemState.selectedItem.value =
         const ListItemDetailsViewModel(
       id: null,
       title: '',

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:listdetaillayout/models/enums/details_view_state_types.dart';
+import 'package:listdetaillayout/models/states/details_view_selected_item_state_widget.dart';
 import 'package:listdetaillayout/models/states/details_view_state_widget.dart';
 import 'package:listdetaillayout/models/states/list_view_selected_index_state_widget.dart';
-import 'package:listdetaillayout/models/states/list_view_selected_item_state_widget.dart';
 import 'package:listdetaillayout/pages/components/app_parts/app_body_container.dart';
 import 'package:listdetaillayout/pages/components/app_parts/app_header.dart';
 import 'package:listdetaillayout/pages/components/navigation/app_navigation_bar.dart';
@@ -42,7 +42,7 @@ class _ListDetailLayoutPageState extends State<ListDetailLayoutPage> {
 
     return ListViewSelectedIndexStateWidget(
       selectedIndex: selectedItemIndexValueNotifier,
-      child: ListViewSelectedItemStateWidget(
+      child: DetailsViewSelectedItemStateWidget(
         selectedItem: itemDetailsValueNotifier,
         child: DetailsViewStateWidget(
           state: detailsViewState,

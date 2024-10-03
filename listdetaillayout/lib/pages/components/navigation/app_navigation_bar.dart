@@ -23,7 +23,7 @@ class _AppNavigationBarState extends State<AppNavigationBar> {
       appState: context.appState,
       listViewItemsState: context.listViewItemsState,
       listViewSelectedIndexState: context.listViewSelectedIndexState,
-      listViewSelectedItemState: context.listViewSelectedItemState,
+      detailsViewSelectedItemState: context.detailsViewSelectedItemState,
       navigationCurrentIndexState: context.navigationCurrentIndexState,
     );
   }

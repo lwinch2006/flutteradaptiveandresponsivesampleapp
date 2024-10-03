@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:listdetaillayout/models/states/app_state_widget.dart';
+import 'package:listdetaillayout/models/states/details_view_selected_item_state_widget.dart';
 import 'package:listdetaillayout/models/states/details_view_state_widget.dart';
 import 'package:listdetaillayout/models/states/list_view_items_state_widget.dart';
 import 'package:listdetaillayout/models/states/list_view_selected_index_state_widget.dart';
-import 'package:listdetaillayout/models/states/list_view_selected_item_state_widget.dart';
 import 'package:listdetaillayout/models/states/navigation_current_index_state_widget.dart';
 import 'package:listdetaillayout/utils/extensions/build_context_extensions.dart';
 
@@ -19,8 +19,8 @@ extension BuildContextExtentions on BuildContext {
   ListViewSelectedIndexStateWidget? get listViewSelectedIndexState =>
       ListViewSelectedIndexStateWidget.of(this);
 
-  ListViewSelectedItemStateWidget? get listViewSelectedItemState =>
-      ListViewSelectedItemStateWidget.of(this);
+  DetailsViewSelectedItemStateWidget? get detailsViewSelectedItemState =>
+      DetailsViewSelectedItemStateWidget.of(this);
 
   DetailsViewStateWidget? get detailsViewState =>
       DetailsViewStateWidget.of(this);

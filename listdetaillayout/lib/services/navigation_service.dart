@@ -27,7 +27,8 @@ class NavigationService {
     final navigationCurrentIndexState =
         commonState.navigationCurrentIndexState!;
 
-    final listViewSelectedItemState = commonState.listViewSelectedItemState;
+    final detailsViewSelectedItemState =
+        commonState.detailsViewSelectedItemState;
 
     if (navigationCurrentIndexState.currentIndex.value == selectedIndex) {
       return;
@@ -37,7 +38,8 @@ class NavigationService {
         navigationCurrentIndexState, selectedIndex);
 
     stateService.setListViewSelectedIndexState(listViewSelectedIndexState, -1);
-    stateService.setListViewSelectedItemState(listViewSelectedItemState, null);
+    stateService.setDetailsViewSelectedItemState(
+        detailsViewSelectedItemState, null);
 
     if (navigationDestinations[selectedIndex].action != null) {
       navigationDestinations[selectedIndex].action!(context, commonState);
@@ -49,7 +51,7 @@ class NavigationService {
   void onAddSelected(CommonStateDto commonState) {
     stateService.setAddNewItemState(
       commonState.listViewSelectedIndexState,
-      commonState.listViewSelectedItemState,
+      commonState.detailsViewSelectedItemState,
     );
   }
 

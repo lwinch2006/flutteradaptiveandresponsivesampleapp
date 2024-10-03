@@ -24,7 +24,7 @@ class _ListViewPaneState extends State<ListViewPane> {
     commonState = CommonStateDto(
       listViewItemsState: context.listViewItemsState,
       listViewSelectedIndexState: context.listViewSelectedIndexState,
-      listViewSelectedItemState: context.listViewSelectedItemState,
+      detailsViewSelectedItemState: context.detailsViewSelectedItemState,
       detailsViewState: context.detailsViewState,
     );
   }
