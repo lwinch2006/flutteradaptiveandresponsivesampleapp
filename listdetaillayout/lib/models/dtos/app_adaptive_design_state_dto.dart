@@ -1,5 +1,5 @@
-import 'package:listdetaillayout/models/app_list_detail_layout_types.dart';
-import 'package:listdetaillayout/models/app_navigation_widget_types.dart';
+import 'package:listdetaillayout/models/enums/app_list_detail_layout_types.dart';
+import 'package:listdetaillayout/models/enums/app_navigation_widget_types.dart';
 
 final class AppAdaptiveDesignStateDto {
   final AppNavigationWidgetTypes navigationWidgetType;

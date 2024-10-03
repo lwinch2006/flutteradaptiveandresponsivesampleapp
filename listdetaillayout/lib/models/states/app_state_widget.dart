@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/models/app_state_types.dart';
+import 'package:listdetaillayout/models/enums/app_state_types.dart';
 
 class AppStateWidget extends InheritedWidget {
   final ValueNotifier<AppStateTypes> state;

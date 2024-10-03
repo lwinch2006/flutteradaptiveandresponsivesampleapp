@@ -1,12 +1,12 @@
 import 'dart:math';
 
-import 'package:listdetaillayout/commands/create_new_list_item_command.dart';
-import 'package:listdetaillayout/commands/delete_list_item_command.dart';
-import 'package:listdetaillayout/commands/update_list_item_command.dart';
-import 'package:listdetaillayout/dummy_data.dart';
-import 'package:listdetaillayout/mappers/list_detail_layout_mapper.dart';
 import 'package:listdetaillayout/models/list_item.dart';
 import 'package:listdetaillayout/models/list_item_details.dart';
+import 'package:listdetaillayout/repositories/dummy_data.dart';
+import 'package:listdetaillayout/services/commands/create_new_list_item_command.dart';
+import 'package:listdetaillayout/services/commands/delete_list_item_command.dart';
+import 'package:listdetaillayout/services/commands/update_list_item_command.dart';
+import 'package:listdetaillayout/utils/mappers/list_detail_layout_mapper.dart';
 
 class ListDetailLayoutRepository {
   const ListDetailLayoutRepository();

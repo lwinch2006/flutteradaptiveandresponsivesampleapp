@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/components/app_horizontal_spacer_20.dart';
-import 'package:listdetaillayout/components/app_vertical_spacer_20.dart';
+import 'package:listdetaillayout/pages/components/app_horizontal_spacer_20.dart';
+import 'package:listdetaillayout/pages/components/app_vertical_spacer_20.dart';
 import 'package:listdetaillayout/pages/list_details_layout/components/list_details_layout/details_view_pane.dart';
 import 'package:listdetaillayout/pages/list_details_layout/components/list_details_layout/list_details_layout_pane_container.dart';
 import 'package:listdetaillayout/pages/list_details_layout/components/list_details_layout/list_view_pane.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/components/app_center_text.dart';
-import 'package:listdetaillayout/components/app_progress_indicator.dart';
-import 'package:listdetaillayout/extensions/build_context_extensions.dart';
+import 'package:listdetaillayout/pages/components/app_center_text.dart';
+import 'package:listdetaillayout/pages/components/app_progress_indicator.dart';
 import 'package:listdetaillayout/pages/list_details_layout/components/details_view_form/details_view_form.dart';
+import 'package:listdetaillayout/utils/extensions/build_context_extensions.dart';
 
 class DetailsViewPane extends StatelessWidget {
   const DetailsViewPane({

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/dtos/common_state_dto.dart';
-import 'package:listdetaillayout/mappers/list_detail_layout_mapper.dart';
-import 'package:listdetaillayout/models/details_view_state_types.dart';
+import 'package:listdetaillayout/models/dtos/common_state_dto.dart';
+import 'package:listdetaillayout/models/enums/details_view_state_types.dart';
 import 'package:listdetaillayout/repositories/list_detail_layout_repository.dart';
 import 'package:listdetaillayout/routes.dart' as routes;
 import 'package:listdetaillayout/services/state_service.dart';
+import 'package:listdetaillayout/utils/mappers/list_detail_layout_mapper.dart';
 import 'package:listdetaillayout/view_models/create_new_list_item_viewmodel.dart';
 import 'package:listdetaillayout/view_models/list_item_viewmodel.dart';
 import 'package:listdetaillayout/view_models/update_list_item_viewmodel.dart';

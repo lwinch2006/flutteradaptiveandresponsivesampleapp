@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/dtos/common_state_dto.dart';
+import 'package:listdetaillayout/models/dtos/common_state_dto.dart';
 
 final class AppNavigationDestination {
   final IconData icon;

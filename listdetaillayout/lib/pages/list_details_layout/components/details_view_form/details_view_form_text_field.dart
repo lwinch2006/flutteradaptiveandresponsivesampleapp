@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:listdetaillayout/components/app_snack_bar.dart';
+import 'package:listdetaillayout/pages/components/app_snack_bar.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
 
 class DetailsViewFormTextField extends StatefulWidget {

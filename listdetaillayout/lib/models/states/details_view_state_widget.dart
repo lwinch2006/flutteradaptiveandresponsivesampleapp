@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/models/details_view_state_types.dart';
+import 'package:listdetaillayout/models/enums/details_view_state_types.dart';
 
 class DetailsViewStateWidget extends InheritedWidget {
   final ValueNotifier<DetailsViewStateTypes> state;

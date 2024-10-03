@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listdetaillayout/dtos/common_state_dto.dart';
-import 'package:listdetaillayout/extensions/build_context_extensions.dart';
 import 'package:listdetaillayout/models/app_navigation_destination.dart';
+import 'package:listdetaillayout/models/dtos/common_state_dto.dart';
 import 'package:listdetaillayout/pages/home_page.dart';
 import 'package:listdetaillayout/pages/list_details_layout/list_detail_layout_page.dart';
 import 'package:listdetaillayout/services.dart';
+import 'package:listdetaillayout/utils/extensions/build_context_extensions.dart';
 
 const homePageIndex = -1;
 const listDetailLayoutPageIndex = 0;

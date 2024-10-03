@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/components/app_parts/app_user_content_container.dart';
-import 'package:listdetaillayout/components/navigation/app_navigation_drawer.dart';
-import 'package:listdetaillayout/components/navigation/app_navigation_rail.dart';
-import 'package:listdetaillayout/models/app_navigation_widget_types.dart';
+import 'package:listdetaillayout/models/enums/app_navigation_widget_types.dart';
+import 'package:listdetaillayout/pages/components/app_parts/app_user_content_container.dart';
+import 'package:listdetaillayout/pages/components/navigation/app_navigation_drawer.dart';
+import 'package:listdetaillayout/pages/components/navigation/app_navigation_rail.dart';
 
 class AppBodyContainer extends StatefulWidget {
   final int pageIndex;

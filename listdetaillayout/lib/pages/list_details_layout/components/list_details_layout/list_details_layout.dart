@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/models/app_list_detail_layout_types.dart';
+import 'package:listdetaillayout/models/enums/app_list_detail_layout_types.dart';
 import 'package:listdetaillayout/pages/list_details_layout/components/list_details_layout/list_details_layout_one_pane.dart';
 import 'package:listdetaillayout/pages/list_details_layout/components/list_details_layout/list_details_layout_two_pane.dart';
 

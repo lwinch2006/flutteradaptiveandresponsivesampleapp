@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listdetaillayout/dtos/app_adaptive_design_state_dto.dart';
-import 'package:listdetaillayout/dtos/common_state_dto.dart';
-import 'package:listdetaillayout/models/app_list_detail_layout_types.dart';
-import 'package:listdetaillayout/models/app_navigation_widget_types.dart';
-import 'package:listdetaillayout/models/app_state_types.dart';
+import 'package:listdetaillayout/models/dtos/app_adaptive_design_state_dto.dart';
+import 'package:listdetaillayout/models/dtos/common_state_dto.dart';
+import 'package:listdetaillayout/models/enums/app_list_detail_layout_types.dart';
+import 'package:listdetaillayout/models/enums/app_navigation_widget_types.dart';
+import 'package:listdetaillayout/models/enums/app_state_types.dart';
 import 'package:listdetaillayout/routes.dart' as routes;
 import 'package:listdetaillayout/services/list_detail_layout_service.dart';
 import 'package:listdetaillayout/services/state_service.dart';

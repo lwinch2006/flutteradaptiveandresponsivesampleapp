@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:listdetaillayout/dtos/common_state_dto.dart';
+import 'package:listdetaillayout/models/dtos/common_state_dto.dart';
 import 'package:listdetaillayout/routes.dart';
 import 'package:listdetaillayout/services/app_service.dart';
 import 'package:listdetaillayout/services/list_detail_layout_service.dart';

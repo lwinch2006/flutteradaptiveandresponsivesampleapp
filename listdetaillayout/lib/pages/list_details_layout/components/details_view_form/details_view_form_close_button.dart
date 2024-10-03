@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/dtos/common_state_dto.dart';
-import 'package:listdetaillayout/extensions/build_context_extensions.dart';
+import 'package:listdetaillayout/models/dtos/common_state_dto.dart';
 import 'package:listdetaillayout/services.dart';
+import 'package:listdetaillayout/utils/extensions/build_context_extensions.dart';
 
 class DetailsViewFormCloseButton extends StatefulWidget {
   const DetailsViewFormCloseButton({super.key});

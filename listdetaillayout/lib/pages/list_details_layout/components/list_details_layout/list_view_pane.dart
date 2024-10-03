@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/components/app_progress_indicator.dart';
-import 'package:listdetaillayout/dtos/common_state_dto.dart';
-import 'package:listdetaillayout/extensions/build_context_extensions.dart';
+import 'package:listdetaillayout/models/dtos/common_state_dto.dart';
+import 'package:listdetaillayout/pages/components/app_progress_indicator.dart';
 import 'package:listdetaillayout/services.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
+import 'package:listdetaillayout/utils/extensions/build_context_extensions.dart';
 
 class ListViewPane extends StatefulWidget {
   const ListViewPane({
@@ -61,7 +61,6 @@ class _ListViewPaneState extends State<ListViewPane> {
             return Material(
               color: theme_data.userContentBackgroundColor,
               child: ListView.builder(
-                //shrinkWrap: true,
                 itemCount: listViewItems.length,
                 itemBuilder: (context, index) {
                   return ListTile(
@@ -85,7 +84,9 @@ class _ListViewPaneState extends State<ListViewPane> {
                         await listDetailLayoutService.deleteItem(
                             itemId, commonState);
 
-                        Navigator.of(context).pop();
+                        if (context.mounted) {
+                          Navigator.of(context).pop();
+                        }
                       },
                     ),
                     onTap: () async => await listDetailLayoutService

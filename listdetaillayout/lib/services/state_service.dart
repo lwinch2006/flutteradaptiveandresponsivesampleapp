@@ -1,11 +1,11 @@
-import 'package:listdetaillayout/models/app_state_types.dart';
-import 'package:listdetaillayout/models/details_view_state_types.dart';
-import 'package:listdetaillayout/states/app_state_widget.dart';
-import 'package:listdetaillayout/states/details_view_state_widget.dart';
-import 'package:listdetaillayout/states/list_view_items_state_widget.dart';
-import 'package:listdetaillayout/states/list_view_selected_index_state_widget.dart';
-import 'package:listdetaillayout/states/list_view_selected_item_state_widget.dart';
-import 'package:listdetaillayout/states/navigation_current_index_state_widget.dart';
+import 'package:listdetaillayout/models/enums/app_state_types.dart';
+import 'package:listdetaillayout/models/enums/details_view_state_types.dart';
+import 'package:listdetaillayout/models/states/app_state_widget.dart';
+import 'package:listdetaillayout/models/states/details_view_state_widget.dart';
+import 'package:listdetaillayout/models/states/list_view_items_state_widget.dart';
+import 'package:listdetaillayout/models/states/list_view_selected_index_state_widget.dart';
+import 'package:listdetaillayout/models/states/list_view_selected_item_state_widget.dart';
+import 'package:listdetaillayout/models/states/navigation_current_index_state_widget.dart';
 import 'package:listdetaillayout/view_models/list_item_details_viewmodel.dart';
 import 'package:listdetaillayout/view_models/list_item_viewmodel.dart';
 

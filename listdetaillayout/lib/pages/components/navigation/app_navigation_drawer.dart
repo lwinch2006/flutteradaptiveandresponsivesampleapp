@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayout/dtos/common_state_dto.dart';
-import 'package:listdetaillayout/extensions/build_context_extensions.dart';
+import 'package:listdetaillayout/models/dtos/common_state_dto.dart';
 import 'package:listdetaillayout/routes.dart';
 import 'package:listdetaillayout/services.dart';
 import 'package:listdetaillayout/theme_data.dart' as theme_data;
+import 'package:listdetaillayout/utils/extensions/build_context_extensions.dart';
 
 class AppNavigationDrawer extends StatefulWidget {
   const AppNavigationDrawer({super.key});
