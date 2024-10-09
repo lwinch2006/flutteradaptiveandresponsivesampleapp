@@ -1,0 +1,14 @@
+{
+    "page": "page",
+    "navigationHomePage": "SmartCardPass",
+    "navigationDetailsPage": "Accounts",
+    "navigationAddPage": "Add account",
+    "navigationEditPage": "Edit page",
+    "navigationDeletePage": "Delete page",
+    "navigationCloseAppPage": "Close",
+    "progressIndicatorLoading": "Loading...",
+    "progressIndicatorLoadingData": "Loading data...",
+    "progressIndicatorAddingData": "Adding data...",
+    "progressIndicatorUpdatingData": "Updating data...",
+    "progressIndicatorDeletingData": "Deleting data..."
+}

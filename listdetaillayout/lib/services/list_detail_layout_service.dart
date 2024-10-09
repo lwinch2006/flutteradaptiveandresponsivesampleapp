@@ -101,7 +101,7 @@ class ListDetailLayoutService {
     return Future.delayed(
       const Duration(seconds: 5),
       () async {
-        var newId = await listDetailLayoutRepository.createItem(command);
+        final newId = await listDetailLayoutRepository.createItem(command);
 
         final detailsViewViewModel = ListDetailLayoutMapper
             .MapToDetailViewViewModelFromCreateNewListItemViewModel(
