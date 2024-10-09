@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
             return Center(
               child: FilledButton(
                   onPressed: () async => await appCubit.initApp(),
-                  child: const Text('Start')),
+                  child: Text(context.l10n.buttonStart)),
             );
           }
 

@@ -10,5 +10,18 @@
     "progressIndicatorLoadingData": "Laster data...",
     "progressIndicatorAddingData": "Adderer data...",
     "progressIndicatorUpdatingData": "Oppdaterer data...",
-    "progressIndicatorDeletingData": "Fjerner data..."
+    "progressIndicatorDeletingData": "Fjerner data...",
+    "buttonStart": "Starte",
+    "buttonUpdate": "Oppdatere",
+    "buttonDelete": "Fjerne",
+    "buttonCancel": "Avbryt",
+    "buttonSave": "Lagre",
+    "buttonClose": "Lukke",
+    "infoMessageSelectListItem": "Velg en item fra listen",
+    "errorMessageOperationFailed": "Operasjon feilet",
+    "textFormFieldTitle": "Tittel",
+    "textFormFieldUsername": "Brukernavn",
+    "textFormFieldPassword": "Passord",
+    "searchFieldPlaceholder": "Søke...",
+    "wordCopied": "kopiert"
 }

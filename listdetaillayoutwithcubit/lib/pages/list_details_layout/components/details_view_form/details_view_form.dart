@@ -10,6 +10,7 @@ import 'package:listdetaillayoutwithcubit/pages/list_details_layout/components/d
 import 'package:listdetaillayoutwithcubit/pages/list_details_layout/components/details_view_form/details_view_form_validator.dart';
 import 'package:listdetaillayoutwithcubit/routes.dart' as routes;
 import 'package:listdetaillayoutwithcubit/theme_data.dart' as theme_data;
+import 'package:listdetaillayoutwithcubit/utils/extensions/build_context_extensions.dart';
 import 'package:listdetaillayoutwithcubit/view_models/create_new_list_item_viewmodel.dart';
 import 'package:listdetaillayoutwithcubit/view_models/list_item_details_viewmodel.dart';
 import 'package:listdetaillayoutwithcubit/view_models/update_list_item_viewmodel.dart';
@@ -127,7 +128,7 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
                       order: const NumericFocusOrder(1),
                       child: DetailsViewFormTextField(
                         icon: null,
-                        label: 'Title',
+                        label: context.l10n.textFormFieldTitle,
                         text: widget.detailViewViewModel.title,
                         isReadOnly: isReadOnly,
                         isHiddenText: false,
@@ -149,7 +150,7 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
                       skipTraversal: isReadOnly,
                       child: DetailsViewFormTextField(
                         icon: Icons.person,
-                        label: 'Username',
+                        label: context.l10n.textFormFieldUsername,
                         text: widget.detailViewViewModel.username,
                         isReadOnly: isReadOnly,
                         isHiddenText: false,
@@ -172,7 +173,7 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
                       skipTraversal: isReadOnly,
                       child: DetailsViewFormTextField(
                         icon: Icons.key_outlined,
-                        label: 'Password',
+                        label: context.l10n.textFormFieldPassword,
                         text: widget.detailViewViewModel.password,
                         isReadOnly: isReadOnly,
                         isHiddenText: isReadOnly,
@@ -202,7 +203,7 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
                           child: Flexible(
                             child: ElevatedButton(
                               onPressed: setReadMode,
-                              child: const Text('Cancel'),
+                              child: Text(context.l10n.buttonCancel),
                             ),
                           ),
                         ),
@@ -215,7 +216,7 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
                           child: Flexible(
                             child: FilledButton(
                               onPressed: setEditMode,
-                              child: const Text('Update'),
+                              child: Text(context.l10n.buttonUpdate),
                             ),
                           ),
                         ),
@@ -256,7 +257,7 @@ class _DetailsViewFormState extends State<DetailsViewForm> {
                                   }
                                 }
                               },
-                              child: const Text('Save'),
+                              child: Text(context.l10n.buttonSave),
                             ),
                           ),
                         ),

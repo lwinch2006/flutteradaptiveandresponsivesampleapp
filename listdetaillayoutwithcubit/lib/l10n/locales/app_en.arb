@@ -10,5 +10,18 @@
     "progressIndicatorLoadingData": "Loading data...",
     "progressIndicatorAddingData": "Adding data...",
     "progressIndicatorUpdatingData": "Updating data...",
-    "progressIndicatorDeletingData": "Deleting data..."
+    "progressIndicatorDeletingData": "Deleting data...",
+    "buttonStart": "Start",
+    "buttonUpdate": "Update",
+    "buttonDelete": "Delete",
+    "buttonCancel": "Cancel",
+    "buttonSave": "Save",
+    "buttonClose": "Close",
+    "infoMessageSelectListItem": "Select an item from the list",
+    "errorMessageOperationFailed": "Operation failed",
+    "textFormFieldTitle": "Title",
+    "textFormFieldUsername": "Username",
+    "textFormFieldPassword": "Password",
+    "searchFieldPlaceholder": "Search...",
+    "wordCopied": "copied"
 }

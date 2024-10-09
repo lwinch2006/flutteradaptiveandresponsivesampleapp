@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:listdetaillayoutwithcubit/cubits/list_detail_layout_cubit.dart';
+import 'package:listdetaillayoutwithcubit/utils/extensions/build_context_extensions.dart';
 
 class DetailsViewFormCloseButton extends StatefulWidget {
   const DetailsViewFormCloseButton({super.key});
@@ -24,7 +25,7 @@ class _DetailsViewFormCloseButtonState
     debugPrint('AppFormCloseButton: build()');
     return ElevatedButton(
       onPressed: () => listDetailLayoutCubit.closeItemDetails(),
-      child: const Text('Close'),
+      child: Text(context.l10n.buttonClose),
     );
   }
 }

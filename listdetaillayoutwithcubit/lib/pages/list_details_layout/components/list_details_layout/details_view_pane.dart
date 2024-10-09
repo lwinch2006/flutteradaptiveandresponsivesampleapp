@@ -5,6 +5,7 @@ import 'package:listdetaillayoutwithcubit/models/states/list_detail_layout_state
 import 'package:listdetaillayoutwithcubit/pages/components/app_center_text.dart';
 import 'package:listdetaillayoutwithcubit/pages/components/app_progress_indicator.dart';
 import 'package:listdetaillayoutwithcubit/pages/list_details_layout/components/details_view_form/details_view_form.dart';
+import 'package:listdetaillayoutwithcubit/utils/extensions/build_context_extensions.dart';
 
 class DetailsViewPane extends StatefulWidget {
   const DetailsViewPane({
@@ -40,14 +41,17 @@ class _DetailsViewPaneState extends State<DetailsViewPane> {
         debugPrint('AppDetailView: BlocConsumer.build()');
 
         if (listDetailLayoutState.detailViewState.isAddingData) {
-          return const AppProgressIndicator(label: 'Adding data...');
+          return AppProgressIndicator(
+              label: context.l10n.progressIndicatorAddingData);
         }
 
         if (listDetailLayoutState.detailViewState.isUpdatingData) {
-          return const AppProgressIndicator(label: 'Updating data...');
+          return AppProgressIndicator(
+              label: context.l10n.progressIndicatorUpdatingData);
         }
         if (listDetailLayoutState.detailViewState.isLoadingData) {
-          return const AppProgressIndicator(label: 'Loading data...');
+          return AppProgressIndicator(
+              label: context.l10n.progressIndicatorLoadingData);
         }
 
         if (listDetailLayoutState.detailViewState.isAddingDataError ||
@@ -65,7 +69,7 @@ class _DetailsViewPaneState extends State<DetailsViewPane> {
           }
 
           if (listDetailLayoutState.detailViewSelectedItem == null) {
-            return const AppCenterText(data: 'Select an item from the list');
+            return AppCenterText(data: context.l10n.infoMessageSelectListItem);
           }
         }
 

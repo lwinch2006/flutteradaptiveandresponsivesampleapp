@@ -4,6 +4,7 @@ import 'package:listdetaillayoutwithcubit/cubits/list_detail_layout_cubit.dart';
 import 'package:listdetaillayoutwithcubit/models/states/list_detail_layout_state.dart';
 import 'package:listdetaillayoutwithcubit/pages/components/app_progress_indicator.dart';
 import 'package:listdetaillayoutwithcubit/theme_data.dart' as theme_data;
+import 'package:listdetaillayoutwithcubit/utils/extensions/build_context_extensions.dart';
 
 class ListViewPane extends StatefulWidget {
   const ListViewPane({
@@ -28,10 +29,11 @@ class _ListViewPaneState extends State<ListViewPane> {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return const Dialog(
+        return Dialog(
           backgroundColor: Colors.transparent,
           child: Center(
-            child: const AppProgressIndicator(label: 'Deleting data...'),
+            child: AppProgressIndicator(
+                label: context.l10n.progressIndicatorDeletingData),
           ),
         );
       },
@@ -71,7 +73,7 @@ class _ListViewPaneState extends State<ListViewPane> {
                       PopupMenuItem(
                         value: listDetailLayoutState
                             .filteredListViewItems[index].id,
-                        child: const Text('Delete'),
+                        child: Text(context.l10n.buttonDelete),
                       ),
                     ];
                   },

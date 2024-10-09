@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:listdetaillayoutwithcubit/pages/components/app_snack_bar.dart';
 import 'package:listdetaillayoutwithcubit/theme_data.dart' as theme_data;
+import 'package:listdetaillayoutwithcubit/utils/extensions/build_context_extensions.dart';
 
 class DetailsViewFormTextField extends StatefulWidget {
   final IconData? icon;
@@ -90,8 +91,14 @@ class _DetailsViewFormTextFieldState extends State<DetailsViewFormTextField> {
                         await Clipboard.setData(
                             ClipboardData(text: widget.controller.text));
 
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            AppSnackBar(content: '${widget.label} copied'));
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            AppSnackBar(
+                                content:
+                                    '${widget.label} ${context.l10n.wordCopied}',
+                                buttonCloseLabel: context.l10n.buttonClose),
+                          );
+                        }
                       },
                       icon: const Icon(Icons.copy_outlined),
                     ),
@@ -115,8 +122,14 @@ class _DetailsViewFormTextFieldState extends State<DetailsViewFormTextField> {
                           await Clipboard.setData(
                               ClipboardData(text: widget.controller.text));
 
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              AppSnackBar(content: '${widget.label} copied'));
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(AppSnackBar(
+                              content:
+                                  '${widget.label} ${context.l10n.wordCopied}',
+                              buttonCloseLabel: context.l10n.buttonClose,
+                            ));
+                          }
                         },
                         icon: const Icon(Icons.copy_outlined),
                       )
