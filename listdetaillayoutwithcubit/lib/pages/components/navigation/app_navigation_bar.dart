@@ -36,7 +36,7 @@ class _AppNavigationBarState extends State<AppNavigationBar> {
       listener: (context, appState) {
         debugPrint('AppNavigationBar: BlocConsumer: listener()');
 
-        listDetailLayoutCubit?.onNavigationDestinationSelected();
+        listDetailLayoutCubit?.resetSelectedIndexAndSelectedItem();
 
         if (navigationDestinations[appState.navigationCurrentIndex].action !=
             null) {

@@ -66,8 +66,8 @@ GoRouter generateRouter() {
               List<ListItemViewModel>.empty();
 
           return CustomTransitionPage(
-            child: ListDetailLayoutPage.withBloc(
-              pageTitle: context.l10n.navigationDetailsPage,
+            child: ListDetailLayoutPage(
+              title: context.l10n.navigationDetailsPage,
               listViewItems: listViewItems,
             ),
             transitionsBuilder:

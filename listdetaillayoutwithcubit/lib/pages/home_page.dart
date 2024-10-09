@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     appCubit = context.read<AppCubit>();
+    appCubit.resetApp();
   }
 
   @override

@@ -38,7 +38,7 @@ class _AppNavigationDrawerState extends State<AppNavigationDrawer> {
         listener: (context, appState) {
           debugPrint('AppNavigationDrawer: BlocConsumer: listener()');
 
-          listDetailLayoutCubit?.onNavigationDestinationSelected();
+          listDetailLayoutCubit?.resetSelectedIndexAndSelectedItem();
 
           if (navigationDestinations[appState.navigationCurrentIndex].action !=
               null) {

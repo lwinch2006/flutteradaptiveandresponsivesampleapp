@@ -12,20 +12,15 @@ import 'package:listdetaillayoutwithcubit/view_models/list_item_viewmodel.dart';
 
 class ListDetailLayoutPage extends StatefulWidget {
   final String title;
-  const ListDetailLayoutPage({super.key, required this.title});
+  final List<ListItemViewModel> listViewItems;
+  const ListDetailLayoutPage({
+    super.key,
+    required this.title,
+    required this.listViewItems,
+  });
 
   @override
   State<ListDetailLayoutPage> createState() => _ListDetailLayoutPageState();
-
-  static Widget withBloc({
-    required String pageTitle,
-    required List<ListItemViewModel> listViewItems,
-  }) {
-    return BlocProvider<ListDetailLayoutCubit>(
-      create: (context) => ListDetailLayoutCubit(listViewItems: listViewItems),
-      child: ListDetailLayoutPage(title: pageTitle),
-    );
-  }
 }
 
 class _ListDetailLayoutPageState extends State<ListDetailLayoutPage> {
@@ -34,32 +29,37 @@ class _ListDetailLayoutPageState extends State<ListDetailLayoutPage> {
     debugPrint('ListDetailLayoutPage: build()');
     var appAdaptiveDesignState = context.getAppAdaptiveDesignState();
 
-    return Scaffold(
-      appBar: AppHeader(
-        header: widget.title,
-        context: context,
-      ),
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            debugPrint('ListDetailLayoutPage: LayoutBuilder: build()');
-            appAdaptiveDesignState =
-                constraints.getAppAdaptiveDesignStateFromBoxConstraints();
-
-            return AppBodyContainer(
-              navigationWidgetType: appAdaptiveDesignState.navigationWidgetType,
-              pageIndex: listDetailLayoutPageIndex,
-              userContent: ListDetailsLayout(
-                appListDetailLayoutType:
-                    appAdaptiveDesignState.appListDetailLayoutType,
-              ),
-            );
-          },
+    return BlocProvider<ListDetailLayoutCubit>(
+      create: (context) =>
+          ListDetailLayoutCubit(listViewItems: widget.listViewItems),
+      child: Scaffold(
+        appBar: AppHeader(
+          header: widget.title,
+          context: context,
         ),
+        body: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              debugPrint('ListDetailLayoutPage: LayoutBuilder: build()');
+              appAdaptiveDesignState =
+                  constraints.getAppAdaptiveDesignStateFromBoxConstraints();
+
+              return AppBodyContainer(
+                navigationWidgetType:
+                    appAdaptiveDesignState.navigationWidgetType,
+                pageIndex: listDetailLayoutPageIndex,
+                userContent: ListDetailsLayout(
+                  appListDetailLayoutType:
+                      appAdaptiveDesignState.appListDetailLayoutType,
+                ),
+              );
+            },
+          ),
+        ),
+        bottomNavigationBar: appAdaptiveDesignState.navigationWidgetType.isBar
+            ? const AppNavigationBar()
+            : const SizedBox(height: 20.0),
       ),
-      bottomNavigationBar: appAdaptiveDesignState.navigationWidgetType.isBar
-          ? const AppNavigationBar()
-          : const SizedBox(height: 20.0),
     );
   }
 }

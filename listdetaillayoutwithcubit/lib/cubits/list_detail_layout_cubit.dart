@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listdetaillayoutwithcubit/application/utils/mappers/list_detail_layout_mapper.dart';
 import 'package:listdetaillayoutwithcubit/models/enums/details_view_state_types.dart';
 import 'package:listdetaillayoutwithcubit/models/nullable.dart';
 import 'package:listdetaillayoutwithcubit/models/states/list_detail_layout_state.dart';
 import 'package:listdetaillayoutwithcubit/services.dart';
-import 'package:listdetaillayoutwithcubit/utils/mappers/list_detail_layout_mapper.dart';
 import 'package:listdetaillayoutwithcubit/view_models/create_new_list_item_viewmodel.dart';
 import 'package:listdetaillayoutwithcubit/view_models/list_item_details_viewmodel.dart';
 import 'package:listdetaillayoutwithcubit/view_models/list_item_viewmodel.dart';
@@ -230,7 +230,7 @@ class ListDetailLayoutCubit extends Cubit<ListDetailLayoutState> {
     }
   }
 
-  void onNavigationDestinationSelected() {
+  void resetSelectedIndexAndSelectedItem() {
     emit(state.copyWith(
         listViewSelectedIndex: -1,
         detailViewSelectedItem: const Nullable(null)));

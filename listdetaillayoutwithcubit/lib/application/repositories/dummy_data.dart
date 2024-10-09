@@ -1,5 +1,5 @@
-import 'package:listdetaillayoutwithcubit/models/list_item.dart';
-import 'package:listdetaillayoutwithcubit/models/list_item_details.dart';
+import 'package:listdetaillayoutwithcubit/application/models/list_item.dart';
+import 'package:listdetaillayoutwithcubit/application/models/list_item_details.dart';
 
 final dummyListItems = <ListItem>[
   const ListItem(id: 11, title: 'Gmail'),

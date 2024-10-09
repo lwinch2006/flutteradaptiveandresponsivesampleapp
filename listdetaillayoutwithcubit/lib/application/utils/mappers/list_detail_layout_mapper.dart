@@ -1,8 +1,8 @@
-import 'package:listdetaillayoutwithcubit/models/list_item.dart';
-import 'package:listdetaillayoutwithcubit/models/list_item_details.dart';
-import 'package:listdetaillayoutwithcubit/services/commands/create_new_list_item_command.dart';
-import 'package:listdetaillayoutwithcubit/services/commands/delete_list_item_command.dart';
-import 'package:listdetaillayoutwithcubit/services/commands/update_list_item_command.dart';
+import 'package:listdetaillayoutwithcubit/application/models/list_item.dart';
+import 'package:listdetaillayoutwithcubit/application/models/list_item_details.dart';
+import 'package:listdetaillayoutwithcubit/application/services/commands/create_new_list_item_command.dart';
+import 'package:listdetaillayoutwithcubit/application/services/commands/delete_list_item_command.dart';
+import 'package:listdetaillayoutwithcubit/application/services/commands/update_list_item_command.dart';
 import 'package:listdetaillayoutwithcubit/view_models/create_new_list_item_viewmodel.dart';
 import 'package:listdetaillayoutwithcubit/view_models/list_item_details_viewmodel.dart';
 import 'package:listdetaillayoutwithcubit/view_models/list_item_viewmodel.dart';

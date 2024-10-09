@@ -42,6 +42,7 @@ class AppService {
     stateService.setDetailsViewSelectedItemState(
         commonState.detailsViewSelectedItemState, null);
     stateService.setListViewItemsState(commonState.listViewItemsState, []);
+
     stateService.setAppState(
         commonState.appState, AppStateTypes.notInitialized);
 

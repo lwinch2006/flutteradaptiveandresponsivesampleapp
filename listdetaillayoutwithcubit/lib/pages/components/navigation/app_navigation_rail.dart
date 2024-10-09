@@ -36,7 +36,7 @@ class _AppNavigationRailState extends State<AppNavigationRail> {
       listener: (context, appState) {
         debugPrint('AppNavigationRail: BlocConsumer: listener()');
 
-        listDetailLayoutCubit?.onNavigationDestinationSelected();
+        listDetailLayoutCubit?.resetSelectedIndexAndSelectedItem();
 
         if (navigationDestinations[appState.navigationCurrentIndex].action !=
             null) {

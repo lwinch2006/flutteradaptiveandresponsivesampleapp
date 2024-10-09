@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:listdetaillayoutwithcubit/models/list_item.dart';
-import 'package:listdetaillayoutwithcubit/models/list_item_details.dart';
-import 'package:listdetaillayoutwithcubit/repositories/list_detail_layout_repository.dart';
-import 'package:listdetaillayoutwithcubit/utils/mappers/list_detail_layout_mapper.dart';
+import 'package:listdetaillayoutwithcubit/application/models/list_item.dart';
+import 'package:listdetaillayoutwithcubit/application/models/list_item_details.dart';
+import 'package:listdetaillayoutwithcubit/application/repositories/list_detail_layout_repository.dart';
+import 'package:listdetaillayoutwithcubit/application/utils/mappers/list_detail_layout_mapper.dart';
 import 'package:listdetaillayoutwithcubit/view_models/create_new_list_item_viewmodel.dart';
 import 'package:listdetaillayoutwithcubit/view_models/update_list_item_viewmodel.dart';
 
