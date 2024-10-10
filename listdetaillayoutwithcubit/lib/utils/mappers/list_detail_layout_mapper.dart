@@ -48,66 +48,6 @@ final class ListDetailLayoutMapper {
     );
   }
 
-  static ListItem? MapToListItemFromCreateCommand(
-      int id, CreateNewListItemCommand? command) {
-    if (command == null) {
-      return null;
-    }
-
-    final destination = ListItem(
-      id: id,
-      title: command.title,
-    );
-
-    return destination;
-  }
-
-  static ListItem? MapToListItemFromUpdateCommand(
-      UpdateListItemCommand? command) {
-    if (command == null) {
-      return null;
-    }
-
-    final destination = ListItem(
-      id: command.id,
-      title: command.title,
-    );
-
-    return destination;
-  }
-
-  static ListItemDetails? MapToListItemDetailsFromCreateCommand(
-      int id, CreateNewListItemCommand? command) {
-    if (command == null) {
-      return null;
-    }
-
-    final destination = ListItemDetails(
-      itemId: id,
-      itemTitle: command.title,
-      username: command.username,
-      password: command.password,
-    );
-
-    return destination;
-  }
-
-  static ListItemDetails? MapToListItemDetailsFromUpdateCommand(
-      UpdateListItemCommand? command) {
-    if (command == null) {
-      return null;
-    }
-
-    final destination = ListItemDetails(
-      itemId: command.id,
-      itemTitle: command.title,
-      username: command.username,
-      password: command.password,
-    );
-
-    return destination;
-  }
-
   static ListItemViewModel? MapToListViewViewModelFromListItem(
       ListItem? source) {
     if (source == null) {

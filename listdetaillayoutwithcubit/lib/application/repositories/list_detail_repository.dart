@@ -6,7 +6,7 @@ import 'package:listdetaillayoutwithcubit/application/repositories/dummy_data.da
 import 'package:listdetaillayoutwithcubit/application/services/commands/create_new_list_item_command.dart';
 import 'package:listdetaillayoutwithcubit/application/services/commands/delete_list_item_command.dart';
 import 'package:listdetaillayoutwithcubit/application/services/commands/update_list_item_command.dart';
-import 'package:listdetaillayoutwithcubit/application/utils/mappers/list_detail_layout_mapper.dart';
+import 'package:listdetaillayoutwithcubit/application/utils/mappers/list_detail_mapper.dart';
 
 class ListDetailLayoutRepository {
   const ListDetailLayoutRepository();
@@ -27,10 +27,10 @@ class ListDetailLayoutRepository {
   Future<int> createItem(CreateNewListItemCommand command) {
     return Future.delayed(const Duration(seconds: 1), () {
       final newId = Random().nextInt(100);
-      final newListItem = ListDetailLayoutMapper.MapToListItemFromCreateCommand(
-          newId, command)!;
+      final newListItem =
+          ListDetailMapper.MapToListItemFromCreateCommand(newId, command)!;
       final newListItemDetails =
-          ListDetailLayoutMapper.MapToListItemDetailsFromCreateCommand(
+          ListDetailMapper.MapToListItemDetailsFromCreateCommand(
               newId, command)!;
 
       dummyListItems.add(newListItem);
@@ -43,10 +43,9 @@ class ListDetailLayoutRepository {
   Future<void> updateItem(UpdateListItemCommand command) {
     return Future.delayed(const Duration(seconds: 1), () {
       final updatedListItem =
-          ListDetailLayoutMapper.MapToListItemFromUpdateCommand(command)!;
+          ListDetailMapper.MapToListItemFromUpdateCommand(command)!;
       final updatedListItemDetails =
-          ListDetailLayoutMapper.MapToListItemDetailsFromUpdateCommand(
-              command)!;
+          ListDetailMapper.MapToListItemDetailsFromUpdateCommand(command)!;
 
       for (var i = 0; i < dummyListItems.length; i++) {
         if (dummyListItems[i].id == updatedListItem.id) {
