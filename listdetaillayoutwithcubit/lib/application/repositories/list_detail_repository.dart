@@ -3,13 +3,14 @@ import 'dart:math';
 import 'package:listdetaillayoutwithcubit/application/models/list_item.dart';
 import 'package:listdetaillayoutwithcubit/application/models/list_item_details.dart';
 import 'package:listdetaillayoutwithcubit/application/repositories/dummy_data.dart';
+import 'package:listdetaillayoutwithcubit/application/repositories/ilist_detail_repository.dart';
 import 'package:listdetaillayoutwithcubit/application/services/commands/create_new_list_item_command.dart';
 import 'package:listdetaillayoutwithcubit/application/services/commands/delete_list_item_command.dart';
 import 'package:listdetaillayoutwithcubit/application/services/commands/update_list_item_command.dart';
 import 'package:listdetaillayoutwithcubit/application/utils/mappers/list_detail_mapper.dart';
 
-class ListDetailLayoutRepository {
-  const ListDetailLayoutRepository();
+class ListDetailRepository implements IListDetailRepository {
+  const ListDetailRepository();
 
   Future<List<ListItem>> getItems() {
     return Future.delayed(const Duration(seconds: 1), () {

@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:listdetaillayoutwithcubit/application/models/list_item.dart';
 import 'package:listdetaillayoutwithcubit/application/models/list_item_details.dart';
-import 'package:listdetaillayoutwithcubit/application/repositories/list_detail_repository.dart';
+import 'package:listdetaillayoutwithcubit/application/repositories/ilist_detail_repository.dart';
 import 'package:listdetaillayoutwithcubit/application/services/commands/create_new_list_item_command.dart';
 import 'package:listdetaillayoutwithcubit/application/services/commands/delete_list_item_command.dart';
 import 'package:listdetaillayoutwithcubit/application/services/commands/update_list_item_command.dart';
+import 'package:listdetaillayoutwithcubit/application/services/ilist_detail_service.dart';
 
-class ListDetailLayoutService {
-  final ListDetailLayoutRepository listDetailLayoutRepository;
-
-  const ListDetailLayoutService({required this.listDetailLayoutRepository});
+class ListDetailService implements IListDetailService {
+  final IListDetailRepository listDetailRepository;
+  const ListDetailService({required this.listDetailRepository});
 
   Future<List<ListItem>> getItems() {
     return Future.delayed(
       const Duration(seconds: 5),
       () async {
-        final listItems = await listDetailLayoutRepository.getItems();
+        final listItems = await listDetailRepository.getItems();
         return listItems;
       },
     );
@@ -29,7 +29,7 @@ class ListDetailLayoutService {
       const Duration(seconds: 5),
       () async {
         final listItemDetails =
-            await listDetailLayoutRepository.getItemDetails(itemId);
+            await listDetailRepository.getItemDetails(itemId);
 
         return listItemDetails;
       },
@@ -39,7 +39,7 @@ class ListDetailLayoutService {
   Future<int> createNewItem(CreateNewListItemCommand command) {
     debugPrint('list item details getting added');
     return Future.delayed(const Duration(seconds: 5), () async {
-      final newId = await listDetailLayoutRepository.createItem(command);
+      final newId = await listDetailRepository.createItem(command);
       return newId;
     });
   }
@@ -49,7 +49,7 @@ class ListDetailLayoutService {
     return Future.delayed(
       const Duration(seconds: 5),
       () async {
-        await listDetailLayoutRepository.updateItem(command);
+        await listDetailRepository.updateItem(command);
       },
     );
   }
@@ -59,7 +59,7 @@ class ListDetailLayoutService {
     return Future.delayed(
       const Duration(seconds: 5),
       () async {
-        await listDetailLayoutRepository.deleteItem(command);
+        await listDetailRepository.deleteItem(command);
       },
     );
   }

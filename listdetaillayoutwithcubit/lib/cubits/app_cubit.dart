@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listdetaillayoutwithcubit/application/services/ilist_detail_service.dart';
 import 'package:listdetaillayoutwithcubit/models/enums/app_state_types.dart';
 import 'package:listdetaillayoutwithcubit/models/states/app_state.dart';
 import 'package:listdetaillayoutwithcubit/routes.dart' as routes;
-import 'package:listdetaillayoutwithcubit/services.dart';
 import 'package:listdetaillayoutwithcubit/utils/mappers/list_detail_layout_mapper.dart';
 import 'package:listdetaillayoutwithcubit/view_models/list_item_viewmodel.dart';
 
 class AppCubit extends Cubit<AppState> {
-  AppCubit()
+  final IListDetailService listDetailService;
+
+  AppCubit({required this.listDetailService})
       : super(AppState(
           state: AppStateTypes.notInitialized,
           navigationCurrentIndex: -1,
@@ -19,7 +21,7 @@ class AppCubit extends Cubit<AppState> {
     try {
       emit(state.copyWith(state: AppStateTypes.initializing));
 
-      final listItems = await listDetailLayoutService.getItems();
+      final listItems = await listDetailService.getItems();
 
       final listItemsViewModel =
           ListDetailLayoutMapper.MapToListViewViewModels(listItems);

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:listdetaillayoutwithcubit/application/services/ilist_detail_service.dart';
 import 'package:listdetaillayoutwithcubit/models/enums/details_view_state_types.dart';
 import 'package:listdetaillayoutwithcubit/models/nullable.dart';
 import 'package:listdetaillayoutwithcubit/models/states/list_detail_layout_state.dart';
-import 'package:listdetaillayoutwithcubit/services.dart';
 import 'package:listdetaillayoutwithcubit/utils/mappers/list_detail_layout_mapper.dart';
 import 'package:listdetaillayoutwithcubit/view_models/create_new_list_item_viewmodel.dart';
 import 'package:listdetaillayoutwithcubit/view_models/list_item_details_viewmodel.dart';
@@ -11,8 +11,12 @@ import 'package:listdetaillayoutwithcubit/view_models/list_item_viewmodel.dart';
 import 'package:listdetaillayoutwithcubit/view_models/update_list_item_viewmodel.dart';
 
 class ListDetailLayoutCubit extends Cubit<ListDetailLayoutState> {
-  ListDetailLayoutCubit({required List<ListItemViewModel> listViewItems})
-      : super(ListDetailLayoutState(
+  final IListDetailService listDetailService;
+
+  ListDetailLayoutCubit({
+    required this.listDetailService,
+    required List<ListItemViewModel> listViewItems,
+  }) : super(ListDetailLayoutState(
           listViewItems: listViewItems
             ..sort((item1, item2) =>
                 item1.title.toUpperCase().compareTo(item2.title.toUpperCase())),
@@ -42,7 +46,7 @@ class ListDetailLayoutCubit extends Cubit<ListDetailLayoutState> {
             detailViewState: DetailsViewStateTypes.loadingData,
           ));
 
-          final listItemDetails = await listDetailLayoutService.getItemDetails(
+          final listItemDetails = await listDetailService.getItemDetails(
               listViewSelectedItem.id, listViewSelectedItem.title);
 
           final listItemDetailsViewModel = ListDetailLayoutMapper
@@ -134,7 +138,7 @@ class ListDetailLayoutCubit extends Cubit<ListDetailLayoutState> {
       final command = ListDetailLayoutMapper.MapToCreateNewListItemCommand(
           createNewListItemViewModel)!;
 
-      final newId = await listDetailLayoutService.createNewItem(command);
+      final newId = await listDetailService.createNewItem(command);
 
       final detailsViewViewModel = ListDetailLayoutMapper
           .MapToDetailViewViewModelFromCreateNewListItemViewModel(
@@ -175,7 +179,7 @@ class ListDetailLayoutCubit extends Cubit<ListDetailLayoutState> {
       final command = ListDetailLayoutMapper.MapToUpdateListItemCommand(
           updateListItemViewModel)!;
 
-      await listDetailLayoutService.updateItem(command);
+      await listDetailService.updateItem(command);
 
       final listItemDetailsViewModel = ListDetailLayoutMapper
           .MapToDetailViewViewModelFromUpdateListItemViewModel(
@@ -208,7 +212,7 @@ class ListDetailLayoutCubit extends Cubit<ListDetailLayoutState> {
 
       final command = ListDetailLayoutMapper.MapToDeleteListItemCommand(itemId);
 
-      await listDetailLayoutService.deleteItem(command);
+      await listDetailService.deleteItem(command);
 
       final unfilteredListViewItemsExceptDeleted =
           List<ListItemViewModel>.from(state.listViewItems)

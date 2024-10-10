@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:listdetaillayoutwithcubit/cubits/list_detail_layout_cubit.dart';
 import 'package:listdetaillayoutwithcubit/pages/components/app_parts/app_body_container.dart';
 import 'package:listdetaillayoutwithcubit/pages/components/app_parts/app_header.dart';
@@ -30,8 +31,10 @@ class _ListDetailLayoutPageState extends State<ListDetailLayoutPage> {
     var appAdaptiveDesignState = context.getAppAdaptiveDesignState();
 
     return BlocProvider<ListDetailLayoutCubit>(
-      create: (context) =>
-          ListDetailLayoutCubit(listViewItems: widget.listViewItems),
+      create: (context) => ListDetailLayoutCubit(
+        listDetailService: GetIt.I.get(),
+        listViewItems: widget.listViewItems,
+      ),
       child: Scaffold(
         appBar: AppHeader(
           header: widget.title,
