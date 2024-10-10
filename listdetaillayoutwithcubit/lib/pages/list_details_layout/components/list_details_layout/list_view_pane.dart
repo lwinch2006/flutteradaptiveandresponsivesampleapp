@@ -44,8 +44,7 @@ class _ListViewPaneState extends State<ListViewPane> {
   Widget build(BuildContext context) {
     debugPrint('AppListView: Widget.build()');
 
-    return BlocConsumer<ListDetailLayoutCubit, ListDetailLayoutState>(
-      listener: (context, state) {},
+    return BlocBuilder<ListDetailLayoutCubit, ListDetailLayoutState>(
       buildWhen: (previousListDetailLayoutState, currentListDetailLayoutState) {
         return currentListDetailLayoutState.filteredListViewItems !=
                 previousListDetailLayoutState.filteredListViewItems ||

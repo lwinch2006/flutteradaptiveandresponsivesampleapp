@@ -27,8 +27,7 @@ class _ListDetailsLayoutOnePaneState extends State<ListDetailsLayoutOnePane> {
   @override
   Widget build(BuildContext context) {
     debugPrint('AppListDetailLayoutOnePane: build()');
-    return BlocConsumer<ListDetailLayoutCubit, ListDetailLayoutState>(
-      listener: (context, listDetailLayoutState) {},
+    return BlocBuilder<ListDetailLayoutCubit, ListDetailLayoutState>(
       buildWhen: (previousListDetailLayoutState, currentListDetailLayoutState) {
         return currentListDetailLayoutState.listViewSelectedIndex !=
                 previousListDetailLayoutState.listViewSelectedIndex ||

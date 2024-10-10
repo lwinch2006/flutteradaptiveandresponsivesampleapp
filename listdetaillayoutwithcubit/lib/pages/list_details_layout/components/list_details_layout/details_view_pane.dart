@@ -29,8 +29,7 @@ class _DetailsViewPaneState extends State<DetailsViewPane> {
   Widget build(BuildContext context) {
     debugPrint('AppDetailView: build()');
 
-    return BlocConsumer<ListDetailLayoutCubit, ListDetailLayoutState>(
-      listener: (context, listDetailLayoutState) {},
+    return BlocBuilder<ListDetailLayoutCubit, ListDetailLayoutState>(
       buildWhen: (previousListDetailLayoutState, currentListDetailLayoutState) {
         return currentListDetailLayoutState.detailViewState !=
                 previousListDetailLayoutState.detailViewState ||
